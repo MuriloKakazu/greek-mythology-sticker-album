@@ -75,12 +75,18 @@
     <Compile Include="Audio\SoundPlayer.cs" />
     <Compile Include="Audio\SoundTrack.cs" />
     <Compile Include="Audio\SoundTrackSampleProvider.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\God.cs" />
+    <Compile Include="Entities\Rarity.cs" />
+    <Compile Include="Entities\SemiGod.cs" />
+    <Compile Include="Generics\IEnumerableExtensions.cs" />
     <Compile Include="Generics\LinkedList.cs" />
     <Compile Include="Generics\Node.cs" />
     <Compile Include="Generics\Queue.cs" />
     <Compile Include="Generics\Stack.cs" />
     <Compile Include="GlobalPaths.cs" />
     <Compile Include="GlobalSettings.cs" />
+    <Compile Include="IO\Cache.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
