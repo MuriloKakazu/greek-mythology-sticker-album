@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace stickeralbum
+namespace stickeralbum.Design.Controls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for Sticker.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Sticker : UserControl
     {
-        public MainWindow()
+        public Sticker()
         {
             InitializeComponent();
         }

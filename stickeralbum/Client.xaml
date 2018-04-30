@@ -1,12 +1,16 @@
-﻿<Window x:Class="stickeralbum.MainWindow"
+﻿<Window x:Class="stickeralbum.Client"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:stickeralbum"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Client" Height="768" Width="1024">
     <Grid>
-        
+        <DockPanel x:Name="ClientArea" Margin="0">
+            <StackPanel x:Name="Sidebar" HorizontalAlignment="Left">
+                <Image x:Name="MenuButton" Width="35" Height="35"></Image>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </Window>

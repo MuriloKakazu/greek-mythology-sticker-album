@@ -5,8 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace stickeralbum.Entities {
-    class SemiGod : Entity {
-        public God RelatedGod { get; set; }
-
+    public class Titan : Entity {
     }
 }

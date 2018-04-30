@@ -1,16 +1,25 @@
-﻿using System;
+﻿using stickeralbum.Design;
+using stickeralbum.IO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace stickeralbum.Entities {
-    public abstract class Entity {
-        public Int32 ID { get; set; }
-        public String ImagePath { get; set; }
-        public String Name { get; set; }
-        public Rarity Rarity { get; set; }
-        public String Description { get; set; }
+    public abstract class Entity : ICacheable {
+        public String ID { get; set; }
+        public String BitmapID;
+        public String Name;
+        public Rarity Rarity;
+        public Gender Gender;
+        public String Description;
+
+        public Boolean IsGod => (this is God);
+        public Boolean IsSemiGod => (this is SemiGod);
+
+        [NonSerialized]
+        public Bitmap Bitmap;
 
         public override string ToString() => this.Name;
     }
