@@ -18,6 +18,8 @@ namespace stickeralbum.IO
         private static String IconsJsonFile => Paths.AssetsDirectory + "icons.json";
         private static String GodsJsonFile => Paths.AssetsDirectory + "gods.json";
         private static String TitansJsonFile => Paths.AssetsDirectory + "titans.json";
+        private static String CreaturesJsonFile => Paths.AssetsDirectory + "creatures.json";
+        private static String SemiGodsJsonFile => Paths.AssetsDirectory + "semigods.json";
 
         public static void Populate() {
             Generate();
@@ -62,6 +64,21 @@ namespace stickeralbum.IO
 
         private static void PopulateTitans() {
             var values = JsonConvert.DeserializeObject<LinkedList<Titan>>(File.ReadAllText(TitansJsonFile));
+            values.ForEach(x => Add(x));
+        }
+
+        private static void PopulateTitans() {
+            var values = JsonConvert.DeserializeObject<LinkedList<Titan>>(TitansJsonFile);
+            values.ForEach(x => Add(x));
+        }
+
+        private static void PopulateCreatures() {
+            var values = JsonConvert.DeserializeObject<LinkedList<Creature>>(CreaturesJsonFile);
+            values.ForEach(x => Add(x));
+        }
+
+        private static void PopulateSemiGods() {
+            var values = JsonConvert.DeserializeObject<LinkedList<SemiGod>>(SemiGodsJsonFile);
             values.ForEach(x => Add(x));
         }
 
