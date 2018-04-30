@@ -17,6 +17,8 @@ namespace stickeralbum.Entities {
 
         public Boolean IsGod => (this is God);
         public Boolean IsSemiGod => (this is SemiGod);
+        public Boolean IsCreature => (this is Creature);
+        public Boolean IsTitan => (this is Titan);
 
         [NonSerialized]
         public Bitmap Bitmap;

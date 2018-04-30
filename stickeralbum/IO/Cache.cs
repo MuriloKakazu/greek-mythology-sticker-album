@@ -17,6 +17,9 @@ namespace stickeralbum.IO
         private static DefaultGenerics.Dictionary<String, ICacheable> CachedObjects = new DefaultGenerics.Dictionary<String, ICacheable>();
         private static String IconsJsonFile => Paths.AssetsDirectory + "icons.json";
         private static String GodsJsonFile => Paths.AssetsDirectory + "gods.json";
+        private static String TitansJsonFile => Paths.AssetsDirectory + "titans.json";
+        private static String CreaturesJsonFile => Paths.AssetsDirectory + "creatures.json";
+        private static String SemiGodsJsonFile => Paths.AssetsDirectory + "semigods.json";
 
         public static void Populate() {
             Generate();
@@ -37,8 +40,23 @@ namespace stickeralbum.IO
             //    Name = "Zeus"
             //});
 
-            //var jsonBody = JsonConvert.SerializeObject(values, Formatting.Indented);
+            //var jsoBody = JsonConvert.SerializeObject(values, Fornmatting.Indented);
             //File.WriteAllText("values.json", jsonBody);
+
+            LinkedList<ICacheable> values = new LinkedList<ICacheable>();
+            values.Add(new God() {
+                ID = "god_gaia",
+                BitmapID = "sprite_gaia",
+                Description = "Sample Description",
+                Gender = Gender.Female,
+                FatherID = null,
+                MotherID = null,
+                Rarity = Rarity.Epic,
+                Name = "Gaia"
+            });
+
+            var jsonBody = JsonConvert.SerializeObject(values, Formatting.Indented);
+            File.WriteAllText("titans.json", jsonBody);
         }
 
         private static void PopulateIcons() {
@@ -49,6 +67,21 @@ namespace stickeralbum.IO
 
         private static void PopulateGods() {
             var values = JsonConvert.DeserializeObject<LinkedList<God>>(GodsJsonFile);
+            values.ForEach(x => Add(x));
+        }
+
+        private static void PopulateTitans() {
+            var values = JsonConvert.DeserializeObject<LinkedList<Titan>>(TitansJsonFile);
+            values.ForEach(x => Add(x));
+        }
+
+        private static void PopulateCreatures() {
+            var values = JsonConvert.DeserializeObject<LinkedList<Creature>>(CreaturesJsonFile);
+            values.ForEach(x => Add(x));
+        }
+
+        private static void PopulateSemiGods() {
+            var values = JsonConvert.DeserializeObject<LinkedList<SemiGod>>(SemiGodsJsonFile);
             values.ForEach(x => Add(x));
         }
 
