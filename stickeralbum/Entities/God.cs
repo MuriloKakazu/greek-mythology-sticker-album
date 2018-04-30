@@ -6,14 +6,17 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace stickeralbum.Entities {
-    class God : Entity {
+    public class God : Entity {
         public String FatherID;
         public String MotherID;
 
-        public Entity Father => 
-            Cache.TryGet(FatherID, out ICacheable value) ? (value as Entity) : null;
+        public static new God Get(String key) =>
+            Cache.GetGod(key);
 
-        public Entity Mother => 
-            Cache.TryGet(MotherID, out ICacheable value) ? (value as Entity) : null;
+        public Entity Father =>
+            Entity.Get(FatherID);
+
+        public Entity Mother =>
+            Entity.Get(MotherID);
     }
 }

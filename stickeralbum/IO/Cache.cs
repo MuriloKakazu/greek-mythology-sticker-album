@@ -17,11 +17,19 @@ namespace stickeralbum.IO
         private static DefaultGenerics.Dictionary<String, ICacheable> CachedObjects = new DefaultGenerics.Dictionary<String, ICacheable>();
         private static String IconsJsonFile => Paths.AssetsDirectory + "icons.json";
         private static String GodsJsonFile => Paths.AssetsDirectory + "gods.json";
+        private static String TitansJsonFile => Paths.AssetsDirectory + "titans.json";
 
         public static void Populate() {
             Generate();
-            //PopulateIcons();
-            //PopulateGods();
+            PopulateIcons();
+            PopulateGods();
+            PopulateTitans();
+
+            Console.WriteLine("Cached objects:");
+            for (Int32 i = 0; i < CachedObjects.Values.Count; i++) {
+                Console.WriteLine(String.Format($"{CachedObjects.Keys.ToList()[i]} - {CachedObjects.Values.ToList()[i]}"));
+            }
+            Console.WriteLine("Cache populated!");
         }
 
         private static void Generate() {
@@ -42,13 +50,18 @@ namespace stickeralbum.IO
         }
 
         private static void PopulateIcons() {
-            var values = JsonConvert.DeserializeObject<LinkedList<Bitmap>>(IconsJsonFile);
+            var values = JsonConvert.DeserializeObject<LinkedList<Bitmap>>(File.ReadAllText(IconsJsonFile));
             values.ForEach(x => x.Path = Paths.IconsDirectory + x.Path);
             values.ForEach(x => Add(x));
         }
 
         private static void PopulateGods() {
-            var values = JsonConvert.DeserializeObject<LinkedList<God>>(GodsJsonFile);
+            var values = JsonConvert.DeserializeObject<LinkedList<God>>(File.ReadAllText(GodsJsonFile));
+            values.ForEach(x => Add(x));
+        }
+
+        private static void PopulateTitans() {
+            var values = JsonConvert.DeserializeObject<LinkedList<Titan>>(File.ReadAllText(TitansJsonFile));
             values.ForEach(x => Add(x));
         }
 
@@ -69,6 +82,9 @@ namespace stickeralbum.IO
 
         public static Entity GetEntity(String key) =>
             TryGet(key, out ICacheable value) ? ((value is Entity) ? (value as Entity) : null) : null;
+
+        public static God GetGod(String key) =>
+            TryGet(key, out ICacheable value) ? ((value is God) ? (value as God) : null) : null;
 
         public static Bitmap GetIcon(IconType type, IconColor color) => 
             GetBitmap(String.Format($"{type.ToString().ToLower()}_{color.ToString().ToLower()}"));

@@ -15,10 +15,12 @@ namespace stickeralbum.Entities {
         public Gender Gender;
         public String Description;
 
+        public static Entity Get(String key) =>
+            Cache.GetEntity(key);
+
         public Boolean IsGod => (this is God);
         public Boolean IsSemiGod => (this is SemiGod);
 
-        [NonSerialized]
         public Bitmap Bitmap;
 
         public override string ToString() => this.Name;
