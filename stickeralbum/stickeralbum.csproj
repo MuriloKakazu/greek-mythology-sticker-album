@@ -85,6 +85,9 @@
     <Compile Include="Design\Controls\Sticker.xaml.cs">
       <DependentUpon>Sticker.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Design\Controls\StickerRegister.xaml.cs">
+      <DependentUpon>StickerRegister.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\IconColor.cs" />
     <Compile Include="Design\IconType.cs" />
     <Compile Include="Design\Theme.cs" />
@@ -125,6 +128,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Design\Controls\Sticker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\StickerRegister.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
