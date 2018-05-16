@@ -8,8 +8,8 @@
              d:DesignHeight="500" d:DesignWidth="350">
     <Grid>
         <DockPanel Background="White">
-            <Label x:Name="Name" VerticalAlignment="Top" Content="NAME" VerticalContentAlignment="Center" HorizontalContentAlignment="Stretch" FontSize="24" FontWeight="Bold" DockPanel.Dock="Bottom" HorizontalAlignment="Center"/>
-            <Image x:Name="Image" Margin="0" MinWidth="200" MinHeight="200" DockPanel.Dock="Top" Height="439"/>
+            <Label x:Name="Name" Content="NAME" FontSize="24" FontWeight="Bold" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+            <Image x:Name="Image" Margin="0" MinWidth="350" MinHeight="458" DockPanel.Dock="Top"/>
         </DockPanel>
     </Grid>
 </UserControl>

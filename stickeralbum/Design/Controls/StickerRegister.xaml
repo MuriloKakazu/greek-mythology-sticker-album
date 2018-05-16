@@ -1,29 +1,33 @@
-﻿<Page x:Class="stickeralbum.Design.Controls.StickerRegister"
+﻿<UserControl x:Class="stickeralbum.Design.Controls.StickerRegister"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:stickeralbum.Design.Controls"
       mc:Ignorable="d" 
-      d:DesignHeight="600" d:DesignWidth="1000"
-      Title="StickerRegister">
+      d:DesignHeight="600" d:DesignWidth="1000" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
 
     <Grid>
-        <Rectangle Fill="#FFF4F4F5" HorizontalAlignment="Left" Height="590" Stroke="Black" VerticalAlignment="Top" Width="1000"/>
-        <Image x:Name="imgStickerImage" Height="300" Width="220" VerticalAlignment="Top" Margin="697,58,83,0" MouseLeftButtonUp="Image_MouseLeftButtonUp"/>
-        <Label FontSize="28" Content="Name" Height="48" VerticalAlignment="Top" Margin="10,10,845,0" RenderTransformOrigin="-0.331,-0.562"/>
-        <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="38" Margin="15,58,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="279"/>
-        <Label FontSize="28" Content="Father" Height="48" VerticalAlignment="Top" Margin="10,113,845,0" RenderTransformOrigin="-0.331,-0.562"/>
-        <TextBox x:Name="txtFather" HorizontalAlignment="Left" Height="38" Margin="15,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="279"/>
-        <Label FontSize="28" Content="Mother" Height="48" VerticalAlignment="Top" Margin="321,113,534,0" RenderTransformOrigin="-0.331,-0.562"/>
-        <TextBox x:Name="txtMother" HorizontalAlignment="Left" Height="38" Margin="326,161,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="279"/>
-        <Label FontSize="28" Content="Rarity" Height="48" VerticalAlignment="Top" Margin="10,214,845,0" RenderTransformOrigin="-0.331,-0.562"/>
-        <TextBox x:Name="txtRarity" HorizontalAlignment="Left" Height="38" Margin="15,262,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="279"/>
-        <Label FontSize="28" Content="Gender" Height="48" VerticalAlignment="Top" Margin="321,214,534,0" RenderTransformOrigin="-0.331,-0.562"/>
-        <TextBox x:Name="txtGender" HorizontalAlignment="Left" Height="38" Margin="326,262,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="279"/>
-        <Label FontSize="28" Content="Description" Height="48" VerticalAlignment="Top" Margin="10,328,823,0" RenderTransformOrigin="-0.331,-0.562"/>
-        <TextBox x:Name="txtDescription" HorizontalAlignment="Left" Height="190" Margin="15,376,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="590"/>
-        <Button Content="Register
-" HorizontalAlignment="Left" Margin="714,444,0,0" VerticalAlignment="Top" Width="167" Height="44"/>
+        <DockPanel>
+            <StackPanel Orientation="Horizontal" MinWidth="610">
+                <StackPanel>
+                    <DockPanel>
+                        <StackPanel>
+                            <Label Content="AAAAAAAAA" FontSize="18" Margin="10,5"></Label>
+                            <TextBox Width="200" Height="32" Margin="10,5"></TextBox>
+
+                            <Label Content="AAAAAAAAA" FontSize="18" Margin="10,5"></Label>
+                            <TextBox Width="200" Height="32" Margin="10,5"></TextBox>
+                        </StackPanel>
+                    </DockPanel>
+                </StackPanel>
+                <StackPanel>
+
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" MinWidth="390">
+                <Image x:Name="imgStickerImage" Height="300" Width="220" MouseLeftButtonUp="Image_MouseLeftButtonUp"/>
+            </StackPanel>
+        </DockPanel>
     </Grid>
-</Page>
+</UserControl>

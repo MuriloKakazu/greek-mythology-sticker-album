@@ -17,7 +17,7 @@ namespace stickeralbum.Design.Controls {
     /// <summary>
     /// Interaction logic for AlbumPage.xaml
     /// </summary>
-    public partial class AlbumPage : Page {
+    public partial class AlbumPage : UserControl {
         public AlbumPage() {
             InitializeComponent();
         }
