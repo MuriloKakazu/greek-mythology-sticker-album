@@ -1,31 +1,19 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
-namespace stickeralbum.Design.Controls
-{
+namespace stickeralbum.Design.Controls {
     /// <summary>
     /// Interaction logic for StickerRegister.xaml
     /// </summary>
-    public partial class StickerRegister : UserControl
-    {
-        public StickerRegister()
-        {
+    public partial class StickerRegister : UserControl {
+        public StickerRegister() {
+            //BackGround = IO.Paths.AssetsDirectory + "GreekBackground.png";
+            BackGround = "assets\\GreekBackground.png";
+            Console.WriteLine(BackGround);
             InitializeComponent();
         }
-        public string imgPath = null;
+        public string BackGround  {get; set;}
 
         private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
 
