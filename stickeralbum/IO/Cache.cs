@@ -67,11 +67,6 @@ namespace stickeralbum.IO
             values.ForEach(x => Add(x));
         }
 
-        private static void PopulateTitans() {
-            var values = JsonConvert.DeserializeObject<LinkedList<Titan>>(TitansJsonFile);
-            values.ForEach(x => Add(x));
-        }
-
         private static void PopulateCreatures() {
             var values = JsonConvert.DeserializeObject<LinkedList<Creature>>(CreaturesJsonFile);
             values.ForEach(x => Add(x));
