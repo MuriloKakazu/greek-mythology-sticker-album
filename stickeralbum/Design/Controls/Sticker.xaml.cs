@@ -26,10 +26,8 @@ namespace stickeralbum.Design.Controls
         public Sticker() => InitializeComponent();
 
         public void SetEntity(Entity entity) {
-            this.Entity                 = entity;
-            this.Image.Source           = entity.Bitmap.Source;
-            this.Title.Content          = entity.Name;
-            this.Description.Content    = entity.Description;
+            this.Entity              = entity;
+            this.ImageSticker.Source = entity.Bitmap.Source;
         }
     }
 }
