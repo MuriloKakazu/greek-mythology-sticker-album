@@ -1,0 +1,33 @@
+﻿<UserControl x:Class="stickeralbum.Design.Controls.StickerRegister"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:stickeralbum.Design.Controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="1000" Background="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}">
+
+    <Grid>
+        <DockPanel>
+            <StackPanel Orientation="Horizontal" MinWidth="610">
+                <StackPanel>
+                    <DockPanel>
+                        <StackPanel>
+                            <Label Content="AAAAAAAAA" FontSize="18" Margin="10,5"></Label>
+                            <TextBox Width="200" Height="32" Margin="10,5"></TextBox>
+
+                            <Label Content="AAAAAAAAA" FontSize="18" Margin="10,5"></Label>
+                            <TextBox Width="200" Height="32" Margin="10,5"></TextBox>
+                        </StackPanel>
+                    </DockPanel>
+                </StackPanel>
+                <StackPanel>
+
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" MinWidth="390">
+                <Image x:Name="imgStickerImage" Height="300" Width="220" MouseLeftButtonUp="Image_MouseLeftButtonUp"/>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>
