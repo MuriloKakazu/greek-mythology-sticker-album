@@ -44,7 +44,7 @@ namespace stickeralbum.Design.Controls
             // Get the selected file name and display in a TextBox 
             if (result == true) {
                 // Open document 
-                imgStickerImage.Source = new BitmapImage(new Uri(dlg.FileName));
+                //imgSticker.Source = new BitmapImage(new Uri(dlg.FileName));
                 //File.Copy(dlg.FileName, Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\";
             }
         }
