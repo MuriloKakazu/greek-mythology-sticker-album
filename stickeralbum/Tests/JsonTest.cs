@@ -51,9 +51,17 @@ namespace stickeralbum.Tests {
             Human human1 = JsonConvert.DeserializeObject<Human>(File.ReadAllText("test.json"));
 
             // Asserção (teste)
-            Debug.Assert(human0.Name        == human1.Name,         "Serialization Error");
-            Debug.Assert(human0.Species     == human1.Species,      "Serialization Error");
-            //Debug.Assert(human0.Geolocation == human1.Geolocation,  "Serialization Error");
+            Debug.Assert(human0.Name    == human1.Name,     "Serialization Error");
+            Debug.Assert(human0.Species == human1.Species,  "Serialization Error");
+
+
+            Lista<Human> l0 = new Lista<Human>();
+            l0.InserirNoFim(human0);
+            l0.InserirNoFim(human1);
+            String jsonBody1 = JsonConvert.SerializeObject(l0, Formatting.Indented);
+            File.WriteAllText("test1.json", jsonBody1);
+
+            Lista<Human> l1 = JsonConvert.DeserializeObject<Lista<Human>>(File.ReadAllText("test1.json"));
         }
     }
 }

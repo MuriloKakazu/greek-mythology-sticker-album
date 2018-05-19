@@ -1,4 +1,5 @@
-﻿using System;
+﻿using stickeralbum.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,15 @@ namespace stickeralbum.Design.Controls
     /// </summary>
     public partial class Sticker : UserControl
     {
-        public Sticker()
-        {
-            InitializeComponent();
+        public Entity Entity { get; protected set; }
+
+        public Sticker() => InitializeComponent();
+
+        public void SetEntity(Entity entity) {
+            this.Entity                 = entity;
+            this.Image.Source           = entity.Bitmap.Source;
+            this.Title.Content          = entity.Name;
+            this.Description.Content    = entity.Description;
         }
     }
 }

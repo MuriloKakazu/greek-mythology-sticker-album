@@ -14,5 +14,7 @@ namespace stickeralbum.Design {
 
         [NonSerialized]
         public BitmapSource Source;
+
+        public override string ToString() => this.Path;
     }
 }

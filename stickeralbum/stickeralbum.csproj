@@ -96,6 +96,8 @@
     <Compile Include="IO\ICacheable.cs" />
     <Compile Include="IO\Paths.cs" />
     <Compile Include="Tests\JsonTest.cs" />
+    <Compile Include="Tests\Lista.cs" />
+    <Compile Include="Tests\Nodo.cs" />
     <Compile Include="Utils\TestUtil.cs" />
     <Page Include="Client.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -123,7 +125,15 @@
       <DependentUpon>Client.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Design\Controls\Album.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Design\Controls\AlbumPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\Sidebar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
