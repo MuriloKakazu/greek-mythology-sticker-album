@@ -27,7 +27,8 @@ namespace stickeralbum
             InitializeComponent();
 
             //TestUtil.RunAllTests();
-            //Cache.Populate();
+            Cache.Load();
+            Cache.Debug();
         }
     }
 }

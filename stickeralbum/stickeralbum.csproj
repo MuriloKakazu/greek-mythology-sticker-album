@@ -93,7 +93,7 @@
     <Compile Include="Design\Theme.cs" />
     <Compile Include="Entities\Creature.cs" />
     <Compile Include="Entities\Titan.cs" />
-    <Compile Include="IO\ICacheable.cs" />
+    <Compile Include="IO\Cacheable.cs" />
     <Compile Include="IO\Paths.cs" />
     <Compile Include="Tests\JsonTest.cs" />
     <Compile Include="Tests\Lista.cs" />
@@ -186,6 +186,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Exceptions\" />
     <Folder Include="Prefabs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -10,13 +10,16 @@ namespace stickeralbum.Entities {
         public String FatherID;
         public String MotherID;
 
-        public static new God Get(String key) =>
-            Cache.GetGod(key);
+        public static new God Get(String key) 
+            => CastFrom(Cache.Get(key, out dynamic value));
 
-        public Entity Father =>
-            Entity.Get(FatherID);
+        public Entity Father 
+            => Entity.Get(FatherID);
 
-        public Entity Mother =>
-            Entity.Get(MotherID);
+        public Entity Mother
+            => Entity.Get(MotherID);
+
+        public static new God CastFrom(dynamic dynamicObj)
+            => Convert.ChangeType(dynamicObj, Type.GetType("God"));
     }
 }

@@ -29,9 +29,10 @@ namespace stickeralbum.Generics {
             foreach (T item in collection) AddLast(item);
         }
 
-        public void ForEach(Action<T> action) {
-            if (action == null) throw new ArgumentNullException();
+        public LinkedList<T> ForEach(Action<T> action) {
+            if (action == null) throw new ArgumentNullException("action");
             foreach (var item in this) action(item);
+            return this;
         }
 
         void ICollection<T>.Add(T value) => AddLast(value);
