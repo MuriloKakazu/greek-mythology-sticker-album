@@ -84,6 +84,7 @@
     <Compile Include="Design\Controls\SidebarMenu.xaml.cs">
       <DependentUpon>SidebarMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Design\Frame.cs" />
     <Compile Include="Design\Sprite.cs" />
     <Compile Include="Design\Controls\Album.xaml.cs">
       <DependentUpon>Album.xaml</DependentUpon>

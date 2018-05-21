@@ -35,13 +35,11 @@ namespace stickeralbum.Design.Controls {
             }
         }
 
-        private void AnimateExpand() {
-            BeginStoryboard(FindResource("Expand") as Storyboard);
-        }
+        private void AnimateExpand() 
+            => BeginStoryboard(FindResource("Expand") as Storyboard);
 
-        private void AnimateCompact() {
-            BeginStoryboard(FindResource("Compact") as Storyboard);
-        }
+        private void AnimateCompact() 
+            => BeginStoryboard(FindResource("Compact") as Storyboard);
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e) {
             ChangeState(ControlState.Compact);
@@ -74,13 +72,11 @@ namespace stickeralbum.Design.Controls {
             App.Current.Shutdown(0);
         }
 
-        private void self_MouseLeave(object sender, MouseEventArgs e) {
-            ChangeState(ControlState.Compact);
-        }
+        private void Self_MouseLeave(object sender, MouseEventArgs e) 
+            => ChangeState(ControlState.Compact);
 
-        private void self_MouseEnter(object sender, MouseEventArgs e) {
-            ChangeState(ControlState.Expanded);
-        }
+        private void Self_MouseEnter(object sender, MouseEventArgs e) 
+            => ChangeState(ControlState.Expanded);
 
         private void AlbumButton_MouseDown(object sender, MouseButtonEventArgs e) {
             ChangeState(ControlState.Compact);

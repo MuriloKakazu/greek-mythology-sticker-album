@@ -12,6 +12,7 @@ namespace stickeralbum.Entities {
         public String FatherID;
         public String MotherID;
         public String SpriteID;
+        public String BackgroundID;
         public String Name;
         public String Description;
         public Rarity Rarity;
@@ -34,6 +35,9 @@ namespace stickeralbum.Entities {
             => (this is Titan);
         [JsonIgnore]
         public Sprite Sprite
+            => Sprite.Get(SpriteID);
+        [JsonIgnore]
+        public Sprite Background
             => Sprite.Get(SpriteID);
         [JsonIgnore]
         public Entity Father

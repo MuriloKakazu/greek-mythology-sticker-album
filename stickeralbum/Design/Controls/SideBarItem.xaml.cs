@@ -28,16 +28,13 @@ namespace stickeralbum.Design.Controls {
         public void SetIcon(Sprite icon) 
             => Icon.Source = icon.Source;
 
-        private void UserControl_MouseEnter(object sender, MouseEventArgs e) {
-            Background.Opacity = 100;
-        }
+        private void UserControl_MouseEnter(object sender, MouseEventArgs e) 
+            => Background.Opacity = 100;
 
-        private void UserControl_MouseLeave(object sender, MouseEventArgs e) {
-            Background.Opacity = 0;
-        }
+        private void UserControl_MouseLeave(object sender, MouseEventArgs e) 
+            => Background.Opacity = 0;
 
-        private void UserControl_Loaded(object sender, RoutedEventArgs e) {
-            Background.Opacity = 0;
-        }
+        private void UserControl_Loaded(object sender, RoutedEventArgs e) 
+            => Background.Opacity = 0;
     }
 }

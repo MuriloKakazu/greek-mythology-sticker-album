@@ -7,9 +7,10 @@
              mc:Ignorable="d" 
              d:DesignHeight="500" d:DesignWidth="350">
     <Grid>
-        <DockPanel Background="White">
-            <Label x:Name="LabelName" Content="NAME" FontSize="24" FontWeight="Bold" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <DockPanel>
             <Image x:Name="ImageSticker" Margin="0" MinWidth="350" MinHeight="458" DockPanel.Dock="Top"/>
         </DockPanel>
+        <Image x:Name="Frame"/>
+        <Label x:Name="LabelName" Content="NAME" FontSize="24" FontWeight="Bold" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
     </Grid>
 </UserControl>
