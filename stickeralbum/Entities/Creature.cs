@@ -10,9 +10,6 @@ namespace stickeralbum.Entities {
         public Int32 DangerLevel { get; set; }
 
         public static new Creature Get(String ID)
-            => CastFrom(Cache.Get(ID, out dynamic value));
-
-        public static new Creature CastFrom(dynamic dynamicObj)
-            => Convert.ChangeType(dynamicObj, Type.GetType("Creature"));
+            => Cache.Get(ID) as Creature;
     }
 }

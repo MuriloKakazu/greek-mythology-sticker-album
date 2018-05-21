@@ -5,15 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="Client" Height="768" Width="1280">
-    <Controls:StickerRegister HorizontalAlignment="Left" Height="298" Margin="265,0,0,143" VerticalAlignment="Bottom" Width="650" RenderTransformOrigin="0.5,0.5">
-        <Controls:StickerRegister.RenderTransform>
-            <TransformGroup>
-                <ScaleTransform/>
-                <SkewTransform/>
-                <RotateTransform Angle="-0.174"/>
-                <TranslateTransform/>
-            </TransformGroup>
-        </Controls:StickerRegister.RenderTransform>
-    </Controls:StickerRegister>
-
+    <Grid>
+        <DockPanel>
+            <Controls:SidebarMenu Width="35"></Controls:SidebarMenu>
+            <Controls:StickerRegister Height="298" Width="650" RenderTransformOrigin="0.5,0.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+        </DockPanel>
+    </Grid>
 </Window>

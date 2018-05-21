@@ -1,0 +1,32 @@
+﻿<UserControl x:Name="self" x:Class="stickeralbum.Design.Controls.SidebarMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:stickeralbum.Design.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="750" d:DesignWidth="200" Loaded="UserControl_Loaded" MouseLeave="self_MouseLeave" MouseEnter="self_MouseEnter">
+
+    <UserControl.Resources>
+        <Storyboard x:Key="Expand">
+            <DoubleAnimation Storyboard.TargetName="self" Storyboard.TargetProperty="Width" Duration="0:0:.25" To="200"/>
+        </Storyboard>
+        <Storyboard x:Key="Compact">
+            <DoubleAnimation Storyboard.TargetName="self" Storyboard.TargetProperty="Width" Duration="0:0:.25" To="35"/>
+        </Storyboard>
+    </UserControl.Resources>
+    
+    <Grid>
+        <DockPanel Background="#FF2D2D2D">
+            <local:SideBarItem x:Name="QuitButton" DockPanel.Dock="Bottom" MouseDown="QuitButton_MouseDown"/>
+            <StackPanel Width="200" DockPanel.Dock="Top">
+                <local:SideBarItem x:Name="Expander" MouseDown="Expander_MouseDown"/>
+                <local:SideBarItem x:Name="AlbumButton" MouseDown="AlbumButton_MouseDown"/>
+                <local:SideBarItem x:Name="NewStickerButton" MouseDown="NewStickerButton_MouseDown"/>
+                <local:SideBarItem x:Name="ShopButton" MouseDown="ShopButton_MouseDown"/>
+                <local:SideBarItem x:Name="MinigameButton" MouseDown="MinigameButton_MouseDown"/>
+                <local:SideBarItem x:Name="SettingsButton" MouseDown="OptionsButton_MouseDown"/>
+            </StackPanel>
+        </DockPanel>
+    </Grid>
+</UserControl>

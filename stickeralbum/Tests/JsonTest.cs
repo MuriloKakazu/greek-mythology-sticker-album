@@ -1,7 +1,10 @@
 ﻿using Newtonsoft.Json;
+using stickeralbum.Entities;
+using stickeralbum.Generics;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 
 namespace stickeralbum.Tests {
     class JsonTest {
@@ -54,6 +57,8 @@ namespace stickeralbum.Tests {
             Debug.Assert(human0.Name    == human1.Name,     "Serialization Error");
             Debug.Assert(human0.Species == human1.Species,  "Serialization Error");
 
+            LinkedList<God> godList = new LinkedList<God>();
+            LinkedList<God> maleGods = godList.Where(x => x.Gender == Gender.Male).ToLinkedList();
 
             Lista<Human> l0 = new Lista<Human>();
             l0.InserirNoFim(human0);

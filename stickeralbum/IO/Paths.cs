@@ -27,5 +27,7 @@ namespace stickeralbum.IO {
             => $"{MetadataDirectory}creatures.json";
         public static String SemiGodsMetadata
             => $"{MetadataDirectory}semigods.json";
+        public static String SpritesMetadata
+            => $"{MetadataDirectory}sprites.json";
     }
 }

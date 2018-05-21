@@ -13,13 +13,20 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace stickeralbum.Design.Controls {
+namespace stickeralbum.Design.Controls
+{
     /// <summary>
     /// Interaction logic for Album.xaml
     /// </summary>
-    public partial class Album : UserControl {
-        public Album() {
+    public partial class Album : UserControl
+    {
+        public Album()
+        {
             InitializeComponent();
+        }
+
+        public void LoadFromCache() {
+
         }
     }
 }

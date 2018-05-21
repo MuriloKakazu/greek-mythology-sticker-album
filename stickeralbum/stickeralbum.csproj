@@ -78,7 +78,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Design\Bitmap.cs" />
+    <Compile Include="Design\Controls\SideBarItem.xaml.cs">
+      <DependentUpon>SideBarItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\SidebarMenu.xaml.cs">
+      <DependentUpon>SidebarMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Sprite.cs" />
+    <Compile Include="Design\Controls\Album.xaml.cs">
+      <DependentUpon>Album.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\Controls\AlbumPage.xaml.cs">
       <DependentUpon>AlbumPage.xaml</DependentUpon>
     </Compile>
@@ -91,8 +100,10 @@
     <Compile Include="Design\IconColor.cs" />
     <Compile Include="Design\IconType.cs" />
     <Compile Include="Design\Theme.cs" />
+    <Compile Include="Entities\Chaos.cs" />
     <Compile Include="Entities\Creature.cs" />
     <Compile Include="Entities\Titan.cs" />
+    <Compile Include="Enums\ControlState.cs" />
     <Compile Include="IO\Cacheable.cs" />
     <Compile Include="IO\Paths.cs" />
     <Compile Include="Tests\JsonTest.cs" />
@@ -133,7 +144,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Design\Controls\Sidebar.xaml">
+    <Page Include="Design\Controls\SideBarItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\SidebarMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,6 +178,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

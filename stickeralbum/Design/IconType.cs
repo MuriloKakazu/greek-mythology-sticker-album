@@ -8,9 +8,13 @@ namespace stickeralbum.Design
 {
     public enum IconType
     {
+        Edit,
+        Exit,
         NavMenu,
         Gamepad,
+        AddItem,
+        Settings,
         ShoppingBasket,
-        ImageAdd,
+        StickerCollection,
     }
 }

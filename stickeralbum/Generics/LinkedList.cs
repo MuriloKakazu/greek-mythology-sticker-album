@@ -9,13 +9,17 @@ namespace stickeralbum.Generics {
         internal Node<T> head;
         internal int count;
 
-        public int Count => count;
+        public int Count 
+            => count;
 
-        protected Node<T> First => head;
+        protected Node<T> First 
+            => head;
 
-        protected Node<T> Last => head?.prev;
+        protected Node<T> Last 
+            => head?.prev;
 
-        bool ICollection<T>.IsReadOnly => false;
+        bool ICollection<T>.IsReadOnly 
+            => false;
 
         public T this[int index] {
             get => FindNodeAt(index).Value;
@@ -25,12 +29,14 @@ namespace stickeralbum.Generics {
         public LinkedList() { }
 
         public LinkedList(IEnumerable<T> collection) {
-            if (collection == null) throw new ArgumentNullException("collection");
+            if (collection == null)
+                throw new ArgumentNullException("collection");
             foreach (T item in collection) AddLast(item);
         }
 
         public LinkedList<T> ForEach(Action<T> action) {
-            if (action == null) throw new ArgumentNullException("action");
+            if (action == null)
+                throw new ArgumentNullException("action");
             foreach (var item in this) action(item);
             return this;
         }
@@ -125,9 +131,12 @@ namespace stickeralbum.Generics {
         public bool Contains(T value) => Find(value) != null;
 
         public void CopyTo(T[] array, int index) {
-            if (array == null) throw new ArgumentNullException("array");
-            if (index < 0 || index > array.Length) throw new ArgumentOutOfRangeException(String.Format($"Index {index} out of range"));
-            if (array.Length - index < Count) throw new ArgumentException("Insufficient disk space");
+            if (array == null)
+                throw new ArgumentNullException("array");
+            if (index < 0 || index > array.Length)
+                throw new ArgumentOutOfRangeException($"Index {index} out of range");
+            if (array.Length - index < Count)
+                throw new ArgumentException("Insufficient disk space");
 
             var node = head;
 
@@ -169,7 +178,8 @@ namespace stickeralbum.Generics {
         }
 
         private Node<T> FindNodeAt(int index) {
-            if (index < 0 || index > count - 1) throw new IndexOutOfRangeException();
+            if (index < 0 || index > count - 1)
+                throw new IndexOutOfRangeException();
 
             var i = 0;
             var node = head;
@@ -205,9 +215,11 @@ namespace stickeralbum.Generics {
             return default(T);
         }
 
-        public Enumerator GetEnumerator() => new Enumerator(this);
+        public Enumerator GetEnumerator() 
+            => new Enumerator(this);
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator() => GetEnumerator();
+        IEnumerator<T> IEnumerable<T>.GetEnumerator() 
+            => GetEnumerator();
 
         public bool Remove(T value) {
             var node = FindNode(value);
@@ -226,12 +238,14 @@ namespace stickeralbum.Generics {
         }
 
         public void RemoveFirst() {
-            if (head == null) throw new InvalidOperationException();
+            if (head == null)
+                throw new InvalidOperationException();
             InternalRemoveNode(head);
         }
 
         public void RemoveLast() {
-            if (head == null) throw new InvalidOperationException();
+            if (head == null)
+                throw new InvalidOperationException();
             InternalRemoveNode(head.prev);
         }
 
@@ -262,14 +276,20 @@ namespace stickeralbum.Generics {
         }
 
         internal void ValidateNode(Node<T> node) {
-            if (node == null) throw new ArgumentNullException("node");
-            if (node.List != this) throw new InvalidOperationException();
+            if (node == null)
+                throw new ArgumentNullException("node");
+            if (node.List != this)
+                throw new InvalidOperationException();
         }
 
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() 
+            => GetEnumerator();
 
         public int IndexOf(T item) {
-            throw new NotImplementedException();
+            for (int i = 0; i < this.Count; i++) {
+                if (this[i].Equals(item)) return i;
+            }
+            return -1;
         }
 
         public void Insert(int index, T item) {

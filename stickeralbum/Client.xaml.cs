@@ -24,11 +24,11 @@ namespace stickeralbum
     {
         public Client()
         {
+            Cache.Load();
+            Cache.Debug();
             InitializeComponent();
 
             //TestUtil.RunAllTests();
-            Cache.Load();
-            Cache.Debug();
         }
     }
 }

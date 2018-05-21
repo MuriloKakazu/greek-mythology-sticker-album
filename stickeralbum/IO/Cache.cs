@@ -14,54 +14,83 @@ using STDGEN = System.Collections.Generic;
 namespace stickeralbum.IO
 {
     public static class Cache {
-        private static STDGEN.Dictionary<String, dynamic> CachedObjects 
-                 = new STDGEN.Dictionary<String, dynamic>();
+        private static STDGEN.Dictionary<String, Cacheable> CachedObjects 
+                 = new STDGEN.Dictionary<String, Cacheable>();
+
+        private class ObjectNotFoundInCacheException : Exception {
+            private String Key;
+            public new String Message 
+                => $"No object with key <{Key}> found in cache.";
+            public ObjectNotFoundInCacheException(String key) 
+                => Key = key;
+        }
 
         public static void Load() {
             LoadGods();
             LoadIcons();
             LoadTitans();
+            LoadSprites();
             //LoadSemiGods();
             //LoadCreatures();
         }
 
+
         public static void Debug() {
             Console.WriteLine("Cached objects:");
-            CachedObjects.Values.ToList()
-                .ForEach(x => Console.WriteLine($"{x.ID} - {x.ToString()}"));
-            Console.WriteLine("Cache populated!");
+            CachedObjects.Values.ToLinkedList()
+           .ForEach(x => Console.WriteLine($"{x.ID} =>\n " +
+            $"{JsonConvert.SerializeObject(x, Formatting.Indented)}"));
+            Console.WriteLine("Cache Loaded!");
         }
 
-        private static LinkedList<dynamic> LoadObjectsFrom(String jsonPath)
-            => JsonConvert.DeserializeObject<LinkedList<dynamic>>(File.ReadAllText(jsonPath))
+        private static void LoadIcons()
+            => JsonConvert.DeserializeObject<LinkedList<Sprite>>
+              (File.ReadAllText(Paths.IconsMetadata))
+              .ForEach(x => x.Path = Paths.IconsDirectory + x.Path)
+              .ForEach(x => x.LoadImage())
               .ForEach(x => Add(x));
 
-        private static void LoadIcons()
-            => LoadObjectsFrom(Paths.IconsMetadata)
-              .ForEach(x => x.Path = Paths.IconsDirectory + x.Path);
+        private static void LoadGods() 
+            => JsonConvert.DeserializeObject<LinkedList<God>>
+              (File.ReadAllText(Paths.GodsMetadata))
+              .ForEach(x => Add(x));
 
-        private static void LoadTitans()
-            => LoadObjectsFrom(Paths.TitansMetadata);
+        private static void LoadTitans() 
+            => JsonConvert.DeserializeObject<LinkedList<Titan>>
+              (File.ReadAllText(Paths.TitansMetadata))
+              .ForEach(x => Add(x));
 
-        private static void LoadGods()
-            => LoadObjectsFrom(Paths.GodsMetadata);
+        private static void LoadSprites()
+            => JsonConvert.DeserializeObject<LinkedList<Sprite>>
+              (File.ReadAllText(Paths.SpritesMetadata))
+              .ForEach(x => x.Path = Paths.SpritesDirectory + x.Path)
+              .ForEach(x => x.LoadImage())
+              .ForEach(x => Add(x));
 
-        private static void LoadSemiGods()
-            => LoadObjectsFrom(Paths.SemiGodsMetadata);
+        private static void LoadCreatures() 
+            => JsonConvert.DeserializeObject<LinkedList<Creature>>
+              (File.ReadAllText(Paths.CreaturesMetadata))
+              .ForEach(x => Add(x));
 
-        private static void LoadCreatures()
-            => LoadObjectsFrom(Paths.CreaturesMetadata);
+        private static void LoadSemiGods() 
+            => JsonConvert.DeserializeObject<LinkedList<SemiGod>>
+              (File.ReadAllText(Paths.SemiGodsMetadata))
+              .ForEach(x => Add(x));
 
-        private static void Add(dynamic value) 
+        private static void Add(Cacheable value) 
             => CachedObjects.Add(value.ID.ToString(), value);
 
-        private static void AddRange(LinkedList<dynamic> values) 
+        private static void AddRange(LinkedList<Cacheable> values) 
             => values.ForEach(x => Add(x));
 
         public static Boolean ContainsKey(String key)  
             => CachedObjects.ContainsKey(key);
 
-        public static dynamic Get(String key, out dynamic value)
-            => CachedObjects.TryGetValue(key, out value);
+        public static Cacheable Get(String key)
+            => (CachedObjects.TryGetValue(key, out Cacheable value)) ? 
+                value : throw new ObjectNotFoundInCacheException(key);
+
+        public static LinkedList<Cacheable> GetAll()
+            => CachedObjects.Values.ToLinkedList();
     }
 }

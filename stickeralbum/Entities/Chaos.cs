@@ -6,8 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace stickeralbum.Entities {
-    public class Titan : Entity {
-        public static new Titan Get(String ID)
-            => Cache.Get(ID) as Titan;
+    public sealed class Chaos : Entity {
+        public static Chaos Get()
+            => Cache.Get("chaos") as Chaos;
     }
 }

@@ -10,9 +10,6 @@ namespace stickeralbum.Entities {
         public God RelatedGod { get; set; }
 
         public static new SemiGod Get(String ID)
-            => CastFrom(Cache.Get(ID, out dynamic value));
-
-        public static new SemiGod CastFrom(dynamic dynamicObj)
-           => Convert.ChangeType(dynamicObj, Type.GetType("SemiGod"));
+            => Cache.Get(ID) as SemiGod;
     }
 }

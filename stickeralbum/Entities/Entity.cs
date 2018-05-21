@@ -1,4 +1,5 @@
-﻿using stickeralbum.Design;
+﻿using Newtonsoft.Json;
+using stickeralbum.Design;
 using stickeralbum.IO;
 using System;
 using System.Collections.Generic;
@@ -8,30 +9,37 @@ using System.Threading.Tasks;
 
 namespace stickeralbum.Entities {
     public abstract class Entity : Cacheable {
-        public String BitmapID;
+        public String FatherID;
+        public String MotherID;
+        public String SpriteID;
         public String Name;
+        public String Description;
         public Rarity Rarity;
         public Gender Gender;
-        public String Description;
 
         public static Entity Get(String ID) 
-            => CastFrom(Cache.Get(ID, out dynamic value));
+            => Cache.Get(ID) as Entity;
 
+        [JsonIgnore]
         public Boolean IsGod 
             => (this is God);
+        [JsonIgnore]
         public Boolean IsSemiGod 
             => (this is SemiGod);
+        [JsonIgnore]
         public Boolean IsCreature 
             => (this is Creature);
+        [JsonIgnore]
         public Boolean IsTitan 
             => (this is Titan);
-
-        public Bitmap Bitmap;
-
-        public override string ToString() 
-            => this.Name;
-
-        public static new Entity CastFrom(dynamic dynamicObj)
-            => Convert.ChangeType(dynamicObj, Type.GetType("Entity"));
+        [JsonIgnore]
+        public Sprite Sprite
+            => Sprite.Get(SpriteID);
+        [JsonIgnore]
+        public Entity Father
+            => Get(FatherID);
+        [JsonIgnore]
+        public Entity Mother
+            => Get(MotherID);
     }
 }
