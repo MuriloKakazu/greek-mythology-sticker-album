@@ -4,11 +4,11 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="Client" Height="768" Width="1280">
+        Title="Client" Height="768" Width="1024">
     <Grid>
         <DockPanel>
             <Controls:SidebarMenu Width="35"></Controls:SidebarMenu>
-            <Controls:StickerRegister Height="298" Width="650" RenderTransformOrigin="0.5,0.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <Controls:StickerRegister Height="356" Width="520" RenderTransformOrigin="0.5,0.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"/>
         </DockPanel>
     </Grid>
 </Window>

@@ -1,6 +1,9 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace stickeralbum.Design.Controls {
     /// <summary>
@@ -8,18 +11,12 @@ namespace stickeralbum.Design.Controls {
     /// </summary>
     public partial class StickerRegister : UserControl {
         public StickerRegister() {
-            //BackGround = IO.Paths.AssetsDirectory + "GreekBackground.png";
-            BackGround = "assets\\GreekBackground.png";
-            Console.WriteLine(BackGround);
             InitializeComponent();
         }
-        public string BackGround  {get; set;}
 
-        private void Image_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
+        private void ImageSprite_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
 
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
-
-
 
             // Set filter for file extension and default file extension 
             dlg.DefaultExt = ".png";
@@ -30,11 +27,18 @@ namespace stickeralbum.Design.Controls {
             bool? result = dlg.ShowDialog();
 
             // Get the selected file name and display in a TextBox 
-            if (result == true) {
+            if(result == true) {
                 // Open document 
-                //imgSticker.Source = new BitmapImage(new Uri(dlg.FileName));
+                ImageSprite.Source = new BitmapImage(new Uri(dlg.FileName));
                 //File.Copy(dlg.FileName, Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\";
             }
+        }
+
+        private void _this_Loaded(object sender, System.Windows.RoutedEventArgs e) {
+
+            if(DesignerProperties.GetIsInDesignMode(this)) return;
+            this.Background = new ImageBrush(Sprite.Get("greek_background").Source);
+            this.ImageSprite.Source = Sprite.Get("greek_background").Source;
         }
     }
 }

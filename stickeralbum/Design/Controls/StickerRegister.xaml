@@ -6,7 +6,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:stickeralbum.Design.Controls"
       xmlns:IO="clr-namespace:stickeralbum.IO"
-      mc:Ignorable="d" Width="700" Height="500" MinHeight="500" MinWidth="700" Background="#FFDAE0A2">
+      mc:Ignorable="d" Width="700" Height="500" MinHeight="500" MinWidth="700" Background="#FFDAE0A2" Loaded="_this_Loaded">
     <!--<UserControl.Background>
         <ImageBrush ImageSource="{Binding Background, ElementName=_this}"/>
     </UserControl.Background>-->
@@ -33,7 +33,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="3*"/>
             <ColumnDefinition Width="3*"/>
         </Grid.ColumnDefinitions>
         <!--Grid que divide a metade da esquerda em duas linhas-->
@@ -54,21 +54,21 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="3*"/>
-                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <!--Name-->
-                <Label Content="Name" FontSize="20" Grid.Column="0" Grid.Row="0" Margin="90px 60px 0px 0px" FontFamily="Diogenes" VerticalAlignment="Bottom"/>
-                <TextBox Text="" Grid.Column="0" Grid.Row="1" Margin="90px 0px 15px 0px" Background="#FFF5EAB8" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="130" MinHeight="25"/>
+                <Label Content="Name" FontSize="20" Grid.Column="0" Grid.Row="0" Margin="35,60,0,0" FontFamily="Diogenes" VerticalAlignment="Bottom"/>
+                <TextBox Text="" Grid.Column="0" Grid.Row="1" Margin="35,0,15,0" Background="White" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="130" MinHeight="25"/>
                 <!--Gender-->
-                <Label Content="Sexo" FontSize="23" Grid.Column="1" Grid.Row="0" Margin="15px 60px 0px 0px" FontFamily="Diogenes" VerticalAlignment="Bottom"/>
-                <ComboBox Grid.Column="1" Grid.Row="1" Margin="15px 0px 15px 0px" HorizontalAlignment="Left" MinWidth="130" MinHeight="25"/>
+                <Label Content="Sexo" FontSize="23" Grid.Column="1" Grid.Row="0" Margin="0,60,0,0" FontFamily="Diogenes" VerticalAlignment="Bottom"/>
+                <ComboBox Grid.Column="1" Grid.Row="1" Margin="0,0,15,0" HorizontalAlignment="Left" MinWidth="130" MinHeight="25" Background="White" BorderBrush="White"/>
                 <!--Father-->
-                <Label Content="Pai" FontSize="23" Grid.Column="0" Grid.Row="2" Margin="90px 10px 0px 0px" FontFamily="Diogenes" VerticalAlignment="Bottom"/>
-                <ComboBox Grid.Column="0" Grid.Row="3" Margin="90px 0px 15px 0px" HorizontalAlignment="Left" VerticalAlignment="Top" MinHeight="25" MinWidth="135"/>
+                <Label Content="Pai" FontSize="23" Grid.Column="0" Grid.Row="2" Margin="35,10,0,0" FontFamily="Diogenes" VerticalAlignment="Bottom"/>
+                <ComboBox Grid.Column="0" Grid.Row="3" Margin="35,0,15,0" HorizontalAlignment="Left" VerticalAlignment="Top" MinHeight="25" MinWidth="135"/>
                 <!--Mother-->
-                <Label Content="Mãe" FontSize="23" Grid.Column="1" Grid.Row="2" Margin="15,0,0,0" FontFamily="Diogenes" VerticalAlignment="Bottom"/>
-                <ComboBox Grid.Column="1" Grid.Row="3" Margin="15px 0px 15px 0px" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="130" MinHeight="25"/>
+                <Label Content="Mãe" FontSize="23" Grid.Column="1" Grid.Row="2" Margin="0" FontFamily="Diogenes" VerticalAlignment="Bottom"/>
+                <ComboBox Grid.Column="1" Grid.Row="3" Margin="0,0,15,0" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="130" MinHeight="25"/>
             </Grid>
             <!--Grid da descrição-->
             <Grid Grid.Column="0" Grid.Row="1" VerticalAlignment="Top">
@@ -80,8 +80,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <!--Description-->
-                <Label Content="Descrição" FontSize="23" Grid.Column="0" Grid.Row="0" Margin="90,8,0,240" FontFamily="Diogenes" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
-                <TextBox Grid.Column="0" Grid.Row="1" Margin="90px 10px 0px 0px" Background="#FFF5EAB8" BorderBrush="#FFB6A120" VerticalAlignment="Top" HorizontalAlignment="Left" MinWidth="295" MinHeight="180"/>
+                <Label Content="Descrição" FontSize="23" Grid.Column="0" Grid.Row="0" Margin="35,8,0,240" FontFamily="Diogenes" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Bottom"/>
+                <TextBox TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" Margin="35,10,0,0" Background="White" BorderBrush="#FFB6A120" VerticalAlignment="Top" HorizontalAlignment="Left" MinWidth="295" MinHeight="160" VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" MaxWidth="295" Width="295" Height="160"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="0">
@@ -92,8 +92,8 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="0" Grid.Row="0" Height="300" Width="220" Margin="20,80,0,0" HorizontalAlignment="Left"/>
-            <Button Grid.Column="0" Grid.Row="1" Margin="15,28,1,1" Content="Cadastrar" FontFamily="Diogenes" FontSize="35" Background="#FFF5EAB8" VerticalAlignment="Top" HorizontalAlignment="Left" MinWidth="250" Height="45"/>
+            <Image x:Name="ImageSprite" Grid.Column="0" Grid.Row="0" Height="300" Width="220" Margin="10,70,0,0" HorizontalAlignment="Left" MouseLeftButtonUp="ImageSprite_MouseLeftButtonUp" Stretch="Fill"/>
+            <Button Grid.Column="0" Grid.Row="1" Margin="6,10,1,1" Content="Cadastrar" FontFamily="Diogenes" FontSize="35" Background="White" VerticalAlignment="Top" HorizontalAlignment="Left" MinWidth="230" Height="45" BorderBrush="White"/>
         </Grid>
     </Grid>
 
