@@ -47,7 +47,10 @@ namespace stickeralbum.Design.Controls
                     stickersList.Skip(i * 6).Take(6).ToArray()
                 ));
                 //pagesList[i].Stickers.ToLinkedList().ForEach(x => x.MouseWheel += Album_MouseWheel);
-                pagesList[i].ListBox.MouseWheel += Album_MouseWheel;
+                //pagesList[i].MouseWheel += Album_MouseWheel;
+                //this.MouseWheel += Album_MouseWheel;
+                //pagesList[i].PageContent.MouseWheel += Album_MouseWheel;
+                //App.ClientWindow.MouseWheel += Album_MouseWheel;
             }
             this.Pages = pagesList.ToArray();
             this.CurrentPage = Pages[0];

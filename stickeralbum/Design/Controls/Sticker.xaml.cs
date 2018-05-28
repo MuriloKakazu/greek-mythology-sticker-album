@@ -33,7 +33,7 @@ namespace stickeralbum.Design.Controls
         public void SetEntity(Entity e) {
             this.Entity = e;
 
-            if (!Player.HasUnlocked(e)) {
+            if (Player.HasUnlocked(e)) {
                 //this.Background          = new ImageBrush(entity.Background.Source);
                 this.StickerFrame.Source = Sprite.Get(e.Rarity).Source;
                 this.StickerImage.Source = e.Sprite.Source;

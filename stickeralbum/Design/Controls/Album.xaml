@@ -8,8 +8,9 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <DockPanel>
-            <Button x:Name="PreviousPageButton" Width="30" Click="PreviousPageButton_Click"></Button>
-            <Button x:Name="NextPageButton" DockPanel.Dock="Right" Width="30" Click="NextPageButton_Click"></Button>
+            <DockPanel DockPanel.Dock="Top" Height="30">
+                <Label></Label>
+            </DockPanel>
             <DockPanel x:Name="DockPanel">
                 
             </DockPanel>

@@ -1,4 +1,5 @@
-﻿using stickeralbum.Entities;
+﻿using stickeralbum.Design;
+using stickeralbum.Entities;
 using stickeralbum.IO;
 using stickeralbum.Utils;
 using System;
@@ -28,7 +29,7 @@ namespace stickeralbum
             Cache.Load();
             Cache.Debug();
             InitializeComponent();
-
+            ClientArea.Background = new ImageBrush(Sprite.Get("greek_background").Source);
             //TestUtil.RunAllTests();
         }
 

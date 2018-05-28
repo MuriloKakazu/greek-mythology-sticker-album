@@ -8,7 +8,9 @@
     <Grid>
         <DockPanel>
             <Controls:SidebarMenu Width="35"></Controls:SidebarMenu>
-            <DockPanel x:Name="Page"/>
+            <DockPanel x:Name="ClientArea">
+                <DockPanel x:Name="Page"/>
+            </DockPanel>
         </DockPanel>
     </Grid>
 </Window>

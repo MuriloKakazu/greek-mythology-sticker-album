@@ -30,9 +30,10 @@ namespace stickeralbum.Design.Controls {
         public void Setup(Sticker[] stickers) {
             this.Stickers = stickers;
             stickers.ToLinkedList().ForEach(x => DockPanel.SetDock(x, Dock.Top));
+            stickers.ToLinkedList().ForEach(x => ListBox.SetFlowDirection(x, FlowDirection.RightToLeft));
             stickers.ToLinkedList().ForEach(x => x.Width = 225);
             stickers.ToLinkedList().ForEach(x => x.Height = 337.5);
-            stickers.ToLinkedList().ForEach(x => ListBox.Items.Add(x));
+            stickers.ToLinkedList().ForEach(x => PageContent.Items.Add(x));
             Refresh();
         }
 
