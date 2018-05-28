@@ -1,4 +1,4 @@
-﻿namespace stickeralbum.Entities {
+﻿namespace stickeralbum.Enums {
     public enum Gender {
         None,
         Unknown,

@@ -8,7 +8,7 @@
     <Grid>
         <DockPanel>
             <Controls:SidebarMenu Width="35"></Controls:SidebarMenu>
-            <Controls:StickerRegister Height="356" Width="520" RenderTransformOrigin="0.5,0.5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <DockPanel x:Name="Page"/>
         </DockPanel>
     </Grid>
 </Window>

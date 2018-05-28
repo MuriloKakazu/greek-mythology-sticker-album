@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using stickeralbum.Entities;
+using stickeralbum.Enums;
 using stickeralbum.Generics;
 using System;
 using System.Diagnostics;

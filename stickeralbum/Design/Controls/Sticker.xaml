@@ -5,12 +5,19 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:stickeralbum.Design.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="350">
+             d:DesignHeight="500" d:DesignWidth="350" BorderBrush="#FF4D4D4D" BorderThickness="0">
     <Grid>
-        <DockPanel>
-            <Image x:Name="ImageSticker" Margin="0" MinWidth="350" MinHeight="458" DockPanel.Dock="Top"/>
+        <Grid.Effect>
+            <DropShadowEffect Opacity="0.5"/>
+        </Grid.Effect>
+        <DockPanel Margin="0">
+            <Image x:Name="StickerImage" Margin="0" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" RenderOptions.ClearTypeHint="Auto" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill"/>
         </DockPanel>
-        <Image x:Name="Frame"/>
-        <Label x:Name="LabelName" Content="NAME" FontSize="24" FontWeight="Bold" DockPanel.Dock="Bottom" VerticalAlignment="Bottom" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
+        <Image x:Name="StickerFrame" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" RenderOptions.ClearTypeHint="Auto" ClipToBounds="True" Stretch="UniformToFill"/>
+        <Label x:Name="StickerName" Content="NAME" FontFamily="Diogenes" FontSize="16" DockPanel.Dock="Bottom" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" ClipToBounds="True">
+            <Label.Effect>
+                <DropShadowEffect Opacity="0.5" ShadowDepth="2"/>
+            </Label.Effect>
+        </Label>
     </Grid>
 </UserControl>

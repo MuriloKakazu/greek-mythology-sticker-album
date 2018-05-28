@@ -13,5 +13,7 @@ namespace stickeralbum
     /// </summary>
     public partial class App : Application
     {
+        public static Client ClientWindow 
+            => App.Current.MainWindow as Client;
     }
 }

@@ -1,4 +1,7 @@
-﻿using stickeralbum.Enums;
+﻿using stickeralbum.Entities;
+using stickeralbum.Enums;
+using stickeralbum.Generics;
+using stickeralbum.IO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -80,6 +83,8 @@ namespace stickeralbum.Design.Controls {
 
         private void AlbumButton_MouseDown(object sender, MouseButtonEventArgs e) {
             ChangeState(ControlState.Compact);
+            var entities = Cache.GetAll().Where(x => x is Entity).Cast<Entity>().ToArray();
+            App.ClientWindow.SetCurrentPage(new Album(entities));
         }
 
         private void NewStickerButton_MouseDown(object sender, MouseButtonEventArgs e) {

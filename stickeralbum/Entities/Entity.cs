@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using stickeralbum.Design;
+using stickeralbum.Enums;
 using stickeralbum.IO;
 using System;
 using System.Collections.Generic;

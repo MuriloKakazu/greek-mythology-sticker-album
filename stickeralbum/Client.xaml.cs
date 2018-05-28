@@ -1,4 +1,5 @@
-﻿using stickeralbum.IO;
+﻿using stickeralbum.Entities;
+using stickeralbum.IO;
 using stickeralbum.Utils;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,11 @@ namespace stickeralbum
             InitializeComponent();
 
             //TestUtil.RunAllTests();
+        }
+
+        public void SetCurrentPage(UserControl control) {
+            Page.Children.Clear();
+            Page.Children.Add(control);
         }
     }
 }

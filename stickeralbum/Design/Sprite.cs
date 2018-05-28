@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using stickeralbum.Enums;
 using stickeralbum.IO;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,9 @@ namespace stickeralbum.Design {
 
         public static Sprite Get(String ID)
             => Cache.Get(ID) as Sprite;
+
+        public static Sprite Get(Rarity rarity)
+            => Get($"frame_{rarity.ToString().ToLower()}");
 
         public static Sprite Get(IconType type, IconColor color)
             => Get($"icon_{type.ToString().ToLower()}_{color.ToString().ToLower()}");

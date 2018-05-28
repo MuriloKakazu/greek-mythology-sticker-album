@@ -84,7 +84,6 @@
     <Compile Include="Design\Controls\SidebarMenu.xaml.cs">
       <DependentUpon>SidebarMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Design\Frame.cs" />
     <Compile Include="Design\Sprite.cs" />
     <Compile Include="Design\Controls\Album.xaml.cs">
       <DependentUpon>Album.xaml</DependentUpon>
@@ -107,6 +106,7 @@
     <Compile Include="Enums\ControlState.cs" />
     <Compile Include="IO\Cacheable.cs" />
     <Compile Include="IO\Paths.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Tests\JsonTest.cs" />
     <Compile Include="Tests\Lista.cs" />
     <Compile Include="Tests\Nodo.cs" />
@@ -119,12 +119,12 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Entities\Gender.cs" />
+    <Compile Include="Enums\Gender.cs" />
     <Compile Include="Extensions\IEnumerableExtensions.cs" />
     <Compile Include="IO\Cache.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\God.cs" />
-    <Compile Include="Entities\Rarity.cs" />
+    <Compile Include="Enums\Rarity.cs" />
     <Compile Include="Entities\SemiGod.cs" />
     <Compile Include="Audio\AutoDisposableStream.cs" />
     <Compile Include="Audio\SoundPlayer.cs" />

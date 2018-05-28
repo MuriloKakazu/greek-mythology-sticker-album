@@ -1,4 +1,5 @@
 ﻿using stickeralbum.Entities;
+using stickeralbum.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,12 +24,31 @@ namespace stickeralbum.Design.Controls
     {
         public Entity Entity { get; protected set; }
 
-        public Sticker() => InitializeComponent();
+        public Sticker()
+            => InitializeComponent();
 
-        public void SetEntity(Entity entity) {
-            this.Entity              = entity;
-            this.Background          = new ImageBrush(entity.Background.Source);
-            this.ImageSticker.Source = entity.Sprite.Source;
+        public Sticker(Entity e) : this() 
+            => SetEntity(e);
+
+        public void SetEntity(Entity e) {
+            this.Entity = e;
+
+            if (!Player.HasUnlocked(e)) {
+                //this.Background          = new ImageBrush(entity.Background.Source);
+                this.StickerFrame.Source = Sprite.Get(e.Rarity).Source;
+                this.StickerImage.Source = e.Sprite.Source;
+                this.StickerName.Content = e.Name;
+                this.StickerName.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+            } else {
+                MakeSecret();
+            }
+        }
+
+        public void MakeSecret() {
+            this.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
+            this.StickerImage.Source = Sprite.Get("unknown").Source;
+            this.StickerName.Content = String.Concat(Enumerable.Repeat("?", Entity.Name.Length));
+            this.StickerName.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
         }
     }
 }

@@ -34,7 +34,6 @@ namespace stickeralbum.IO
             //LoadCreatures();
         }
 
-
         public static void Debug() {
             Console.WriteLine("Cached objects:");
             CachedObjects.Values.ToLinkedList()

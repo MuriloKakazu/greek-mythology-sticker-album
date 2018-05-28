@@ -4,8 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace stickeralbum.Entities {
+namespace stickeralbum.Enums {
     public enum Rarity {
+        Unknown,
         Common,
         Uncommon,
         Rare,
