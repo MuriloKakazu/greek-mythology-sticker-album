@@ -6,7 +6,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:stickeralbum.Design.Controls"
       xmlns:IO="clr-namespace:stickeralbum.IO"
-      mc:Ignorable="d" MinHeight="500" MinWidth="700" Background="#FFDAE0A2" Loaded="_this_Loaded">
+      mc:Ignorable="d" MinHeight="500" MinWidth="700" Loaded="_this_Loaded">
     <!--<UserControl.Background>
         <ImageBrush ImageSource="{Binding Background, ElementName=_this}"/>
     </UserControl.Background>-->
@@ -39,39 +39,53 @@
         <!--Grid que divide a metade da esquerda em duas linhas-->
         <Grid Grid.Column="0" Grid.Row="0">
             <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
                 <RowDefinition Height="3*"/>
-                <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <!--Grid do formulario superior-->
-            <Grid Grid.Column="0" Grid.Row="0" MinWidth="300" MinHeight="214">
+            <Grid MinWidth="400" MinHeight="133">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="1*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+
+                <Label Content="Name" FontSize="36" Grid.Column="0" Grid.Row="0" Margin="60,30,0,0" FontFamily="Diogenes" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" FontWeight="Bold"/>
+                <TextBox Text="" Grid.Column="0" Grid.Row="1" Margin="60,0,0,0" Background="White" MinWidth="130" MinHeight="25"/>
+            </Grid>
+            <!--Grid do formulario superior-->
+            <Grid Grid.Column="0" Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="2*"/>
                     <RowDefinition/>
                     <RowDefinition Height="2*"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="4*"/>
-                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
                 <!--Name-->
-                <Label Content="Name" FontSize="20" Grid.Column="0" Grid.Row="0" Margin="60,60,0,0" FontFamily="Diogenes" VerticalAlignment="Bottom"/>
-                <TextBox Text="" Grid.Column="0" Grid.Row="1" Margin="60,0,15,0" Background="White" MinWidth="130" MinHeight="25"/>
+                <Label Content="Raridade" FontSize="20" Grid.Column="0" Grid.Row="0" Margin="60,5,0,0" FontFamily="Diogenes" FontWeight="Bold" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom"/>
+                <ComboBox Grid.Column="0" Grid.Row="1" Margin="60,0,15,0" MinWidth="130" MinHeight="25" Background="White" BorderBrush="White"/>
                 <!--Gender-->
-                <Label Content="Sexo" FontSize="23" Grid.Column="1" Grid.Row="0" Margin="0,60,0,0" FontFamily="Diogenes" VerticalAlignment="Bottom"/>
+                <Label Content="Sexo" FontSize="23" Grid.Column="1" Grid.Row="0" Margin="0" FontFamily="Diogenes" VerticalAlignment="Bottom" FontWeight="Bold" VerticalContentAlignment="Bottom"/>
                 <ComboBox Grid.Column="1" Grid.Row="1" Margin="0,0,15,0" MinWidth="130" MinHeight="25" Background="White" BorderBrush="White"/>
                 <!--Father-->
-                <Label Content="Pai" FontSize="23" Grid.Column="0" Grid.Row="2" Margin="60,0,0,0" FontFamily="Diogenes" VerticalAlignment="Bottom"/>
+                <Label Content="Pai" FontSize="23" Grid.Column="0" Grid.Row="2" Margin="60,0,0,0" FontFamily="Diogenes" VerticalAlignment="Bottom" FontWeight="Bold" VerticalContentAlignment="Bottom"/>
                 <ComboBox Grid.Column="0" Grid.Row="3" Margin="60,0,15,0" MinHeight="25" MinWidth="135"/>
                 <!--Mother-->
-                <Label Content="Mãe" FontSize="23" Grid.Column="1" Grid.Row="2" Margin="0" FontFamily="Diogenes" VerticalAlignment="Bottom"/>
+                <Label Content="Mãe" FontSize="23" Grid.Column="1" Grid.Row="2" Margin="0" FontFamily="Diogenes" VerticalAlignment="Bottom" FontWeight="Bold" VerticalContentAlignment="Bottom"/>
                 <ComboBox Grid.Column="1" Grid.Row="3" Margin="0,0,15,0" MinWidth="130" MinHeight="25"/>
             </Grid>
             <!--Grid da descrição-->
-            <Grid Grid.Column="0" Grid.Row="1" >
+            <Grid Grid.Column="0" Grid.Row="2" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="4*"/>
@@ -80,8 +94,8 @@
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
                 <!--Description-->
-                <Label Content="Descrição" FontSize="23" Grid.Column="0" Grid.Row="0" Margin="60,8,0,0" FontFamily="Diogenes" Grid.RowSpan="2" HorizontalAlignment="Left" VerticalAlignment="Top"/>
-                <TextBox x:Name="TextBoxDescription" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" Margin="60,10,0,60" Background="White" BorderBrush="#FFB6A120" VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" TextAlignment="Justify" UseLayoutRounding="False"/>
+                <Label Content="Descrição" FontSize="23" Grid.Column="0" Grid.Row="0" Margin="60,0,0,0" FontFamily="Diogenes" FontWeight="Bold" VerticalContentAlignment="Bottom"/>
+                <TextBox x:Name="TextBoxDescription" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" Margin="60,0,0,60" Background="White" BorderBrush="#FFB6A120" VerticalScrollBarVisibility="Auto" ScrollViewer.CanContentScroll="True" TextAlignment="Justify" UseLayoutRounding="False"/>
             </Grid>
         </Grid>
         <Grid Grid.Column="1" Grid.Row="0">
@@ -92,7 +106,8 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Grid.Row="1" Margin="6,10,60,60" Content="Cadastrar" FontFamily="Diogenes" FontSize="35" Background="White" MinWidth="230" Height="45" BorderBrush="White" HorizontalContentAlignment="Center" VerticalAlignment="Bottom"/>
+            <local:Sticker Grid.Column="0" Grid.Row="0" Margin="0,40,40,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="200" Height="290" MinWidth="200" MinHeight="290"/>
+            <Button Grid.Column="0" Grid.Row="1" Margin="6,10,60,60" Content="Cadastrar" FontFamily="Diogenes" FontSize="35" Background="White" MinWidth="230" Height="45" BorderBrush="White" HorizontalContentAlignment="Center" VerticalAlignment="Bottom" FontWeight="Bold"/>
         </Grid>
     </Grid>
 
