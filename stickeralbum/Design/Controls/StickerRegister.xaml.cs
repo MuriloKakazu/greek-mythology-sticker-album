@@ -35,10 +35,7 @@ namespace stickeralbum.Design.Controls {
         }
 
         private void _this_Loaded(object sender, System.Windows.RoutedEventArgs e) {
-
-            if(DesignerProperties.GetIsInDesignMode(this)) return;
-            this.Background = new ImageBrush(Sprite.Get("greek_background").Source);
-            this.ImageSprite.Source = Sprite.Get("greek_background").Source;
+         
         }
     }
 }
