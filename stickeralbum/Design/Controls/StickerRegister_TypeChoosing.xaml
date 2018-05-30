@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="stickeralbum.Design.Controls.StickerRegister_TypeChoosing"
+             x:Name="_this"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:stickeralbum.Design.Controls"
+      xmlns:IO="clr-namespace:stickeralbum.IO"
+      mc:Ignorable="d" MinHeight="500" MinWidth="700" Loaded="_this_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"/>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="1*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="4*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="4*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Content ="Forja de Figurinhas" FontSize="52px" FontWeight="ExtraBold" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" Padding="0px, 0px,0px,40px"/>
+            <Label Content="Selecione o tipo da sua figurinha" FontSize="20px" FontWeight="Bold" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <ComboBox x:Name="ComboBoxType" Grid.Row="2" Grid.Column="0" Margin="50px,5px" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+            <Button FontSize="26px" FontFamily="Diogenes" FontWeight="Bold" Grid.Row="3" Grid.Column="0" Content="Continuar" VerticalAlignment="Top" HorizontalAlignment="Center" MinWidth="240px" MinHeight="40px" Margin="0px, 40px, 0px, 0px" MouseLeftButtonUp="Button_MouseLeftButtonUp"/>
+        </Grid>
+    </Grid>
+
+</UserControl>

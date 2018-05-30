@@ -7,27 +7,6 @@
       xmlns:local="clr-namespace:stickeralbum.Design.Controls"
       xmlns:IO="clr-namespace:stickeralbum.IO"
       mc:Ignorable="d" MinHeight="500" MinWidth="700" Loaded="_this_Loaded">
-    <!--<UserControl.Background>
-        <ImageBrush ImageSource="{Binding Background, ElementName=_this}"/>
-    </UserControl.Background>-->
-    <!--<Canvas>
-        <Canvas.Background>
-            <ImageBrush/>
-        </Canvas.Background>
-        <Label x:Name="lblName" Content="Nome" Height="43" Canvas.Left="48" Canvas.Top="33" Width="132" FontSize="20"/>
-        <Label Content="Sexo" Height="43" Canvas.Left="330" Canvas.Top="33" Width="162" FontSize="20"/>
-        <TextBox x:Name="txtName" Height="33" Canvas.Left="48" TextWrapping="Wrap" Canvas.Top="76" Width="234"/>
-        <ComboBox Height="33" Canvas.Left="330" Canvas.Top="76" Width="162"/>
-        <Label x:Name="lblFather" Content="Pai" Height="43" Canvas.Left="48" Canvas.Top="133" Width="132" FontSize="20"/>
-        <ComboBox x:Name="cbFather" Height="33" Canvas.Left="48" Canvas.Top="176" Width="162"/>
-        <Label x:Name="lblMother" Content="Mãe" Height="43" Canvas.Left="276" Canvas.Top="133" Width="132" FontSize="20"/>
-        <ComboBox x:Name="cbMother" Height="33" Canvas.Left="276" Canvas.Top="176" Width="162"/>
-        <Label x:Name="lblDescription" Content="Descrição" Height="43" Canvas.Left="48" Canvas.Top="238" Width="132" FontSize="20"/>
-        <TextBox x:Name="txtDescription" Height="169" Canvas.Left="48" TextWrapping="Wrap" Canvas.Top="286" Width="444"/>
-        <Image x:Name="imgSticker" Height="272" Canvas.Left="572" Canvas.Top="76" Width="218"/>
-        <Button Content="Button" Canvas.Left="572" Canvas.Top="395" Width="218" Height="44"/>
-    </Canvas>-->
-    <!--Grid que divide a tela no meio-->
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
