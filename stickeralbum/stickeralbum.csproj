@@ -60,6 +60,8 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -83,11 +85,17 @@
     <Compile Include="Design\Controls\AlbumInteractionBar.xaml.cs">
       <DependentUpon>AlbumInteractionBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Design\Controls\StickerRegister_Semigod.xaml.cs">
+      <DependentUpon>StickerRegister_Semigod.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\Controls\SideBarItem.xaml.cs">
       <DependentUpon>SideBarItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Design\Controls\SidebarMenu.xaml.cs">
       <DependentUpon>SidebarMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\StrickerRegister_TypeChoosing.xaml.cs">
+      <DependentUpon>StrickerRegister_TypeChoosing.xaml</DependentUpon>
     </Compile>
     <Compile Include="Design\Sprite.cs" />
     <Compile Include="Design\Controls\Album.xaml.cs">
@@ -99,8 +107,8 @@
     <Compile Include="Design\Controls\Sticker.xaml.cs">
       <DependentUpon>Sticker.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Design\Controls\StickerRegister.xaml.cs">
-      <DependentUpon>StickerRegister.xaml</DependentUpon>
+    <Compile Include="Design\Controls\StickerRegister_God.xaml.cs">
+      <DependentUpon>StickerRegister_God.xaml</DependentUpon>
     </Compile>
     <Compile Include="Design\IconColor.cs" />
     <Compile Include="Design\IconType.cs" />
@@ -156,6 +164,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Design\Controls\StickerRegister_Semigod.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Design\Controls\SideBarItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -168,7 +180,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Design\Controls\StickerRegister.xaml">
+    <Page Include="Design\Controls\StickerRegister_God.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\StrickerRegister_TypeChoosing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

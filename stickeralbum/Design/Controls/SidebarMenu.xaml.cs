@@ -89,6 +89,7 @@ namespace stickeralbum.Design.Controls {
 
         private void NewStickerButton_MouseDown(object sender, MouseButtonEventArgs e) {
             ChangeState(ControlState.Compact);
+            App.ClientWindow.SetCurrentPage(new StickerRegister_God());
         }
 
         private void ShopButton_MouseDown(object sender, MouseButtonEventArgs e) {
