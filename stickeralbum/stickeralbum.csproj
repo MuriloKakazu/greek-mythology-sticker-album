@@ -94,8 +94,8 @@
     <Compile Include="Design\Controls\SidebarMenu.xaml.cs">
       <DependentUpon>SidebarMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Design\Controls\StrickerRegister_TypeChoosing.xaml.cs">
-      <DependentUpon>StrickerRegister_TypeChoosing.xaml</DependentUpon>
+    <Compile Include="Design\Controls\StickerRegister_TypeChoosing.xaml.cs">
+      <DependentUpon>StickerRegister_TypeChoosing.xaml</DependentUpon>
     </Compile>
     <Compile Include="Design\Sprite.cs" />
     <Compile Include="Design\Controls\Album.xaml.cs">
@@ -184,7 +184,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Design\Controls\StrickerRegister_TypeChoosing.xaml">
+    <Page Include="Design\Controls\StickerRegister_TypeChoosing.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
