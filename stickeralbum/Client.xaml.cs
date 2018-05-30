@@ -29,8 +29,8 @@ namespace stickeralbum
             Cache.Load();
             Cache.DumpLog();
             GameMaster.LoadAll();
-            GameMaster.Player.Inventory.Add(new SimpleSticker() { ItemID = "god_zeus" });
-            GameMaster.SaveAll();
+            //GameMaster.Player.Inventory.Add(new SimpleSticker() { ItemID = "god_zeus" });
+            //GameMaster.SaveAll();
             InitializeComponent();
             this.Background = new ImageBrush(Sprite.Get("bg_oldpaper").Source);
             //TestUtil.RunAllTests();

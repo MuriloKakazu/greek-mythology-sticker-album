@@ -18,8 +18,8 @@ namespace stickeralbum.Design.Controls {
     /// <summary>
     /// Interaction logic for SideBarItem.xaml
     /// </summary>
-    public partial class SideBarItem : UserControl {
-        public SideBarItem() 
+    public partial class BarItem : UserControl {
+        public BarItem() 
             => InitializeComponent();
 
         public void SetText(String text) 

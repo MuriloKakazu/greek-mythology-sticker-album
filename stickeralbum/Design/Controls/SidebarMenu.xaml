@@ -18,14 +18,14 @@
     
     <Grid>
         <DockPanel Background="#FF2D2D2D">
-            <local:SideBarItem x:Name="QuitButton" DockPanel.Dock="Bottom" MouseDown="QuitButton_MouseDown"/>
+            <local:BarItem x:Name="QuitButton" DockPanel.Dock="Bottom" MouseDown="QuitButton_MouseDown"/>
             <StackPanel Width="200" DockPanel.Dock="Top">
-                <local:SideBarItem x:Name="Expander" MouseDown="Expander_MouseDown"/>
-                <local:SideBarItem x:Name="AlbumButton" MouseDown="AlbumButton_MouseDown"/>
-                <local:SideBarItem x:Name="NewStickerButton" MouseDown="NewStickerButton_MouseDown"/>
-                <local:SideBarItem x:Name="ShopButton" MouseDown="ShopButton_MouseDown"/>
-                <local:SideBarItem x:Name="MinigameButton" MouseDown="MinigameButton_MouseDown"/>
-                <local:SideBarItem x:Name="SettingsButton" MouseDown="OptionsButton_MouseDown"/>
+                <local:BarItem x:Name="Expander" MouseDown="Expander_MouseDown"/>
+                <local:BarItem x:Name="AlbumButton" MouseDown="AlbumButton_MouseDown"/>
+                <local:BarItem x:Name="NewStickerButton" MouseDown="NewStickerButton_MouseDown"/>
+                <local:BarItem x:Name="ShopButton" MouseDown="ShopButton_MouseDown"/>
+                <local:BarItem x:Name="MinigameButton" MouseDown="MinigameButton_MouseDown"/>
+                <local:BarItem x:Name="SettingsButton" MouseDown="OptionsButton_MouseDown"/>
             </StackPanel>
         </DockPanel>
     </Grid>
