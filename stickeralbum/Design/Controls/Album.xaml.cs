@@ -91,12 +91,20 @@ namespace stickeralbum.Design.Controls
             return false;
         }
 
-        private void NextPageButton_Click(object sender, RoutedEventArgs e) {
+        private void UpperPrevPage_Click(object sender, RoutedEventArgs e) {
+            PreviousPage();
+        }
+
+        private void UpperNextPage_Click(object sender, RoutedEventArgs e) {
             NextPage();
         }
 
-        private void PreviousPageButton_Click(object sender, RoutedEventArgs e) {
+        private void LowerPrevPage_Click(object sender, RoutedEventArgs e) {
             PreviousPage();
+        }
+
+        private void LowerNextPage_Click(object sender, RoutedEventArgs e) {
+            NextPage();
         }
     }
 }

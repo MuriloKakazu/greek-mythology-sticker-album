@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace stickeralbum.Entities {
-    class SemiGod : Entity {
+    public class SemiGod : Entity {
         public God RelatedGod { get; set; }
 
         public static new SemiGod Get(String ID)

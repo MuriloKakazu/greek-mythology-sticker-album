@@ -1,7 +1,8 @@
 ﻿using stickeralbum.Design;
 using stickeralbum.Entities;
+using stickeralbum.Game;
+using stickeralbum.Game.Items;
 using stickeralbum.IO;
-using stickeralbum.Utils;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,12 +25,14 @@ namespace stickeralbum
     /// </summary>
     public partial class Client : Window
     {
-        public Client()
-        {
+        public Client() {
             Cache.Load();
-            Cache.Debug();
+            Cache.DumpLog();
+            GameMaster.LoadAll();
+            GameMaster.Player.Inventory.Add(new SimpleSticker() { ItemID = "god_zeus" });
+            GameMaster.SaveAll();
             InitializeComponent();
-            ClientArea.Background = new ImageBrush(Sprite.Get("greek_background").Source);
+            this.Background = new ImageBrush(Sprite.Get("bg_oldpaper").Source);
             //TestUtil.RunAllTests();
         }
 

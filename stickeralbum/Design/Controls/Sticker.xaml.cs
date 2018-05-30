@@ -1,5 +1,6 @@
 ﻿using stickeralbum.Entities;
 using stickeralbum.Enums;
+using stickeralbum.Game;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace stickeralbum.Design.Controls
         public void SetEntity(Entity e) {
             this.Entity = e;
 
-            if (Player.HasUnlocked(e)) {
+            if (GameMaster.Player.Inventory.HasConsumedSticker(e)) {
                 //this.Background          = new ImageBrush(entity.Background.Source);
                 this.StickerFrame.Source = Sprite.Get(e.Rarity).Source;
                 this.StickerImage.Source = e.Sprite.Source;

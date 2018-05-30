@@ -16,7 +16,14 @@ namespace stickeralbum.IO {
             => $@"{AssetsDirectory}sprites\";
         public static String SaveGameDirectory
             => $@"{ApplicationDirectory}saves\";
+        public static String LogsDirectory
+            => $@"{ApplicationDirectory}logs\";
 
+
+        public static String SettingsFile
+            => $"{ApplicationDirectory}settings.data";
+        public static String GameSaveFile
+            => $"{ApplicationDirectory}save.data";
         public static String IconsMetadata
             => $"{MetadataDirectory}icons.json";
         public static String GodsMetadata

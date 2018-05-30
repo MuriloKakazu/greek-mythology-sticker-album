@@ -1,5 +1,6 @@
 ﻿using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
+using stickeralbum.Game;
 using System;
 
 namespace stickeralbum.Audio {
@@ -9,7 +10,7 @@ namespace stickeralbum.Audio {
         private static MixingSampleProvider Mixer { get; set; }
         public static readonly SoundPlayer Instance = new SoundPlayer(44100, 2);
         public static PlaybackState State { get { return Device.PlaybackState; } }
-        public static Single Volume { get { return GlobalSettings.Volume; } set { GlobalSettings.Volume = Device.Volume = value; } }
+        public static Single Volume { get { return GameMaster.Settings.Volume; } set { GameMaster.Settings.Volume = Device.Volume = value; } }
         public static Boolean DestroyOnPlaybackEnd { get; set; }
         #endregion
 
@@ -19,7 +20,7 @@ namespace stickeralbum.Audio {
                 WaveFormat.CreateIeeeFloatWaveFormat(sampleRate, channelCount)
             );
             Mixer.ReadFully = true;
-            Volume = GlobalSettings.Volume;
+            Volume = GameMaster.Settings.Volume;
             Device.Init(Mixer);
             Device.Play();
         }
@@ -38,7 +39,7 @@ namespace stickeralbum.Audio {
             if (String.IsNullOrWhiteSpace(fileName)) return;
 
             var input = new AudioFileReader(fileName);
-            Volume = GlobalSettings.Volume;
+            Volume = GameMaster.Settings.Volume;
 
             input.Volume = Volume;
             AddMixerInput(new AutoDisposableStream(input));
@@ -47,7 +48,7 @@ namespace stickeralbum.Audio {
         public void Play(SoundTrack track) {
             if (track == null) return;
 
-            Volume = GlobalSettings.Volume;
+            Volume = GameMaster.Settings.Volume;
             AddMixerInput(new SoundTrackSampleProvider(track));
         }
 

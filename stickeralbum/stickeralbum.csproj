@@ -78,6 +78,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Debug\DebugUtils.cs" />
+    <Compile Include="Debug\Tests\EntityTest.cs" />
+    <Compile Include="Design\Controls\AlbumInteractionBar.xaml.cs">
+      <DependentUpon>AlbumInteractionBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\Controls\SideBarItem.xaml.cs">
       <DependentUpon>SideBarItem.xaml</DependentUpon>
     </Compile>
@@ -102,15 +107,17 @@
     <Compile Include="Design\Theme.cs" />
     <Compile Include="Entities\Chaos.cs" />
     <Compile Include="Entities\Creature.cs" />
+    <Compile Include="Entities\EntityUtils.cs" />
     <Compile Include="Entities\Titan.cs" />
     <Compile Include="Enums\ControlState.cs" />
+    <Compile Include="Game\GameMaster.cs" />
+    <Compile Include="Game\Inventory.cs" />
+    <Compile Include="Game\Items\InventoryItem.cs" />
+    <Compile Include="Game\Items\SimpleSticker.cs" />
     <Compile Include="IO\Cacheable.cs" />
     <Compile Include="IO\Paths.cs" />
-    <Compile Include="Player.cs" />
-    <Compile Include="Tests\JsonTest.cs" />
-    <Compile Include="Tests\Lista.cs" />
-    <Compile Include="Tests\Nodo.cs" />
-    <Compile Include="Utils\TestUtil.cs" />
+    <Compile Include="Game\Player.cs" />
+    <Compile Include="Debug\Tests\JsonTest.cs" />
     <Page Include="Client.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -132,12 +139,16 @@
     <Compile Include="Audio\SoundTrackSampleProvider.cs" />
     <Compile Include="Generics\LinkedList.cs" />
     <Compile Include="Generics\Node.cs" />
-    <Compile Include="GlobalSettings.cs" />
+    <Compile Include="Game\Settings.cs" />
     <Compile Include="Client.xaml.cs">
       <DependentUpon>Client.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Design\Controls\Album.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\AlbumInteractionBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

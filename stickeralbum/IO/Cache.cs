@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using stickeralbum.Design;
 using stickeralbum.Entities;
 using stickeralbum.Generics;
+using stickeralbum.Debug;
 using STDGEN = System.Collections.Generic;
 
 namespace stickeralbum.IO
@@ -26,20 +27,26 @@ namespace stickeralbum.IO
         }
 
         public static void Load() {
-            LoadGods();
-            LoadIcons();
-            LoadTitans();
-            LoadSprites();
-            //LoadSemiGods();
-            //LoadCreatures();
+            try {
+                DebugUtils.LogIO("Populating cache...");
+                LoadGods();
+                LoadIcons();
+                LoadTitans();
+                LoadSprites();
+                //LoadSemiGods();
+                //LoadCreatures();
+                DebugUtils.LogIO("Cache populated!");
+            } catch (Exception e) {
+                DebugUtils.LogError($"Error populating cache. Reason: {e.Message}");
+            }
         }
 
-        public static void Debug() {
-            Console.WriteLine("Cached objects:");
+        public static void DumpLog() {
+            DebugUtils.LogCache("Dumping Cache State...");
             CachedObjects.Values.ToLinkedList()
-           .ForEach(x => Console.WriteLine($"{x.ID} =>\n " +
+           .ForEach(x => DebugUtils.LogCache($"{x.ID} =>\n " +
             $"{JsonConvert.SerializeObject(x, Formatting.Indented)}"));
-            Console.WriteLine("Cache Loaded!");
+            DebugUtils.LogCache("Cache State Dumped!");
         }
 
         private static void LoadIcons()
