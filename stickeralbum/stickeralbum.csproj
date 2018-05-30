@@ -88,8 +88,8 @@
     <Compile Include="Design\Controls\StickerRegister_Semigod.xaml.cs">
       <DependentUpon>StickerRegister_Semigod.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Design\Controls\SideBarItem.xaml.cs">
-      <DependentUpon>SideBarItem.xaml</DependentUpon>
+    <Compile Include="Design\Controls\BarItem.xaml.cs">
+      <DependentUpon>BarItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Design\Controls\SidebarMenu.xaml.cs">
       <DependentUpon>SidebarMenu.xaml</DependentUpon>
@@ -168,7 +168,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Design\Controls\SideBarItem.xaml">
+    <Page Include="Design\Controls\BarItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

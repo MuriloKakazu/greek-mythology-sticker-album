@@ -52,7 +52,7 @@ namespace stickeralbum.Design.Controls {
             MinigameButton.SetText("Minigame");
             SettingsButton.SetText("Configurações");
             ShopButton.SetText("Loja de Figurinhas");
-            NewStickerButton.SetText("Criar Figurinha");
+            NewStickerButton.SetText("Forja de Figurinhas");
 
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             QuitButton.SetIcon(Sprite.Get(IconType.Exit, IconColor.White));
