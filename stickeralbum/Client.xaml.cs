@@ -29,7 +29,7 @@ namespace stickeralbum
             Cache.Load();
             Cache.Debug();
             InitializeComponent();
-            ClientArea.Background = new ImageBrush(Sprite.Get("greek_background").Source);
+            ClientArea.Background = new ImageBrush(Sprite.Get("bg_oldpaper").Source);
             //TestUtil.RunAllTests();
         }
 
