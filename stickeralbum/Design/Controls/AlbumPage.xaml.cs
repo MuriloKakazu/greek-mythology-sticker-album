@@ -43,6 +43,10 @@ namespace stickeralbum.Design.Controls {
         public void Clear() 
             => PageContent.Items.Clear();
 
+        private void PageContent_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            PageContent.SelectedIndex = -1;
+        }
+
         //protected Vector GetBestLayoutConfiguration(Array array)
         //    => (array.Length == 1) ? new Vector(1, 1) :
         //       (array.Length == 2) ? new Vector(2, 1) :
