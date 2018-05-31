@@ -70,7 +70,7 @@ namespace stickeralbum.Design.Controls {
         }
 
         SolidColorBrush normalBg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFE2C992"));
-        SolidColorBrush pinkBg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffcccc"));
+        SolidColorBrush pinkBg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffddcc"));
         SolidColorBrush redBg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ff0000"));
         private void ButtonRegister_Click(object sender, System.Windows.RoutedEventArgs e) {
             bool hasError = false;
