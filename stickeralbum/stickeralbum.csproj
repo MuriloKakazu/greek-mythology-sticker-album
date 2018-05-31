@@ -85,6 +85,12 @@
     <Compile Include="Design\Controls\AlbumInteractionBar.xaml.cs">
       <DependentUpon>AlbumInteractionBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Design\Controls\PlayerInventory.xaml.cs">
+      <DependentUpon>PlayerInventory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\StickerCollection.xaml.cs">
+      <DependentUpon>StickerCollection.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\Controls\StickerRegister_Creature.xaml.cs">
       <DependentUpon>StickerRegister_Creature.xaml</DependentUpon>
     </Compile>
@@ -169,6 +175,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Design\Controls\AlbumPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\PlayerInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\StickerCollection.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

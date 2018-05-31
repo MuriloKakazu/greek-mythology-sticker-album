@@ -44,6 +44,7 @@ namespace stickeralbum.Design.Controls {
         }
 
         public void Refresh() {
+            if (ActualHeight < 0 || ActualWidth < 0) return;
             StickerName.FontSize = (12f / 250f * ActualHeight);
             StickerImage.Width = StickerFrame.ActualWidth;
             StickerImage.Height = StickerFrame.ActualHeight;
@@ -57,6 +58,15 @@ namespace stickeralbum.Design.Controls {
         }
 
         private void Self_SizeChanged(object sender, SizeChangedEventArgs e) {
+            Refresh();
+        }
+
+        private void StickerFrame_MouseEnter(object sender, MouseEventArgs e) {
+            StickerImage.Width = StickerFrame.ActualWidth - 10;
+            StickerImage.Height = StickerFrame.ActualHeight - 10;
+        }
+
+        private void StickerFrame_MouseLeave(object sender, MouseEventArgs e) {
             Refresh();
         }
     }
