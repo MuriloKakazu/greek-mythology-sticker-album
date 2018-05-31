@@ -28,13 +28,16 @@ namespace stickeralbum.Design.Controls {
             };
         }
 
-        private void Button_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
+        private void ButtonNext_Click(object sender, RoutedEventArgs e) {
             switch(ComboBoxType.SelectedItem.ToString()) {
                 case "Deus":
                     App.ClientWindow.SetCurrentPage(new StickerRegister_God());
                     return;
                 case "Semideus":
                     App.ClientWindow.SetCurrentPage(new StickerRegister_Semigod());
+                    return;
+                case "Criatura":
+                    App.ClientWindow.SetCurrentPage(new StickerRegister_Creature());
                     return;
             }
         }

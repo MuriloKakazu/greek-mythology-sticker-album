@@ -1,38 +1,44 @@
-﻿using stickeralbum.IO;
-using stickeralbum.Entities;
+﻿using stickeralbum.Enums;
 using System;
-using System.ComponentModel;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using stickeralbum.Enums;
-using System.Collections.Generic;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
 
-namespace stickeralbum.Design.Controls {
+namespace stickeralbum.Design.Controls
+{
     /// <summary>
-    /// Interaction logic for StickerRegister.xaml
+    /// Interação lógica para StickerRegister_Creature.xam
     /// </summary>
-    public partial class StickerRegister_God : UserControl {
-
-        Dictionary<String, Rarity> rarityOptions = new Dictionary<string, Rarity>{
-            { "Comum"   , Rarity.Common   },
-            { "Incomum" , Rarity.Uncommon },
-            { "Rara"     , Rarity.Rare     },
-            { "Muito rara", Rarity.VeryRare },
-            { "Épica"     , Rarity.Epic     }
-        };
-
-        public StickerRegister_God() {
+    public partial class StickerRegister_Creature : UserControl
+    {
+        public StickerRegister_Creature() {
             InitializeComponent();
             StickerNewStricker.StickerImage.Source = Sprite.Get("unknown").Source;
             StickerNewStricker.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
             ComboBoxRarity.ItemsSource = rarityOptions.Keys;
-            ComboBoxGender.ItemsSource = new Generics.LinkedList<String>(){"Masculino", "Feminino", "None"};
+            ComboBoxGender.ItemsSource = new Generics.LinkedList<String>() { "Masculino", "Feminino", "None" };
         }
-        private void _this_Loaded(object sender, System.Windows.RoutedEventArgs e) {
-         
-        }
+
+        Dictionary<String, Rarity> rarityOptions = new Dictionary<string, Rarity>{
+            { "Comum"   , Rarity.Common   },
+            { "Incomum" , Rarity.Uncommon },
+            { "Raro"     , Rarity.Rare     },
+            { "Muito Rara", Rarity.VeryRare },
+            { "Épica"     , Rarity.Epic     }
+        };
+
+        
 
         private void StickerNewStricker_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
 
@@ -66,8 +72,13 @@ namespace stickeralbum.Design.Controls {
             StickerNewStricker.StickerName.Content = TextBoxName.Text;
         }
 
-        private void Button_Click(object sender, System.Windows.RoutedEventArgs e) {
+        private void ButtonBack_Click(object sender, RoutedEventArgs e) {
             App.ClientWindow.SetCurrentPage(new StickerRegister_TypeChoosing());
+        }
+
+        private void TextBoxDangerLevel_PreviewTextInput(object sender, TextCompositionEventArgs e) {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text) || (TextBoxDangerLevel.Text.Length == 1 && TextBoxDangerLevel.Text != "1") || TextBoxDangerLevel.Text.Length > 1;
         }
     }
 }

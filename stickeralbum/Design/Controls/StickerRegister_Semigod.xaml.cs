@@ -21,18 +21,18 @@ namespace stickeralbum.Design.Controls {
     public partial class StickerRegister_Semigod : UserControl {
 
         Dictionary<String, Rarity> rarityOptions = new Dictionary<string, Rarity>{
-            { "Common"   , Rarity.Common   },
-            { "Uncommon" , Rarity.Uncommon },
-            { "Rare"     , Rarity.Rare     },
-            { "Very Rare", Rarity.VeryRare },
-            { "Epic"     , Rarity.Epic     }
+            { "Comum"   , Rarity.Common   },
+            { "Incomum" , Rarity.Uncommon },
+            { "Raro"     , Rarity.Rare     },
+            { "Muito Rara", Rarity.VeryRare },
+            { "Épica"     , Rarity.Epic     }
         };
 
         public StickerRegister_Semigod() {
             InitializeComponent();
             StickerNewStricker.StickerImage.Source = Sprite.Get("unknown").Source;
             StickerNewStricker.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
-            ComboBoxRarity.ItemsSource = rarityOptions;
+            ComboBoxRarity.ItemsSource = rarityOptions.Keys;
             ComboBoxGender.ItemsSource = new Generics.LinkedList<String>() { "Masculino", "Feminino", "None" };
         }
 
@@ -66,6 +66,10 @@ namespace stickeralbum.Design.Controls {
 
         private void TextBoxName_KeyUp(object sender, KeyEventArgs e) {
             StickerNewStricker.StickerName.Content = TextBoxName.Text;
+        }
+
+        private void ButtonBack_Click(object sender, RoutedEventArgs e) {
+            App.ClientWindow.SetCurrentPage(new StickerRegister_TypeChoosing());
         }
     }
 }
