@@ -6,7 +6,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:stickeralbum.Design.Controls"
       xmlns:IO="clr-namespace:stickeralbum.IO"
-      mc:Ignorable="d" MinHeight="500" MinWidth="700" Loaded="_this_Loaded">
+      mc:Ignorable="d" MinHeight="700" MinWidth="1000" Loaded="_this_Loaded">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -34,8 +34,8 @@
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
 
-
-                <Label Content="Name" FontSize="36" Grid.Column="0" Grid.Row="0" Margin="60,30,0,0" FontFamily="Diogenes" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" FontWeight="Bold"/>
+                <Button Content="Voltar" Height="40" Width="80" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="80,40,0,0" FontWeight="Bold" FontSize="22" FontFamily="Diogenes" Background="#FFE2C992" Click="Button_Click"/>
+                <Label Content="Nome" FontSize="36" Grid.Column="0" Grid.Row="0" Margin="60,30,0,0" FontFamily="Diogenes" VerticalContentAlignment="Bottom" HorizontalContentAlignment="Center" FontWeight="Bold" Height="60" VerticalAlignment="Bottom"/>
                 <TextBox x:Name="TextBoxName" Text="" Grid.Column="0" Grid.Row="1" Margin="80,0,20,0" Background="#FFE2C992" MinWidth="130" MinHeight="25" Padding="0" FontSize="24" FontFamily="Diogenes" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" BorderBrush="Black" KeyUp="TextBoxName_KeyUp"/>
             </Grid>
             <!--Grid do formulario superior-->
@@ -52,14 +52,14 @@
                 </Grid.ColumnDefinitions>
                 <!--Name-->
                 <Label Content="Raridade" FontSize="20" Grid.Column="0" Grid.Row="0" Margin="80,5,0,0" FontFamily="Diogenes" FontWeight="Bold" VerticalContentAlignment="Bottom" VerticalAlignment="Bottom"/>
-                <ComboBox x:Name="ComboBoxRarity" Grid.Column="0" Grid.Row="1" Margin="80,0,15,0" MinWidth="130" MinHeight="25" Background="#FFE2C992" BorderBrush="White" SelectionChanged="ComboBoxRarity_SelectionChanged" FontSize="22" FontFamily="Diogenes" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <ComboBox x:Name="ComboBoxRarity" Grid.Column="0" Grid.Row="1" Margin="80,0,60,0" MinWidth="130" MinHeight="30" Background="#FFE2C992" BorderBrush="White" SelectionChanged="ComboBoxRarity_SelectionChanged" FontSize="22" FontFamily="Diogenes" VerticalContentAlignment="Center" MaxWidth="270" HorizontalContentAlignment="Center">
                     <ComboBox.Effect>
                         <BlurEffect Radius="1.2"/>
                     </ComboBox.Effect>
                 </ComboBox>
                 <!--Gender-->
-                <Label Content="Sexo" FontSize="23" Grid.Column="1" Grid.Row="0" Margin="0" FontFamily="Diogenes" VerticalAlignment="Bottom" FontWeight="Bold" VerticalContentAlignment="Bottom"/>
-                <ComboBox x:Name="ComboBoxGender" Grid.Column="1" Grid.Row="1" Margin="0,0,20,0" MinWidth="130" MinHeight="25" Background="#FFE2C992" BorderBrush="White" FontFamily="Diogenes" FontSize="22" HorizontalContentAlignment="Center" VerticalContentAlignment="Center">
+                <Label Content="Sexo" FontSize="23" Grid.Column="1" Grid.Row="0" Margin="5,0,60,0" FontFamily="Diogenes" VerticalAlignment="Bottom" FontWeight="Bold" VerticalContentAlignment="Bottom"/>
+                <ComboBox x:Name="ComboBoxGender" Grid.Column="1" Grid.Row="1" Margin="0,0,60,0" MinWidth="130" MinHeight="30" Background="#FFE2C992" BorderBrush="White" FontFamily="Diogenes" FontSize="22" VerticalContentAlignment="Center" MaxWidth="270" HorizontalContentAlignment="Center" Padding="1,3">
                     <ComboBox.Effect>
                         <BlurEffect Radius="1.2"/>
                     </ComboBox.Effect>
@@ -95,14 +95,16 @@
         </Grid>
         <Grid Grid.Column="1" Grid.Row="0">
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"/>
+                <RowDefinition Height="10*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="4*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <local:Sticker x:Name="StickerNewStricker" Grid.Column="0" Grid.Row="0" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="250" Height="375" MinWidth="200" MinHeight="290" MouseLeftButtonUp="StickerNewStricker_MouseLeftButtonUp"/>
-            <Button x:Name="ButtonRegister" Grid.Column="0" Grid.Row="1" Margin="30,0,60,30" Content="Cadastrar" FontFamily="Diogenes" FontSize="35" Background="#FFE2C992" MinWidth="230" Height="45" BorderBrush="#FF040404" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Label x:Name="LabelTip" FontFamily="Diogenes" FontSize="16px" Content="Clique na figurinha para alterar sua imagem" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+            <Button x:Name="ButtonRegister" Grid.Column="0" Grid.Row="2" Margin="30,0,60,30" Content="Forjar" FontFamily="Diogenes" FontSize="35" Background="#FFE2C992" MinWidth="230" Height="50" BorderBrush="#FF040404" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
         </Grid>
     </Grid>
 
