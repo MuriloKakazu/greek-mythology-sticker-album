@@ -24,7 +24,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Label Content ="Forja de Figurinhas" FontSize="72px" FontWeight="ExtraBold" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Padding="0px, 0px,0px,40px" FontFamily="Diogenes" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            <Label Content ="Forja de Figurinhas" FontSize="72px" FontWeight="ExtraBold" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Padding="0" FontFamily="Diogenes" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
             <Label Content="Selecione o tipo da sua figurinha" FontSize="36px" FontWeight="Bold" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontFamily="Diogenes"/>
             <ComboBox MaxWidth="290px" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="38px" FontFamily="Diogenes"  x:Name="ComboBoxType" Grid.Row="2" Grid.Column="0" Margin="0px,10px" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
             <Button x:Name="ButtonNext" FontSize="36px" FontFamily="Diogenes" FontWeight="Bold" Grid.Row="3" Grid.Column="0" Content="Continuar" VerticalAlignment="Top" HorizontalAlignment="Center" MinWidth="240px" MinHeight="40px" Margin="0px, 40px, 0px, 0px" Click="ButtonNext_Click"/>
