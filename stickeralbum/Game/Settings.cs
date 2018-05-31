@@ -1,4 +1,5 @@
 ﻿using stickeralbum.Design;
+using stickeralbum.Enums;
 using System;
 
 namespace stickeralbum.Game {

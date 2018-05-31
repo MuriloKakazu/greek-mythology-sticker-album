@@ -1,12 +1,9 @@
 ﻿using Newtonsoft.Json;
 using stickeralbum.Debug;
+using stickeralbum.Enums;
 using stickeralbum.IO;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace stickeralbum.Game
 {
@@ -45,7 +42,7 @@ namespace stickeralbum.Game
             } catch (Exception e) {
                 Settings = new Settings();
                 Settings.Volume = 100f;
-                Settings.Theme = Design.Theme.Dark;
+                Settings.Theme = Theme.Dark;
                 DebugUtils.LogError($"Couldn't load settings. Reason: {e.Message}");
             }
         }

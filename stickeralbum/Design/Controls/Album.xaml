@@ -5,16 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:stickeralbum.Design.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800" SizeChanged="UserControl_SizeChanged">
     <Grid>
         <DockPanel>
-            <DockPanel Height="30" LastChildFill="False" DockPanel.Dock="Top" Width="200">
-                <Button x:Name="UpperPrevPage" Content="&lt;" Width="30" HorizontalContentAlignment="Center" FontFamily="Diogenes" Click="UpperPrevPage_Click"/>
-                <Button x:Name="UpperNextPage" Content="&gt;" Width="30" DockPanel.Dock="Right" FontFamily="Diogenes" Click="UpperNextPage_Click"/>
+            <DockPanel Height="30" DockPanel.Dock="Top" LastChildFill="False" Background="#FF2D2D2D">
+                <Button x:Name="UpperPrevPage" Content="Anterior" HorizontalContentAlignment="Center" FontFamily="Diogenes" Click="UpperPrevPage_Click" Margin="0" Cursor="Hand"/>
+                <Button x:Name="UpperNextPage" Content="Próximo" DockPanel.Dock="Right" FontFamily="Diogenes" Click="UpperNextPage_Click" Margin="0" HorizontalContentAlignment="Center" Cursor="Hand"/>
             </DockPanel>
-            <DockPanel Height="30" LastChildFill="False" DockPanel.Dock="Bottom" Width="200">
-                <Button x:Name="LowerPrevPage" Content="&lt;" Width="30" HorizontalContentAlignment="Center" FontFamily="Diogenes" Click="LowerPrevPage_Click"/>
-                <Button x:Name="LowerNextPage" Content="&gt;" Width="30" DockPanel.Dock="Right" FontFamily="Diogenes" Click="LowerNextPage_Click"/>
+            <DockPanel DockPanel.Dock="Bottom">
+                <local:AlbumInteractionBar x:Name="InteractionBar" />
             </DockPanel>
             <DockPanel x:Name="DockPanel">
                 

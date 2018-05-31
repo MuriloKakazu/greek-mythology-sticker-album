@@ -2,9 +2,6 @@
 using stickeralbum.IO;
 using System;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace stickeralbum.Debug
 {
@@ -23,12 +20,15 @@ namespace stickeralbum.Debug
             }
         }
 
-        public static void Log(String message, ConsoleColor color) {
+        public static void Log(object message, ConsoleColor color) {
             Console.ForegroundColor = color;
             Console.WriteLine(message);
             Console.ResetColor();
-            Buffer.Add(message);
+            Buffer.Add(message.ToString());
         }
+
+        public static void Log(object message)
+            => Log($"[DEBUG] => {message.ToString()}", ConsoleColor.Cyan);
 
         public static void LogError(String message)
             => Log($"[ERROR] => {message}", ConsoleColor.Red);

@@ -5,10 +5,23 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:stickeralbum.Design.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="500">
+             d:DesignHeight="230" d:DesignWidth="800">
     <Grid>
         <DockPanel>
-            <local:BarItem />
+            <DockPanel DockPanel.Dock="Top" Background="#FF2D2D2D">
+                <Image    x:Name="SearchIcon"     Width="20" Height="20" Margin="5"/>
+                <CheckBox x:Name="FilterFemale"   DockPanel.Dock="Right" Content="Female"   Margin="3,3,5,3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterFemale_Checked" Unchecked="FilterFemale_Unchecked"/>
+                <CheckBox x:Name="FilterMale"     DockPanel.Dock="Right" Content="Male"     Margin="3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterMale_Checked" Unchecked="FilterMale_Unchecked"/>
+                <CheckBox x:Name="FilterCreature" DockPanel.Dock="Right" Content="Creature" Margin="3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterCreature_Checked" Unchecked="FilterCreature_Unchecked"/>
+                <CheckBox x:Name="FilterSemiGod"  DockPanel.Dock="Right" Content="Semi God" Margin="3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterSemiGod_Checked" Unchecked="FilterSemiGod_Unchecked"/>
+                <CheckBox x:Name="FilterGod"      DockPanel.Dock="Right" Content="God"      Margin="3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterGod_Checked" Unchecked="FilterGod_Unchecked"/>
+                <CheckBox x:Name="FilterTitan"    DockPanel.Dock="Right" Content="Titan"    Margin="3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterTitan_Checked" Unchecked="FilterTitan_Unchecked"/>
+                <CheckBox x:Name="FilterCustom"   DockPanel.Dock="Right" Content="Custom"   Margin="5,3,3,3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterCustom_Checked" Unchecked="FilterCustom_Unchecked"/>
+                <TextBox  x:Name="SearchBox"      Margin="0,8,3,8" TextChanged="SearchBox_TextChanged" VerticalContentAlignment="Center" Cursor="Pen" Height="20"/>
+            </DockPanel>
+            <DockPanel Height="200" DockPanel.Dock="Top" Background="#FF4B4B4B">
+
+            </DockPanel>
         </DockPanel>
     </Grid>
 </UserControl>

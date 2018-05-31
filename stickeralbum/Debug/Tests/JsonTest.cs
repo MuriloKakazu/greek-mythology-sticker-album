@@ -1,12 +1,5 @@
 ﻿using Newtonsoft.Json;
-using stickeralbum.Entities;
-using stickeralbum.Enums;
-using stickeralbum.Generics;
 using System;
-using System.Diagnostics;
-using System.IO;
-using System.Linq;
-using DIAG = System.Diagnostics;
 
 namespace stickeralbum.Debug.Tests {
     class JsonTest {

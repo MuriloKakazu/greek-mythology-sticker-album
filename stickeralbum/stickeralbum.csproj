@@ -110,14 +110,16 @@
     <Compile Include="Design\Controls\StickerRegister_God.xaml.cs">
       <DependentUpon>StickerRegister_God.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Design\IconColor.cs" />
-    <Compile Include="Design\IconType.cs" />
-    <Compile Include="Design\Theme.cs" />
+    <Compile Include="Enums\IconColor.cs" />
+    <Compile Include="Enums\IconType.cs" />
+    <Compile Include="Enums\Theme.cs" />
     <Compile Include="Entities\Chaos.cs" />
     <Compile Include="Entities\Creature.cs" />
     <Compile Include="Entities\EntityUtils.cs" />
     <Compile Include="Entities\Titan.cs" />
     <Compile Include="Enums\ControlState.cs" />
+    <Compile Include="Extensions\UIElementExtensions.cs" />
+    <Compile Include="Game\FilterSettings.cs" />
     <Compile Include="Game\GameMaster.cs" />
     <Compile Include="Game\Inventory.cs" />
     <Compile Include="Game\Items\InventoryItem.cs" />

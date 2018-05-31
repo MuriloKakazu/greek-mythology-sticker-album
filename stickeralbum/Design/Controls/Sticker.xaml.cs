@@ -16,33 +16,37 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace stickeralbum.Design.Controls
-{
+namespace stickeralbum.Design.Controls {
     /// <summary>
     /// Interaction logic for Sticker.xaml
     /// </summary>
-    public partial class Sticker : UserControl
-    {
+    public partial class Sticker : UserControl {
         public Entity Entity { get; protected set; }
 
         public Sticker()
             => InitializeComponent();
 
-        public Sticker(Entity e) : this() 
+        public Sticker(Entity e) : this()
             => SetEntity(e);
 
         public void SetEntity(Entity e) {
             this.Entity = e;
 
-            if (GameMaster.Player.Inventory.HasConsumedSticker(e)) {
-                //this.Background          = new ImageBrush(entity.Background.Source);
-                this.StickerFrame.Source = Sprite.Get(e.Rarity).Source;
-                this.StickerImage.Source = e.Sprite.Source;
-                this.StickerName.Content = e.Name;
-                this.StickerName.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
-            } else {
-                MakeSecret();
-            }
+            //if (GameMaster.Player.Inventory.HasConsumedSticker(e)) {
+            //this.Background          = new ImageBrush(entity.Background.Source);
+            this.StickerFrame.Source = Sprite.Get(e.Rarity).Source;
+            this.StickerImage.Source = e.Sprite.Source;
+            this.StickerName.Content = e.Name;
+            this.StickerName.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
+            //} else {
+            //    MakeSecret();
+            //}
+        }
+
+        public void Refresh() {
+            StickerName.FontSize = (12f / 250f * ActualHeight);
+            StickerImage.Width = StickerFrame.ActualWidth;
+            StickerImage.Height = StickerFrame.ActualHeight;
         }
 
         public void MakeSecret() {
@@ -50,6 +54,10 @@ namespace stickeralbum.Design.Controls
             this.StickerImage.Source = Sprite.Get("unknown").Source;
             this.StickerName.Content = String.Concat(Enumerable.Repeat("?", Entity.Name.Length));
             this.StickerName.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
+        }
+
+        private void Self_SizeChanged(object sender, SizeChangedEventArgs e) {
+            Refresh();
         }
     }
 }

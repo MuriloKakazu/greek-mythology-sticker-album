@@ -3,10 +3,6 @@ using stickeralbum.Design;
 using stickeralbum.Enums;
 using stickeralbum.IO;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace stickeralbum.Entities {
     public abstract class Entity : Cacheable {
@@ -18,6 +14,8 @@ namespace stickeralbum.Entities {
         public String Description;
         public Rarity Rarity;
         public Gender Gender;
+
+        public Boolean IsCustom { get; set; }
 
         public static Entity Get(String ID) 
             => Cache.Get(ID) as Entity;

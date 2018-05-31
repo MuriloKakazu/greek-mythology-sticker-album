@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
-using stickeralbum.Design.Controls;
 
 namespace stickeralbum.Generics {
 
@@ -10,16 +9,16 @@ namespace stickeralbum.Generics {
         internal Node<T> head;
         internal int count;
 
-        public int Count 
+        public int Count
             => count;
 
-        protected Node<T> First 
+        protected Node<T> First
             => head;
 
-        protected Node<T> Last 
+        protected Node<T> Last
             => head?.prev;
 
-        bool ICollection<T>.IsReadOnly 
+        bool ICollection<T>.IsReadOnly
             => false;
 
         public T this[int index] {
@@ -98,7 +97,13 @@ namespace stickeralbum.Generics {
             node.list = this;
         }
 
-        public T Add(T value) => AddLast(value);
+        public T Add(T value) 
+            => AddLast(value);
+
+        public LinkedList<T> Add(IEnumerable<T> values) {
+            foreach (var v in values) Add(v);
+            return this;
+        }
 
         public T AddLast(T value) {
             var result = new Node<T>(this, value);

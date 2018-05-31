@@ -18,6 +18,10 @@ namespace stickeralbum.IO {
             => $@"{ApplicationDirectory}saves\";
         public static String LogsDirectory
             => $@"{ApplicationDirectory}logs\";
+        public static String CustomSpritesDirectory
+            => $@"{SpritesDirectory}custom\";
+        public static String CustomMetadataDirectory
+            => $@"{MetadataDirectory}custom\";
 
 
         public static String SettingsFile
@@ -36,5 +40,15 @@ namespace stickeralbum.IO {
             => $"{MetadataDirectory}semigods.json";
         public static String SpritesMetadata
             => $"{MetadataDirectory}sprites.json";
+        public static String CustomGodsMetadata
+            => $"{CustomMetadataDirectory}gods.json";
+        public static String CustomTitansMetadata
+            => $"{CustomMetadataDirectory}titans.json";
+        public static String CustomCreaturesMetadata
+            => $"{CustomMetadataDirectory}creatures.json";
+        public static String CustomSemiGodsMetadata
+            => $"{CustomMetadataDirectory}semigods.json";
+        public static String CustomSpritesMetadata
+            => $"{CustomMetadataDirectory}sprites.json";
     }
 }

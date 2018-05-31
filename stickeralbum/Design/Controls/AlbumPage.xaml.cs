@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
@@ -29,15 +30,18 @@ namespace stickeralbum.Design.Controls {
 
         public void Setup(Sticker[] stickers) {
             this.Stickers = stickers;
-            stickers.ToLinkedList().ForEach(x => x.Width = 225);
-            stickers.ToLinkedList().ForEach(x => x.Height = 337.5);
+            //stickers.ToLinkedList().ForEach(x => x.Width  = 125.0f);
+            //stickers.ToLinkedList().ForEach(x => x.Height = 187.5f);
             stickers.ToLinkedList().ForEach(x => PageContent.Items.Add(x));
             Refresh();
         }
 
         public virtual void Refresh() {
-
+            Stickers.ToLinkedList().ForEach(x => x.Width = x.Height / 5f);
         }
+
+        public void Clear() 
+            => PageContent.Items.Clear();
 
         //protected Vector GetBestLayoutConfiguration(Array array)
         //    => (array.Length == 1) ? new Vector(1, 1) :

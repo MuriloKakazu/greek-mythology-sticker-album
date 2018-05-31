@@ -4,8 +4,6 @@ using stickeralbum.Game.Items;
 using stickeralbum.Generics;
 using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace stickeralbum.Game {
     public class Inventory {
