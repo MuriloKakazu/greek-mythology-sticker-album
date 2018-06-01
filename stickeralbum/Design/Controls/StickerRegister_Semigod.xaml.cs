@@ -1,8 +1,12 @@
-﻿using stickeralbum.Entities;
+﻿using Newtonsoft.Json;
+using stickeralbum.Entities;
 using stickeralbum.Enums;
+using stickeralbum.Game.Items;
+using stickeralbum.Generics;
 using stickeralbum.IO;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +18,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace stickeralbum.Design.Controls {
     /// <summary>
@@ -30,7 +33,14 @@ namespace stickeralbum.Design.Controls {
             { "Épica"     , Rarity.Epic     }
         };
 
-        Dictionary<String, String> name_x_id = new Dictionary<string, string>();
+        Dictionary<String, Gender> genderOptions = new Dictionary<String, Gender>{
+            { "Masculino"   , Gender.Male },
+            { "Feminino"    , Gender.Female },
+            { "Nenhum"      , Gender.None },
+            { "Desconhecido", Gender.Unknown }
+        };
+
+        Dictionary<String, String> godName_x_id = new Dictionary<string, string>();
 
         public StickerRegister_Semigod() {
             InitializeComponent();
@@ -38,18 +48,19 @@ namespace stickeralbum.Design.Controls {
             StickerNewStricker.StickerImage.Source = Sprite.Get("unknown").Source;
             //StickerNewStricker.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
             ComboBoxRarity.ItemsSource = rarityOptions.Keys;
-            ComboBoxGender.ItemsSource = new Generics.LinkedList<String>() { "Masculino", "Feminino", "None" };
-            ComboBoxRelatedGod.ItemsSource = name_x_id.Keys;
+            ComboBoxGender.ItemsSource = genderOptions.Keys;
+            ComboBoxRelatedGod.ItemsSource = godName_x_id.Keys;
             ComboBoxRarity.SelectedIndex = ComboBoxRelatedGod.SelectedIndex = ComboBoxGender.SelectedIndex = 0;
         }
 
+        Microsoft.Win32.OpenFileDialog dlg;
         private void StickerNewStricker_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
 
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg = new Microsoft.Win32.OpenFileDialog();
 
             // Set filter for file extension and default file extension 
             dlg.DefaultExt = ".png";
-            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+            dlg.Filter = "Image Files (*.gif,*.jpg,*.jpeg,*.bmp,*.png)|*.gif;*.jpg;*.jpeg;*.bmp;*.png";
 
 
             // Display OpenFileDialog by calling ShowDialog method 
@@ -104,6 +115,41 @@ namespace stickeralbum.Design.Controls {
             if(hasError) {
                 return;
             }
+
+            String imgGuid = Guid.NewGuid().ToString();
+            File.Copy(dlg.FileName, Path.Combine(Paths.CustomSpritesDirectory, imgGuid));
+            Generics.LinkedList<Sprite> spritesMetadata = JsonConvert.DeserializeObject<Generics.LinkedList<Sprite>>(File.ReadAllText(Paths.CustomSpritesMetadata));
+            spritesMetadata.Add(new Sprite() {
+                ID = imgGuid,
+                Path = Path.Combine(Paths.CustomSpritesDirectory, imgGuid)
+            });
+            File.WriteAllText(Paths.CustomSpritesMetadata, JsonConvert.SerializeObject(spritesMetadata, Formatting.Indented));
+
+            Generics.LinkedList<SemiGod> customSemigods = EntityUtils.AllSemiGods().Where(x => x.IsCustom).ToLinkedList();
+
+            SemiGod newCustomSemiGod = new SemiGod() {
+                Name = TextBoxName.Text,
+                Description = TextBoxDescription.Text,
+                ID = Guid.NewGuid().ToString(),
+                SpriteID = imgGuid,
+                IsCustom = true
+            };
+            Console.WriteLine(ComboBoxRelatedGod.Text);
+            Console.WriteLine(ComboBoxRarity.Text);
+            Console.WriteLine(ComboBoxGender.Text);
+            godName_x_id.TryGetValue(ComboBoxRelatedGod.Text, out newCustomSemiGod.RelatedGodID);
+            rarityOptions.TryGetValue(ComboBoxRarity.Text, out newCustomSemiGod.Rarity);
+            genderOptions.TryGetValue(ComboBoxGender.Text, out newCustomSemiGod.Gender);
+
+            customSemigods.Add(newCustomSemiGod);
+
+            File.WriteAllText(Paths.CustomSemiGodsMetadata, JsonConvert.SerializeObject(customSemigods, Formatting.Indented));
+            Cache.Clear();
+            Cache.LoadCustoms();
+            Game.GameMaster.Player.Inventory.Add(new SimpleSticker() {
+                ItemID = newCustomSemiGod.ID
+            });
+            App.ClientWindow.SetCurrentPage(new StickerRegister_TypeChoosing());
         }
     }
 }
