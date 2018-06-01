@@ -6,7 +6,7 @@ namespace stickeralbum.Game {
         protected Dictionary<String, Boolean> InternalMap;
         public String Query;
 
-        public FilterSettings() 
+        public FilterSettings()
             => InternalMap = new Dictionary<string, bool>();
 
         public Boolean ContainsKey(String key)
@@ -18,11 +18,17 @@ namespace stickeralbum.Game {
         }
 
         public Boolean? Get(String key)
-            => InternalMap.TryGetValue(key, out Boolean value) ? (Boolean?) value : null;
+            => InternalMap.TryGetValue(key, out Boolean value) ? (Boolean?)value : null;
 
         public FilterSettings Clear() {
             InternalMap.Clear();
             return this;
+        }
+
+        public String[] GetKeys() {
+            String[] output = new String[InternalMap.Keys.Count];
+            InternalMap.Keys.CopyTo(output, 0);
+            return output;
         }
 
         public FilterSettings SetKey(String key, Boolean value) {

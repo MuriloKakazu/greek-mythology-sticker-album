@@ -1,4 +1,5 @@
 ﻿using stickeralbum.Generics;
+using stickeralbum.IO;
 using System.Linq;
 
 namespace stickeralbum.Entities
@@ -46,5 +47,20 @@ namespace stickeralbum.Entities
 
         public static LinkedList<Creature> GetCreatures(this LinkedList<Entity> entityList)
             => entityList.OfType<Creature>().Cast<Creature>().ToLinkedList();
+
+        public static LinkedList<Titan> AllTitans()
+            => Cache.GetAll().Where(x => x is Titan).Cast<Titan>().ToLinkedList();
+
+        public static LinkedList<God> AllGods()
+            => Cache.GetAll().Where(x => x is God).Cast<God>().ToLinkedList();
+
+        public static LinkedList<SemiGod> AllSemiGods()
+            => Cache.GetAll().Where(x => x is SemiGod).Cast<SemiGod>().ToLinkedList();
+
+        public static LinkedList<Creature> AllCreatures()
+            => Cache.GetAll().Where(x => x is Creature).Cast<Creature>().ToLinkedList();
+
+        public static LinkedList<Entity> AllEntities()
+            => Cache.GetAll().Where(x => x is Entity).Cast<Entity>().ToLinkedList();
     }
 }

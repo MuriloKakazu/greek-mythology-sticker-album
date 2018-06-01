@@ -30,14 +30,12 @@ namespace stickeralbum.Design.Controls {
 
         public void Setup(Sticker[] stickers) {
             this.Stickers = stickers;
-            //stickers.ToLinkedList().ForEach(x => x.Width  = 125.0f);
-            //stickers.ToLinkedList().ForEach(x => x.Height = 187.5f);
             stickers.ToLinkedList().ForEach(x => PageContent.Items.Add(x));
             Refresh();
         }
 
         public virtual void Refresh() {
-            Stickers.ToLinkedList().ForEach(x => x.Width = x.Height / 5f);
+            
         }
 
         public void Clear() 

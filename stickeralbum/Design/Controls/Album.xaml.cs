@@ -31,17 +31,17 @@ namespace stickeralbum.Design.Controls
 
         public Album() {
             InitializeComponent();
-            InteractionBar.FilterChanged += InteractionBar_FilterChanged;
-            DebugUtils.Log("Default Album ctor");
+            FilterPanel.FilterChanged += InteractionBar_FilterChanged;
         }
 
+        public Album(Sticker[] stickers): 
+            this() => Setup(stickers);
+
+        public Album(Entity[] entities): 
+            this(GetStickersFromEntities(entities)) { }
+
         private void InteractionBar_FilterChanged(object sender, EventArgs e) 
-            => Filter(InteractionBar.FilterSettings);
-
-        public Album(Sticker[] stickers) : this() 
-            => Setup(stickers);
-
-        public Album(Entity[] entities) : this(GetStickersFromEntities(entities)) {}
+            => Filter(FilterPanel.FilterSettings);
 
         protected static Sticker[] GetStickersFromEntities(Entity[] entities) {
             var stickers = new LinkedList<Sticker>();
@@ -57,30 +57,15 @@ namespace stickeralbum.Design.Controls
             var filtered = new LinkedList<Sticker>();
             var sourceCopy = new LinkedList<Sticker>();
             AllStickers.ToLinkedList().ForEach(x => sourceCopy.Add(new Sticker(x.Entity)));
-            if ((Boolean) settings.Get("custom")) {
+            var filters = FilterPanel.FilterSettings.GetKeys().Where(x => (Boolean)settings.Get(x)).ToLinkedList();
+
+            filtered.Add(sourceCopy.Where(x => filters.Contains(x.Entity.GetType().Name.ToLower()) && !filtered.Contains(x)));
+            if (filters.Contains("custom")) {
                 filtered.Add(sourceCopy.Where(x => x.Entity.IsCustom && !filtered.Contains(x)));
             }
-            if ((Boolean)settings.Get("titan")) {
-                filtered.Add(sourceCopy.Where(x => x.Entity.IsTitan && !filtered.Contains(x)));
-            }
-            if ((Boolean)settings.Get("god")) {
-                filtered.Add(sourceCopy.Where(x => x.Entity.IsGod && !filtered.Contains(x)));
-            }
-            if ((Boolean)settings.Get("semigod")) {
-                filtered.Add(sourceCopy.Where(x => x.Entity.IsSemiGod && !filtered.Contains(x)));
-            }
-            if ((Boolean)settings.Get("creature")) {
-                filtered.Add(sourceCopy.Where(x => x.Entity.IsCreature && !filtered.Contains(x)));
-            }
-            if ((Boolean)settings.Get("male") && (Boolean)settings.Get("female")) {
-                //
-            } else if ((Boolean) settings.Get("male")) {
-                filtered = filtered.Where(x => x.Entity.Gender == Gender.Male).ToLinkedList();
-            } else if ((Boolean )settings.Get("female")) {
-                filtered = filtered.Where(x => x.Entity.Gender == Gender.Female).ToLinkedList();
-            } else {
-                filtered = filtered.Where(x => x.Entity.Gender != Gender.Male && x.Entity.Gender != Gender.Female).ToLinkedList();
-            }
+            filtered.Remove(filtered.Where(x => !filters.Contains(x.Entity.Rarity.ToString().ToLower())));
+            filtered.Remove(filtered.Where(x => !filters.Contains(x.Entity.Gender.ToString().ToLower())));
+
             if (settings.Query != null) {
                 filtered = filtered.Where(x => x.Entity.Name.ToLower().Contains(settings.Query.ToLower())).ToLinkedList();
                 DebugUtils.Log($"Filter query => {settings.Query}");
@@ -90,8 +75,8 @@ namespace stickeralbum.Design.Controls
         }
 
         public void Refresh() {
-            UpperPrevPage.Width = this.ActualWidth / 2f;
-            UpperNextPage.Width = this.ActualWidth / 2f;
+            UpperPrevPage.Width = this.AlbumArea.ActualWidth / 2f;
+            UpperNextPage.Width = this.AlbumArea.ActualWidth / 2f;
         }
 
         public void GeneratePagesForStickers(Sticker[] stickers) {
@@ -100,36 +85,27 @@ namespace stickeralbum.Design.Controls
                 Pages.ToLinkedList().ForEach(x => x.Clear());
             }
             var pagesList = new LinkedList<AlbumPage>();
-            var pagesCount = Math.Ceiling(stickers.Length / 8d);
+            var pagesCount = Math.Ceiling(stickers.Length / 6d);
             var stickersList = stickers.ToLinkedList();
             for (var i = 0; i < pagesCount; i++) {
                 pagesList.Add(new AlbumPage(
-                    stickersList.Skip(i * 8).Take(8).ToArray()
+                    stickersList.Skip(i * 6).Take(6).ToArray()
                 ));
             }
             this.Pages = pagesList.ToArray();
-            this.DockPanel.Children.Clear();
+            this.AlbumArea.Children.Clear();
             this.CurrentPage = null;
             if (Pages.Length > 0) {
                 this.CurrentPage = Pages[0];
-                this.DockPanel.Children.Add(this.CurrentPage);
-            }
-        }
-
-        private void Album_MouseWheel(object sender, MouseWheelEventArgs e) {
-            Console.WriteLine(e.Delta);
-            if (e.Delta > 0) {
-                NextPage();
-            } else if (e.Delta < 0) {
-                PreviousPage();
+                this.AlbumArea.Children.Add(this.CurrentPage);
             }
         }
 
         public Boolean SetPage(AlbumPage page) {
             if (page == null) return false;
             this.CurrentPage = page;
-            this.DockPanel.Children.Clear();
-            this.DockPanel.Children.Add(page);
+            this.AlbumArea.Children.Clear();
+            this.AlbumArea.Children.Add(page);
             return true;
         }
 
@@ -157,15 +133,7 @@ namespace stickeralbum.Design.Controls
             NextPage();
         }
 
-        private void LowerPrevPage_Click(object sender, RoutedEventArgs e) {
-            PreviousPage();
-        }
-
-        private void LowerNextPage_Click(object sender, RoutedEventArgs e) {
-            NextPage();
-        }
-
-        private void UserControl_SizeChanged(object sender, SizeChangedEventArgs e) {
+        private void AlbumArea_SizeChanged(object sender, SizeChangedEventArgs e) {
             Refresh();
         }
     }

@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using stickeralbum.Enums;
+using stickeralbum.Extensions;
 using stickeralbum.IO;
 using System;
 using System.Windows.Media.Imaging;
@@ -7,14 +8,21 @@ using System.Windows.Media.Imaging;
 namespace stickeralbum.Design {
     public class Sprite : Cacheable {
         public  String      Path;
-        private BitmapImage Image;
 
         [JsonIgnore]
-        public BitmapSource Source
-            => Image;
+        public BitmapSource Source;
+        [JsonIgnore]
+        public BitmapSource DarkenedSource;
 
-        public void LoadImage() 
-            => Image = new BitmapImage(new Uri(Path));
+        [JsonIgnore]
+        public Boolean IsCustom;
+
+        public void LoadImage() {
+            Source = new BitmapImage(new Uri(Path));
+            if (Source.Width <= 512 && Source.Height <= 512) {
+                DarkenedSource = Source.GetAllBlack();
+            }
+        }
 
         public static Sprite Get(String ID)
             => Cache.Get(ID) as Sprite;

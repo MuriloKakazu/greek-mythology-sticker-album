@@ -5,18 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:stickeralbum.Design.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" SizeChanged="UserControl_SizeChanged">
+             d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <DockPanel>
-            <DockPanel Height="30" DockPanel.Dock="Top" LastChildFill="False" Background="#FF2D2D2D">
-                <Button x:Name="UpperPrevPage" Content="Anterior" HorizontalContentAlignment="Center" FontFamily="Diogenes" Click="UpperPrevPage_Click" Margin="0" Cursor="Hand"/>
-                <Button x:Name="UpperNextPage" Content="Próximo" DockPanel.Dock="Right" FontFamily="Diogenes" Click="UpperNextPage_Click" Margin="0" HorizontalContentAlignment="Center" Cursor="Hand"/>
-            </DockPanel>
             <DockPanel DockPanel.Dock="Bottom">
-                <local:AlbumInteractionBar x:Name="InteractionBar" />
+                <local:PlayerInventory MaxHeight="200" />
             </DockPanel>
-            <DockPanel x:Name="DockPanel">
-                
+            <DockPanel DockPanel.Dock="Right">
+                <local:FilterSidepanel x:Name="FilterPanel" MaxWidth="236" />
+            </DockPanel>
+            <DockPanel>
+                <DockPanel Height="30" DockPanel.Dock="Top" LastChildFill="False" Background="#FF2D2D2D">
+                    <Button x:Name="UpperPrevPage" Content="Anterior" HorizontalContentAlignment="Center" FontFamily="Diogenes" Click="UpperPrevPage_Click" Margin="0" Cursor="Hand"/>
+                    <Button x:Name="UpperNextPage" Content="Próximo" DockPanel.Dock="Right" FontFamily="Diogenes" Click="UpperNextPage_Click" Margin="0" HorizontalContentAlignment="Center" Cursor="Hand"/>
+                </DockPanel>
+                <DockPanel x:Name="AlbumArea" SizeChanged="AlbumArea_SizeChanged"/>
             </DockPanel>
         </DockPanel>
     </Grid>

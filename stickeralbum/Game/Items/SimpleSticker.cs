@@ -6,11 +6,13 @@ namespace stickeralbum.Game.Items
 {
     public class SimpleSticker : InventoryItem
     {
-        public Boolean IsConsumed { get; set; }
+        public SimpleSticker() { }
+
+        public SimpleSticker(String itemID): 
+            base(itemID) { }
+
         [JsonIgnore]
         public Entity Entity
             => Entity.Get(ItemID);
-        public void Consume() 
-            => IsConsumed = true;
     }
 }

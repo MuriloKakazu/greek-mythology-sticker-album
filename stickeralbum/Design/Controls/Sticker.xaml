@@ -5,16 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:stickeralbum.Design.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="500" d:DesignWidth="350" BorderBrush="#FF4D4D4D" BorderThickness="0" ClipToBounds="True" SizeChanged="Self_SizeChanged">
-    <Grid x:Name="Grid">
+             d:DesignHeight="500" d:DesignWidth="350" BorderBrush="#FF4D4D4D" BorderThickness="0" ClipToBounds="True" SizeChanged="Self_SizeChanged" AllowDrop="True" DragEnter="Self_DragEnter" DragLeave="Self_DragLeave" DragOver="Self_DragOver" Drop="Self_Drop" MouseDown="Self_MouseDown" MouseMove="Self_MouseMove" GiveFeedback="Self_GiveFeedback" PreviewMouseLeftButtonDown="Self_PreviewMouseLeftButtonDown">
+    <Grid>
         <Grid.Effect>
             <DropShadowEffect Opacity="0.5"/>
         </Grid.Effect>
-        <DockPanel Margin="0">
-            <Image x:Name="StickerImage" Margin="0" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" RenderOptions.ClearTypeHint="Auto" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-        </DockPanel>
+        <DockPanel x:Name="SpaceFiller"/>
+        <Image x:Name="StickerImage" Margin="0" DockPanel.Dock="Top" ScrollViewer.VerticalScrollBarVisibility="Disabled" HorizontalAlignment="Center" VerticalAlignment="Center"/>
         <Image x:Name="StickerFrame" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" RenderOptions.ClearTypeHint="Auto" ClipToBounds="True" Cursor="Hand" MouseEnter="StickerFrame_MouseEnter" MouseLeave="StickerFrame_MouseLeave"/>
-        <Label x:Name="StickerName" Content="NAME" FontFamily="Diogenes" FontSize="11" DockPanel.Dock="Bottom" VerticalAlignment="Top" HorizontalContentAlignment="Center" ClipToBounds="True">
+        <Label x:Name="StickerName" Content="NAME" FontFamily="Diogenes" FontSize="11" HorizontalContentAlignment="Center" ClipToBounds="True" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0">
             <Label.Effect>
                 <DropShadowEffect Opacity="0.5" ShadowDepth="2"/>
             </Label.Effect>

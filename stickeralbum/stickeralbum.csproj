@@ -85,6 +85,9 @@
     <Compile Include="Design\Controls\AlbumInteractionBar.xaml.cs">
       <DependentUpon>AlbumInteractionBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Design\Controls\FilterSidepanel.xaml.cs">
+      <DependentUpon>FilterSidepanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\Controls\PlayerInventory.xaml.cs">
       <DependentUpon>PlayerInventory.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,7 @@
     <Compile Include="Entities\EntityUtils.cs" />
     <Compile Include="Entities\Titan.cs" />
     <Compile Include="Enums\ControlState.cs" />
+    <Compile Include="Extensions\BitmapSourceExtensions.cs" />
     <Compile Include="Extensions\UIElementExtensions.cs" />
     <Compile Include="Game\FilterSettings.cs" />
     <Compile Include="Game\GameMaster.cs" />
@@ -172,6 +176,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Design\Controls\AlbumPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\FilterSidepanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -227,7 +227,7 @@ namespace stickeralbum.Generics {
         IEnumerator<T> IEnumerable<T>.GetEnumerator() 
             => GetEnumerator();
 
-        public bool Remove(T value) {
+        public Boolean Remove(T value) {
             var node = FindNode(value);
 
             if (node != null) {
@@ -236,6 +236,13 @@ namespace stickeralbum.Generics {
             }
 
             return false;
+        }
+
+        public LinkedList<T> Remove(IEnumerable<T> values) {
+            foreach (var v in values) {
+                Remove(v);
+            }
+            return this;
         }
 
         public void Remove(Node<T> node) {

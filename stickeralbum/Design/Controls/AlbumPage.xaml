@@ -11,7 +11,7 @@
         <ListBox x:Name="PageContent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" Background="{x:Null}" SelectionChanged="PageContent_SelectionChanged">
             <ListBox.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <UniformGrid x:Name="Grid" Rows="2" Columns="4"/>
+                    <UniformGrid x:Name="Grid" Rows="2" Columns="3"/>
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
             <ListBox.ItemContainerStyle>

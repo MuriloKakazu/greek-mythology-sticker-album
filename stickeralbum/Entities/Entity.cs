@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
 using stickeralbum.Design;
 using stickeralbum.Enums;
+using stickeralbum.Game;
+using stickeralbum.Game.Items;
 using stickeralbum.IO;
 using System;
 
@@ -15,22 +17,26 @@ namespace stickeralbum.Entities {
         public Rarity Rarity;
         public Gender Gender;
 
-        public Boolean IsCustom { get; set; }
+        [JsonIgnore]
+        public Boolean IsCustom;
 
-        public static Entity Get(String ID) 
+        public static Entity Get(String ID)
             => Cache.Get(ID) as Entity;
 
+        public SimpleSticker ToInventoryItem()
+            => new SimpleSticker(this.ID);
+
         [JsonIgnore]
-        public Boolean IsGod 
+        public Boolean IsGod
             => (this is God);
         [JsonIgnore]
-        public Boolean IsSemiGod 
+        public Boolean IsSemiGod
             => (this is SemiGod);
         [JsonIgnore]
-        public Boolean IsCreature 
+        public Boolean IsCreature
             => (this is Creature);
         [JsonIgnore]
-        public Boolean IsTitan 
+        public Boolean IsTitan
             => (this is Titan);
         [JsonIgnore]
         public Sprite Sprite
@@ -44,5 +50,8 @@ namespace stickeralbum.Entities {
         [JsonIgnore]
         public Entity Mother
             => Get(MotherID);
+        [JsonIgnore]
+        public Boolean IsUnlocked
+            => GameMaster.Player.HasUnlocked(this);
     }
 }
