@@ -109,6 +109,7 @@ namespace stickeralbum.Design.Controls {
             }
             if(StickerNewStricker.StickerImage.Source == Sprite.Get("unknown").Source){
                 LabelTip.Foreground = redBg;
+                hasError = true;
             } else {
                 LabelTip.Foreground = new SolidColorBrush(Colors.Black);
             }
@@ -142,7 +143,9 @@ namespace stickeralbum.Design.Controls {
             customGods.Add(newCustomGod);
 
             File.WriteAllText(Paths.CustomGodsMetadata, JsonConvert.SerializeObject(customGods, Formatting.Indented));
-            Cache.LoadCustoms();
+
+            Cache.Clear();
+            Cache.Load();
 
             App.ClientWindow.SetCurrentPage(new StickerRegister_TypeChoosing());
         }

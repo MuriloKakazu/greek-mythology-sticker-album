@@ -22,6 +22,10 @@ namespace stickeralbum.IO
                 => Key = key;
         }
 
+        public static void Clear() {
+            CachedObjects.Clear();
+        }
+
         public static void Load() {
             try {
                 DebugUtils.LogIO("Populating cache...");
@@ -46,15 +50,15 @@ namespace stickeralbum.IO
             LoadIcons();
             LoadTitans();
             var sprites = LoadSprites();
-            //LoadSemiGods();
+            LoadSemiGods();
             //LoadCreatures();
         }
 
         public static void LoadCustoms() {
             LoadCustomGods();
             //LoadCustomTitans();
-            //var sprites = LoadCustomSprites();
-            //LoadCustomSemiGods();
+            var sprites = LoadCustomSprites();
+            LoadCustomSemiGods();
             //LoadCustomCreatures();
         }
 

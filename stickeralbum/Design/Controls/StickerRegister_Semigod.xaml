@@ -128,7 +128,7 @@
             </Grid.ColumnDefinitions>
             <local:Sticker x:Name="StickerNewStricker" Grid.Column="0" Grid.Row="0" Margin="0,30,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="250" Height="375" MinWidth="200" MinHeight="290" MouseLeftButtonUp="StickerNewStricker_MouseLeftButtonUp"/>
             <Label x:Name="LabelTip" FontFamily="Diogenes" FontSize="16px" Content="Clique na figurinha para alterar sua imagem" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-            <Button x:Name="ButtonRegister" Grid.Column="0" Grid.Row="2" Margin="30,0,60,30" Content="Forjar" FontFamily="Diogenes" FontSize="35" Background="#FFE2C992" MinWidth="230" Height="50" BorderBrush="#FF040404" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"/>
+            <Button x:Name="ButtonRegister" Grid.Column="0" Grid.Row="2" Margin="30,0,60,30" Content="Forjar" FontFamily="Diogenes" FontSize="35" Background="#FFE2C992" MinWidth="230" Height="50" BorderBrush="#FF040404" HorizontalContentAlignment="Center" VerticalAlignment="Center" FontWeight="Bold" Click="ButtonRegister_Click"/>
         </Grid>
     </Grid>
 </UserControl>
