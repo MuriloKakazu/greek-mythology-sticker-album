@@ -1,8 +1,10 @@
 ﻿using Newtonsoft.Json;
 using stickeralbum.Enums;
 using stickeralbum.Extensions;
+using stickeralbum.Generics;
 using stickeralbum.IO;
 using System;
+using System.Linq;
 using System.Windows.Media.Imaging;
 
 namespace stickeralbum.Design {
@@ -35,5 +37,11 @@ namespace stickeralbum.Design {
 
         public override String ToString() 
             => this.Path;
+
+        public static LinkedList<Sprite> GetAll()
+            => Cache.GetAll()
+              .Where(x => x is Sprite)
+              .Cast<Sprite>()
+              .ToLinkedList();
     }
 }

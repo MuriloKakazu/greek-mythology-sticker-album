@@ -34,7 +34,7 @@ namespace stickeralbum.Design.Controls {
 
         public StickerRegister_Semigod() {
             InitializeComponent();
-            EntityUtils.AllGods().ForEach(x => name_x_id.Add(x.Name, x.ID));
+            God.GetAll().ForEach(x => name_x_id.Add(x.Name, x.ID));
             StickerNewStricker.StickerImage.Source = Sprite.Get("unknown").Source;
             //StickerNewStricker.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
             ComboBoxRarity.ItemsSource = rarityOptions.Keys;
