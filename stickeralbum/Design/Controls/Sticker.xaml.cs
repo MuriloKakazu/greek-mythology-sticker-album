@@ -76,7 +76,7 @@ namespace stickeralbum.Design.Controls {
         public void MakeSecret() {
             this.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
             //this.StickerImage.Source = Sprite.Get("unknown").Source;
-            this.StickerImage.Source = Entity.Sprite.DarkenedSource;
+            this.StickerImage.Source = (Entity.IsCustom) ? Sprite.Get("unknown").Source : Entity.Sprite.DarkenedSource;
             this.StickerName.Content = Entity.Name;
             //this.StickerName.Content = String.Concat(Enumerable.Repeat("?", Entity.Name.Length));
             this.StickerName.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));

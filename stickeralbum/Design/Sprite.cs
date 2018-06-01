@@ -7,7 +7,7 @@ using System.Windows.Media.Imaging;
 
 namespace stickeralbum.Design {
     public class Sprite : Cacheable {
-        public  String      Path;
+        public String Path;
 
         [JsonIgnore]
         public BitmapSource Source;
@@ -19,7 +19,7 @@ namespace stickeralbum.Design {
 
         public void LoadImage() {
             Source = new BitmapImage(new Uri(Path));
-            if (Source.Width <= 512 && Source.Height <= 512) {
+            if (!IsCustom && Source.Width <= 512 && Source.Height <= 512) {
                 DarkenedSource = Source.GetAllBlack();
             }
         }
