@@ -14,26 +14,30 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace stickeralbum.Design.Controls {
+namespace stickeralbum.Design.Controls
+{
     /// <summary>
-    /// Interação lógica para Page1.xam
+    /// Interação lógica para StickerRegister_Titan.xam
     /// </summary>
-    public partial class StickerRegister_Semigod : UserControl {
-
+    public partial class StickerRegister_Titan : UserControl
+    {
         Dictionary<String, Rarity> rarityOptions = new Dictionary<string, Rarity>{
             { "Comum"   , Rarity.Common   },
             { "Incomum" , Rarity.Uncommon },
-            { "Raro"     , Rarity.Rare     },
-            { "Muito Rara", Rarity.VeryRare },
+            { "Rara"     , Rarity.Rare     },
+            { "Muito rara", Rarity.VeryRare },
             { "Épica"     , Rarity.Epic     }
         };
 
-        public StickerRegister_Semigod() {
+        public StickerRegister_Titan() {
             InitializeComponent();
             StickerNewStricker.StickerImage.Source = Sprite.Get("unknown").Source;
             StickerNewStricker.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
             ComboBoxRarity.ItemsSource = rarityOptions.Keys;
             ComboBoxGender.ItemsSource = new Generics.LinkedList<String>() { "Masculino", "Feminino", "None" };
+        }
+        private void _this_Loaded(object sender, System.Windows.RoutedEventArgs e) {
+
         }
 
         private void StickerNewStricker_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
@@ -68,7 +72,7 @@ namespace stickeralbum.Design.Controls {
             StickerNewStricker.StickerName.Content = TextBoxName.Text;
         }
 
-        private void ButtonBack_Click(object sender, RoutedEventArgs e) {
+        private void Button_Click(object sender, System.Windows.RoutedEventArgs e) {
             App.ClientWindow.SetCurrentPage(new StickerRegister_TypeChoosing());
         }
 

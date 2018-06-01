@@ -39,6 +39,9 @@ namespace stickeralbum.Design.Controls {
                 case "Criatura":
                     App.ClientWindow.SetCurrentPage(new StickerRegister_Creature());
                     return;
+                case "Titã":
+                    App.ClientWindow.SetCurrentPage(new StickerRegister_Titan());
+                    return;
             }
         }
     }

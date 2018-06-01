@@ -80,5 +80,32 @@ namespace stickeralbum.Design.Controls
             Regex regex = new Regex("[^0-9]+");
             e.Handled = regex.IsMatch(e.Text) || (TextBoxDangerLevel.Text.Length == 1 && TextBoxDangerLevel.Text != "1") || TextBoxDangerLevel.Text.Length > 1;
         }
+
+        SolidColorBrush normalBg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFE2C992"));
+        SolidColorBrush pinkBg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffddcc"));
+        SolidColorBrush redBg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ff0000"));
+        private void ButtonRegister_Click(object sender, System.Windows.RoutedEventArgs e) {
+            bool hasError = false;
+            if(TextBoxName.Text == null || TextBoxName.Text == "") {
+                TextBoxName.Background = pinkBg;
+                hasError = true;
+            } else {
+                TextBoxName.Background = normalBg;
+            }
+            if(TextBoxDescription.Text == null || TextBoxDescription.Text == "") {
+                TextBoxDescription.Background = pinkBg;
+                hasError = true;
+            } else {
+                TextBoxDescription.Background = normalBg;
+            }
+            if(StickerNewStricker.StickerImage.Source == Sprite.Get("unknown").Source) {
+                LabelTip.Foreground = redBg;
+            } else {
+                LabelTip.Foreground = new SolidColorBrush(Colors.Black);
+            }
+            if(hasError) {
+                return;
+            }
+        }
     }
 }

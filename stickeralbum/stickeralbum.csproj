@@ -106,6 +106,9 @@
     <Compile Include="Design\Controls\SidebarMenu.xaml.cs">
       <DependentUpon>SidebarMenu.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Design\Controls\StickerRegister_Titan.xaml.cs">
+      <DependentUpon>StickerRegister_Titan.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\Controls\StickerRegister_TypeChoosing.xaml.cs">
       <DependentUpon>StickerRegister_TypeChoosing.xaml</DependentUpon>
     </Compile>
@@ -212,6 +215,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Design\Controls\StickerRegister_God.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\StickerRegister_Titan.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using stickeralbum.Enums;
 using System.Collections.Generic;
+using System.IO;
 
 namespace stickeralbum.Design.Controls {
     /// <summary>
@@ -33,10 +34,10 @@ namespace stickeralbum.Design.Controls {
         private void _this_Loaded(object sender, System.Windows.RoutedEventArgs e) {
          
         }
-
+        Microsoft.Win32.OpenFileDialog dlg;
         private void StickerNewStricker_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
 
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg = new Microsoft.Win32.OpenFileDialog();
 
             // Set filter for file extension and default file extension 
             dlg.DefaultExt = ".png";
@@ -50,8 +51,6 @@ namespace stickeralbum.Design.Controls {
             if(result == true) {
                 // Open document 
                 StickerNewStricker.StickerImage.Source = new BitmapImage(new Uri(dlg.FileName));
-
-                //File.Copy(dlg.FileName, Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\";
             }
         }
 
@@ -68,6 +67,33 @@ namespace stickeralbum.Design.Controls {
 
         private void Button_Click(object sender, System.Windows.RoutedEventArgs e) {
             App.ClientWindow.SetCurrentPage(new StickerRegister_TypeChoosing());
+        }
+
+        SolidColorBrush normalBg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFE2C992"));
+        SolidColorBrush pinkBg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffddcc"));
+        SolidColorBrush redBg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ff0000"));
+        private void ButtonRegister_Click(object sender, System.Windows.RoutedEventArgs e) {
+            bool hasError = false;
+            if(TextBoxName.Text == null || TextBoxName.Text == "") {
+                TextBoxName.Background = pinkBg;
+                hasError = true;
+            } else {
+                TextBoxName.Background = normalBg;
+            }
+            if(TextBoxDescription.Text == null || TextBoxDescription.Text == "") {
+                TextBoxDescription.Background = pinkBg;
+                hasError = true;
+            } else {
+                TextBoxDescription.Background = normalBg;
+            }
+            if(StickerNewStricker.StickerImage.Source == Sprite.Get("unknown").Source){
+                LabelTip.Foreground = redBg;
+            } else {
+                LabelTip.Foreground = new SolidColorBrush(Colors.Black);
+            }
+            if(hasError) {
+                return;
+            }
         }
     }
 }
