@@ -51,7 +51,7 @@ namespace stickeralbum.IO
         }
 
         public static void LoadCustoms() {
-            //LoadCustomGods();
+            LoadCustomGods();
             //LoadCustomTitans();
             //var sprites = LoadCustomSprites();
             //LoadCustomSemiGods();

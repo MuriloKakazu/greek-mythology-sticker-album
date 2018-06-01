@@ -1,4 +1,6 @@
-﻿using stickeralbum.Enums;
+﻿using stickeralbum.Entities;
+using stickeralbum.Enums;
+using stickeralbum.IO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +30,17 @@ namespace stickeralbum.Design.Controls {
             { "Épica"     , Rarity.Epic     }
         };
 
+        Dictionary<String, String> name_x_id = new Dictionary<string, string>();
+
         public StickerRegister_Semigod() {
             InitializeComponent();
+            EntityUtils.AllGods().ForEach(x => name_x_id.Add(x.Name, x.ID));
             StickerNewStricker.StickerImage.Source = Sprite.Get("unknown").Source;
-            StickerNewStricker.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
+            //StickerNewStricker.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
             ComboBoxRarity.ItemsSource = rarityOptions.Keys;
             ComboBoxGender.ItemsSource = new Generics.LinkedList<String>() { "Masculino", "Feminino", "None" };
+            ComboBoxRelatedGod.ItemsSource = name_x_id.Keys;
+            ComboBoxRarity.SelectedIndex = ComboBoxRelatedGod.SelectedIndex = ComboBoxGender.SelectedIndex = 0;
         }
 
         private void StickerNewStricker_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
