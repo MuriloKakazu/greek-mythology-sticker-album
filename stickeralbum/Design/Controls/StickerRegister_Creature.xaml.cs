@@ -1,6 +1,12 @@
-﻿using stickeralbum.Enums;
+﻿using Newtonsoft.Json;
+using stickeralbum.Entities;
+using stickeralbum.Enums;
+using stickeralbum.Game.Items;
+using stickeralbum.Generics;
+using stickeralbum.IO;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -13,7 +19,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace stickeralbum.Design.Controls
 {
@@ -25,9 +30,10 @@ namespace stickeralbum.Design.Controls
         public StickerRegister_Creature() {
             InitializeComponent();
             StickerNewStricker.StickerImage.Source = Sprite.Get("unknown").Source;
-            StickerNewStricker.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
+            //StickerNewStricker.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
             ComboBoxRarity.ItemsSource = rarityOptions.Keys;
-            ComboBoxGender.ItemsSource = new Generics.LinkedList<String>() { "Masculino", "Feminino", "None" };
+            ComboBoxGender.ItemsSource = genderOptions.Keys;
+            ComboBoxRarity.SelectedIndex =  ComboBoxGender.SelectedIndex = 0;
         }
 
         Dictionary<String, Rarity> rarityOptions = new Dictionary<string, Rarity>{
@@ -38,15 +44,21 @@ namespace stickeralbum.Design.Controls
             { "Épica"     , Rarity.Epic     }
         };
 
-        
+        Dictionary<String, Gender> genderOptions = new Dictionary<String, Gender>{
+            { "Masculino"   , Gender.Male },
+            { "Feminino"    , Gender.Female },
+            { "Nenhum"      , Gender.None },
+            { "Desconhecido", Gender.Unknown }
+        };
 
+        Microsoft.Win32.OpenFileDialog dlg;
         private void StickerNewStricker_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
 
-            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg = new Microsoft.Win32.OpenFileDialog();
 
             // Set filter for file extension and default file extension 
             dlg.DefaultExt = ".png";
-            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+            dlg.Filter = "Image Files (*.gif,*.jpg,*.jpeg,*.bmp,*.png)|*.gif;*.jpg;*.jpeg;*.bmp;*.png";
 
 
             // Display OpenFileDialog by calling ShowDialog method 
@@ -78,13 +90,14 @@ namespace stickeralbum.Design.Controls
 
         private void TextBoxDangerLevel_PreviewTextInput(object sender, TextCompositionEventArgs e) {
             Regex regex = new Regex("[^0-9]+");
-            e.Handled = regex.IsMatch(e.Text) || (TextBoxDangerLevel.Text.Length == 1 && TextBoxDangerLevel.Text != "1") || TextBoxDangerLevel.Text.Length > 1;
+            e.Handled = regex.IsMatch(e.Text) || (TextBoxDangerLevel.Text.Length == 1 && e.Text != "0") || TextBoxDangerLevel.Text.Length > 1;
         }
 
         SolidColorBrush normalBg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFE2C992"));
         SolidColorBrush pinkBg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffddcc"));
         SolidColorBrush redBg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ff0000"));
         private void ButtonRegister_Click(object sender, System.Windows.RoutedEventArgs e) {
+            Console.WriteLine("-- FLAG --");
             bool hasError = false;
             if(TextBoxName.Text == null || TextBoxName.Text == "") {
                 TextBoxName.Background = pinkBg;
@@ -100,12 +113,55 @@ namespace stickeralbum.Design.Controls
             }
             if(StickerNewStricker.StickerImage.Source == Sprite.Get("unknown").Source) {
                 LabelTip.Foreground = redBg;
+                hasError = true;
             } else {
                 LabelTip.Foreground = new SolidColorBrush(Colors.Black);
+            }
+            if(TextBoxDangerLevel.Text == null || TextBoxDangerLevel.Text == "") {
+                TextBoxDangerLevel.Background = pinkBg;
+                hasError = true;
+            } else {
+                TextBoxDangerLevel.Background = normalBg;
             }
             if(hasError) {
                 return;
             }
+
+            String imgGuid = Guid.NewGuid().ToString();
+            File.Copy(dlg.FileName, Path.Combine(Paths.CustomSpritesDirectory, imgGuid));
+            Generics.LinkedList<Sprite> spritesMetadata = JsonConvert.DeserializeObject<Generics.LinkedList<Sprite>>(File.ReadAllText(Paths.CustomSpritesMetadata));
+            spritesMetadata.Add(new Sprite() {
+                ID = imgGuid,
+                Path = imgGuid,
+                IsCustom = true
+            });
+            File.WriteAllText(Paths.CustomSpritesMetadata, JsonConvert.SerializeObject(spritesMetadata, Formatting.Indented));
+
+            Generics.LinkedList<Creature> customCreatures = EntityUtils.AllCreatures().Where(x => x.IsCustom).ToLinkedList();
+
+            Creature newCustomCreature = new Creature() {
+                Name        = TextBoxName.Text,
+                Description = TextBoxDescription.Text,
+                ID          = Guid.NewGuid().ToString(),
+                SpriteID    = imgGuid,
+                IsCustom    = true,
+                DangerLevel = Int16.Parse(TextBoxDangerLevel.Text)
+            };
+
+            rarityOptions.TryGetValue(ComboBoxRarity.Text, out newCustomCreature.Rarity);
+            genderOptions.TryGetValue(ComboBoxGender.Text, out newCustomCreature.Gender);
+
+            customCreatures.Add(newCustomCreature);
+
+            File.WriteAllText(Paths.CustomCreaturesMetadata, JsonConvert.SerializeObject(customCreatures, Formatting.Indented));
+            Cache.Clear();
+            Cache.Load();
+            Cache.DumpLog();
+            Game.GameMaster.Player.Inventory.Add(new SimpleSticker() {
+                ItemID = newCustomCreature.ID
+            });
+            Game.GameMaster.SaveAll();
+            App.ClientWindow.SetCurrentPage(new StickerRegister_TypeChoosing());
         }
     }
 }

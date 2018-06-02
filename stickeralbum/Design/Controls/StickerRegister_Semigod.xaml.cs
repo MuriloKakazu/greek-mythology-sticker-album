@@ -109,6 +109,8 @@ namespace stickeralbum.Design.Controls {
             }
             if(StickerNewStricker.StickerImage.Source == Sprite.Get("unknown").Source) {
                 LabelTip.Foreground = redBg;
+                hasError = true;
+
             } else {
                 LabelTip.Foreground = new SolidColorBrush(Colors.Black);
             }
@@ -121,7 +123,8 @@ namespace stickeralbum.Design.Controls {
             Generics.LinkedList<Sprite> spritesMetadata = JsonConvert.DeserializeObject<Generics.LinkedList<Sprite>>(File.ReadAllText(Paths.CustomSpritesMetadata));
             spritesMetadata.Add(new Sprite() {
                 ID = imgGuid,
-                Path = Path.Combine(Paths.CustomSpritesDirectory, imgGuid)
+                Path = imgGuid,
+                IsCustom = true
             });
             File.WriteAllText(Paths.CustomSpritesMetadata, JsonConvert.SerializeObject(spritesMetadata, Formatting.Indented));
 
@@ -145,7 +148,7 @@ namespace stickeralbum.Design.Controls {
 
             File.WriteAllText(Paths.CustomSemiGodsMetadata, JsonConvert.SerializeObject(customSemigods, Formatting.Indented));
             Cache.Clear();
-            Cache.LoadCustoms();
+            Cache.Load();
             Game.GameMaster.Player.Inventory.Add(new SimpleSticker() {
                 ItemID = newCustomSemiGod.ID
             });

@@ -12,6 +12,7 @@ using System.IO;
 using System.Linq;
 using Newtonsoft.Json;
 using stickeralbum.Generics;
+using stickeralbum.Game.Items;
 
 namespace stickeralbum.Design.Controls {
     /// <summary>
@@ -49,7 +50,7 @@ namespace stickeralbum.Design.Controls {
             ComboBoxGender.ItemsSource = genderOptions.Keys;
             ComboBoxFather.ItemsSource = fatherName_x_id.Keys;
             ComboBoxMother.ItemsSource = motherName_x_id.Keys;
-            ComboBoxRarity.SelectedIndex = ComboBoxFather.SelectedIndex = ComboBoxMother.SelectedIndex = 0;
+            ComboBoxRarity.SelectedIndex = ComboBoxFather.SelectedIndex = ComboBoxGender.SelectedIndex = ComboBoxMother.SelectedIndex = 0;
         }
         private void _this_Loaded(object sender, System.Windows.RoutedEventArgs e) {
          
@@ -61,7 +62,7 @@ namespace stickeralbum.Design.Controls {
 
             // Set filter for file extension and default file extension 
             dlg.DefaultExt = ".png";
-            dlg.Filter = "JPEG Files (*.jpeg)|*.jpeg|PNG Files (*.png)|*.png|JPG Files (*.jpg)|*.jpg|GIF Files (*.gif)|*.gif";
+            dlg.Filter = "Image Files (*.gif,*.jpg,*.jpeg,*.bmp,*.png)|*.gif;*.jpg;*.jpeg;*.bmp;*.png";
 
 
             // Display OpenFileDialog by calling ShowDialog method 
@@ -121,7 +122,8 @@ namespace stickeralbum.Design.Controls {
             Generics.LinkedList<Sprite> spritesMetadata = JsonConvert.DeserializeObject<Generics.LinkedList<Sprite>>(File.ReadAllText(Paths.CustomSpritesMetadata));
             spritesMetadata.Add(new Sprite() {
                 ID = imgGuid,
-                Path = dlg.SafeFileName
+                Path = imgGuid,
+                IsCustom = true
             });
             File.WriteAllText(Paths.CustomSpritesMetadata, JsonConvert.SerializeObject(spritesMetadata, Formatting.Indented));            
 
@@ -146,6 +148,11 @@ namespace stickeralbum.Design.Controls {
 
             Cache.Clear();
             Cache.Load();
+            Cache.DumpLog();
+
+            Game.GameMaster.Player.Inventory.Add(new SimpleSticker() {
+                ItemID = newCustomGod.ID
+            });
 
             App.ClientWindow.SetCurrentPage(new StickerRegister_TypeChoosing());
         }

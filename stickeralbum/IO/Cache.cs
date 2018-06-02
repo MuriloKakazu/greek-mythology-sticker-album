@@ -51,15 +51,15 @@ namespace stickeralbum.IO
             LoadTitans();
             var sprites = LoadSprites();
             LoadSemiGods();
-            //LoadCreatures();
+            LoadCreatures();
         }
 
         public static void LoadCustoms() {
             LoadCustomGods();
-            //LoadCustomTitans();
+            LoadCustomTitans();
             var sprites = LoadCustomSprites();
             LoadCustomSemiGods();
-            //LoadCustomCreatures();
+            LoadCustomCreatures();
         }
 
         private static LinkedList<Creature> LoadCustomCreatures()
