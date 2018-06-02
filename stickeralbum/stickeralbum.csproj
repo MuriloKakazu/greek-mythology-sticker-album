@@ -103,6 +103,9 @@
     <Compile Include="Design\Controls\StickerRegister_Creature.xaml.cs">
       <DependentUpon>StickerRegister_Creature.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Design\Controls\StickerRegister_Finished.xaml.cs">
+      <DependentUpon>StickerRegister_Finished.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\Controls\StickerRegister_Semigod.xaml.cs">
       <DependentUpon>StickerRegister_Semigod.xaml</DependentUpon>
     </Compile>
@@ -209,6 +212,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Design\Controls\StickerRegister_Creature.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\StickerRegister_Finished.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

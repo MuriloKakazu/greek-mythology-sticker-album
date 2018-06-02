@@ -29,7 +29,7 @@ namespace stickeralbum.Design.Controls
     {
         public StickerRegister_Creature() {
             InitializeComponent();
-            StickerNewStricker.StickerImage.Source = Sprite.Get("unknown").Source;
+            StickerNewSticker.StickerImage.Source = Sprite.Get("unknown").Source;
             //StickerNewStricker.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
             ComboBoxRarity.ItemsSource = rarityOptions.Keys;
             ComboBoxGender.ItemsSource = genderOptions.Keys;
@@ -67,7 +67,7 @@ namespace stickeralbum.Design.Controls
             // Get the selected file name and display in a TextBox 
             if(result == true) {
                 // Open document 
-                StickerNewStricker.StickerImage.Source = new BitmapImage(new Uri(dlg.FileName));
+                StickerNewSticker.StickerImage.Source = new BitmapImage(new Uri(dlg.FileName));
 
                 //File.Copy(dlg.FileName, Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\";
             }
@@ -76,12 +76,12 @@ namespace stickeralbum.Design.Controls
         private void ComboBoxRarity_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             Rarity rarity;
             if(rarityOptions.TryGetValue(ComboBoxRarity.SelectedItem.ToString(), out rarity)) {
-                StickerNewStricker.StickerFrame.Source = Sprite.Get(rarity).Source;
+                StickerNewSticker.StickerFrame.Source = Sprite.Get(rarity).Source;
             }
         }
 
         private void TextBoxName_KeyUp(object sender, KeyEventArgs e) {
-            StickerNewStricker.StickerName.Content = TextBoxName.Text;
+            StickerNewSticker.StickerName.Content = TextBoxName.Text;
         }
 
         private void ButtonBack_Click(object sender, RoutedEventArgs e) {
@@ -111,7 +111,7 @@ namespace stickeralbum.Design.Controls
             } else {
                 TextBoxDescription.Background = normalBg;
             }
-            if(StickerNewStricker.StickerImage.Source == Sprite.Get("unknown").Source) {
+            if(StickerNewSticker.StickerImage.Source == Sprite.Get("unknown").Source) {
                 LabelTip.Foreground = redBg;
                 hasError = true;
             } else {
@@ -161,7 +161,7 @@ namespace stickeralbum.Design.Controls
                 ItemID = newCustomCreature.ID
             });
             Game.GameMaster.SaveAll();
-            App.ClientWindow.SetCurrentPage(new StickerRegister_TypeChoosing());
+            App.ClientWindow.SetCurrentPage(new StickerRegister_Finished(StickerNewSticker));
         }
     }
 }

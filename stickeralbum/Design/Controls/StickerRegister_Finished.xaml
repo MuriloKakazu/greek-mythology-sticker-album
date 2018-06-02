@@ -1,0 +1,25 @@
+﻿<UserControl x:Class="stickeralbum.Design.Controls.StickerRegister_Finished"
+      x:Name="_this"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:stickeralbum.Design.Controls"
+      mc:Ignorable="d" MinHeight="700" MinWidth="1000">
+    <!--Grid que divide a tela no meio-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content ="Figurinha forjada!" FontSize="72px" FontWeight="ExtraBold" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" Padding="0" FontFamily="Diogenes" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <local:Sticker x:Name="StickerNewSticker" Grid.Column="0" Grid.Row="1" Margin="0" Width="224" Height="335" MinWidth="200" MinHeight="290" />
+        <Button x:Name="ButtonNewSticker" Content="Nova figurinha" Grid.Column="0" Grid.Row="2" MaxHeight="60px" MaxWidth="280px" Click="ButtonNewSticker_Click" FontFamily="Diogenes" FontSize="36" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Bottom"/>
+        <Button x:Name="ButtonAlbum" Content="Voltar para o album" Grid.Column="0" Grid.Row="3" MaxHeight="60px" MaxWidth="320px" Click="ButtonAlbum_Click" FontFamily="Diogenes" FontSize="36"/>
+    </Grid>
+</UserControl>

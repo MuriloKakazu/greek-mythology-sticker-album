@@ -44,7 +44,7 @@ namespace stickeralbum.Design.Controls {
 
         public StickerRegister_Semigod() {
             InitializeComponent();
-            God.GetAll().ForEach(x => godName_x_id.Add(x.Name, x.ID));
+            God.GetAll().ForEach(x => name_x_id.Add(x.Name, x.ID));
             StickerNewStricker.StickerImage.Source = Sprite.Get("unknown").Source;
             //StickerNewStricker.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
             ComboBoxRarity.ItemsSource = rarityOptions.Keys;
@@ -152,7 +152,7 @@ namespace stickeralbum.Design.Controls {
             Game.GameMaster.Player.Inventory.Add(new SimpleSticker() {
                 ItemID = newCustomSemiGod.ID
             });
-            App.ClientWindow.SetCurrentPage(new StickerRegister_TypeChoosing());
+            App.ClientWindow.SetCurrentPage(new StickerRegister_Finished(StickerNewStricker));
         }
     }
 }
