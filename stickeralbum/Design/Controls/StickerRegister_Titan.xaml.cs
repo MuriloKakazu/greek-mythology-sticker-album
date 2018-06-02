@@ -159,7 +159,7 @@ namespace stickeralbum.Design.Controls
                 ItemID = newCustomTitan.ID
             });
 
-            App.ClientWindow.SetCurrentPage(new StickerRegister_TypeChoosing());
+            App.ClientWindow.SetCurrentPage(new StickerRegister_Finished(StickerNewStricker));
         }
     }
 }

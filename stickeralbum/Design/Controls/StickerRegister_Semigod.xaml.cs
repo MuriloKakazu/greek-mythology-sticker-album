@@ -152,7 +152,7 @@ namespace stickeralbum.Design.Controls {
             Game.GameMaster.Player.Inventory.Add(new SimpleSticker() {
                 ItemID = newCustomSemiGod.ID
             });
-            App.ClientWindow.SetCurrentPage(new StickerRegister_TypeChoosing());
+            App.ClientWindow.SetCurrentPage(new StickerRegister_Finished(StickerNewStricker));
         }
     }
 }

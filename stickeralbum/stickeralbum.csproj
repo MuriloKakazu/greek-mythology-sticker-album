@@ -85,6 +85,9 @@
     <Compile Include="Design\Controls\AlbumInteractionBar.xaml.cs">
       <DependentUpon>AlbumInteractionBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Design\Controls\Configs.xaml.cs">
+      <DependentUpon>Configs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\Controls\FilterSidepanel.xaml.cs">
       <DependentUpon>FilterSidepanel.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,9 @@
     </Compile>
     <Compile Include="Design\Controls\StickerRegister_Creature.xaml.cs">
       <DependentUpon>StickerRegister_Creature.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\StickerRegister_Finished.xaml.cs">
+      <DependentUpon>StickerRegister_Finished.xaml</DependentUpon>
     </Compile>
     <Compile Include="Design\Controls\StickerRegister_Semigod.xaml.cs">
       <DependentUpon>StickerRegister_Semigod.xaml</DependentUpon>
@@ -188,6 +194,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Design\Controls\Configs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Design\Controls\FilterSidepanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -209,6 +219,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Design\Controls\StickerRegister_Creature.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\StickerRegister_Finished.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

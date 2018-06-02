@@ -154,7 +154,7 @@ namespace stickeralbum.Design.Controls {
                 ItemID = newCustomGod.ID
             });
 
-            App.ClientWindow.SetCurrentPage(new StickerRegister_TypeChoosing());
+            App.ClientWindow.SetCurrentPage(new StickerRegister_Finished(StickerNewStricker));
         }
     }
 }
