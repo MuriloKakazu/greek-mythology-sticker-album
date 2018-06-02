@@ -1,14 +1,15 @@
-﻿using stickeralbum.Generics;
+﻿using stickeralbum.Debug;
+using stickeralbum.Generics;
 using System;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Timers;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -19,7 +20,7 @@ namespace stickeralbum.Design.Controls {
     /// <summary>
     /// Interaction logic for SlotColumn.xaml
     /// </summary>
-    public partial class SlotColumn : UserControl {
+    public partial class SlotColumn : System.Windows.Controls.UserControl {
         LinkedList<Sprite> AvailableSprites;
         Int32 CurrentIndex;
         Timer StopTimer;
@@ -27,8 +28,8 @@ namespace stickeralbum.Design.Controls {
         Sprite Row0Sprite;
         Sprite Row1Sprite;
         Sprite Row2Sprite;
-        public event SlideFinishedEventHandler SlideFinished;
-        public delegate void SlideFinishedEventHandler(object sender, EventArgs e);
+        public event FinishedSpinEventHandler FinishedSpin;
+        public delegate void FinishedSpinEventHandler(object sender, EventArgs e);
         static Random RNG = new Random();
 
         public SlotColumn() {
@@ -38,30 +39,30 @@ namespace stickeralbum.Design.Controls {
                 CurrentIndex = RNG.Next(AvailableSprites.Count);
                 StopTimer = new Timer();
                 SlideTimer = new Timer();
-                SlideTimer.Interval = 50;
-                StopTimer.Elapsed += StopTimer_Elapsed;
-                SlideTimer.Elapsed += SlideTimer_Elapsed;
-                SlideFinished += OnSlideFinished;
+                SlideTimer.Interval = 25;
+                StopTimer.Tick += StopTimer_Elapsed; ;
+                SlideTimer.Tick += SlideTimer_Elapsed;
+                FinishedSpin += OnFinishedSpin;
                 Slide();
             }
         }
 
-        private void OnSlideFinished(object sender, EventArgs e) {
+        private void OnFinishedSpin(object sender, EventArgs e) {
             StopTimer.Stop();
             SlideTimer.Stop();
         }
 
-        private void SlideTimer_Elapsed(object sender, ElapsedEventArgs e) {
+        private void SlideTimer_Elapsed(object sender, EventArgs e) {
             Slide();
         }
 
-        public void Spin(Double timeMs) {
+        public void Spin(Int32 timeMs) {
             StopTimer.Interval = timeMs;
             SlideTimer.Start();
             StopTimer.Start();
         }
 
-        private void Slide() {
+        public void Slide() {
             CurrentIndex++;
             var spritesCount = AvailableSprites.Count;
             if (CurrentIndex >= spritesCount) {
@@ -83,8 +84,8 @@ namespace stickeralbum.Design.Controls {
         public Sprite GetResult()
             => Row1Sprite;
 
-        private void StopTimer_Elapsed(object sender, ElapsedEventArgs e) {
-            SlideFinished.Invoke(this, EventArgs.Empty);
+        private void StopTimer_Elapsed(object sender, EventArgs e) {
+            FinishedSpin.Invoke(this, EventArgs.Empty);
         }
     }
 }

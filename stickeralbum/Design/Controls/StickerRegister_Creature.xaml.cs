@@ -137,7 +137,7 @@ namespace stickeralbum.Design.Controls
             });
             File.WriteAllText(Paths.CustomSpritesMetadata, JsonConvert.SerializeObject(spritesMetadata, Formatting.Indented));
 
-            Generics.LinkedList<Creature> customCreatures = EntityUtils.AllCreatures().Where(x => x.IsCustom).ToLinkedList();
+            Generics.LinkedList<Creature> customCreatures = Creature.GetAll().Where(x => x.IsCustom).ToLinkedList();
 
             Creature newCustomCreature = new Creature() {
                 Name        = TextBoxName.Text,
