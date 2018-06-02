@@ -83,8 +83,7 @@ namespace stickeralbum.Design.Controls {
 
         private void AlbumButton_MouseDown(object sender, MouseButtonEventArgs e) {
             ChangeState(ControlState.Compact);
-            var entities = Cache.GetAll().Where(x => x is Entity).Cast<Entity>().ToArray();
-            App.ClientWindow.SetCurrentPage(new Album(entities));
+            App.ClientWindow.SetCurrentPage(new Album(Entity.GetAll().ToArray()));
         }
 
         private void NewStickerButton_MouseDown(object sender, MouseButtonEventArgs e) {
