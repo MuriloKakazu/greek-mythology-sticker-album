@@ -5,8 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:stickeralbum.Design.Controls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1000">
     <Grid>
-            
+        <DockPanel Background="#FF2D2D2D" Width="1000" Height="800" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="43*"/>
+                    <ColumnDefinition Width="39*"/>
+                    <ColumnDefinition Width="43*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="13*"/>
+                    <RowDefinition Height="54*"/>
+                    <RowDefinition Height="13*"/>
+                </Grid.RowDefinitions>
+                <Image Margin="130,245,132,243" Width="50" Height="50" Grid.Row="1" Grid.Column="2"/>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,6,0,128" Grid.Row="1" Grid.Column="1" Height="536" Width="312" Grid.RowSpan="2">
+                    <local:SlotColumn />
+                    <local:SlotColumn />
+                    <local:SlotColumn />
+                </StackPanel>
+            </Grid>
+        </DockPanel>
     </Grid>
 </UserControl>

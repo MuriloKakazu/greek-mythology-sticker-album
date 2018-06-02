@@ -1,5 +1,6 @@
 ﻿using stickeralbum.Generics;
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,17 +29,21 @@ namespace stickeralbum.Design.Controls {
         Sprite Row2Sprite;
         public event SlideFinishedEventHandler SlideFinished;
         public delegate void SlideFinishedEventHandler(object sender, EventArgs e);
+        static Random RNG = new Random();
 
         public SlotColumn() {
             InitializeComponent();
-            AvailableSprites = Sprite.GetAll().Where(x => x.ID.StartsWith("spin_")).ToLinkedList();
-            CurrentIndex = new Random().Next(AvailableSprites.Count);
-            StopTimer    = new Timer();
-            SlideTimer   = new Timer();
-            SlideTimer.Interval = 50;
-            StopTimer.Elapsed  += StopTimer_Elapsed;
-            SlideTimer.Elapsed += SlideTimer_Elapsed;
-            SlideFinished += OnSlideFinished;
+            if (!DesignerProperties.GetIsInDesignMode(this)) {
+                AvailableSprites = Sprite.GetAll().Where(x => x.ID.StartsWith("spin_")).ToLinkedList();
+                CurrentIndex = RNG.Next(AvailableSprites.Count);
+                StopTimer = new Timer();
+                SlideTimer = new Timer();
+                SlideTimer.Interval = 50;
+                StopTimer.Elapsed += StopTimer_Elapsed;
+                SlideTimer.Elapsed += SlideTimer_Elapsed;
+                SlideFinished += OnSlideFinished;
+                Slide();
+            }
         }
 
         private void OnSlideFinished(object sender, EventArgs e) {
@@ -59,17 +64,20 @@ namespace stickeralbum.Design.Controls {
         private void Slide() {
             CurrentIndex++;
             var spritesCount = AvailableSprites.Count;
-            Row0Sprite = AvailableSprites[
-                (CurrentIndex == spritesCount) ? 0 : spritesCount
-            ];
+            if (CurrentIndex >= spritesCount) {
+                CurrentIndex = 0;
+            }
+            Row0Sprite = AvailableSprites[CurrentIndex];
             Row1Sprite = AvailableSprites[
-                (CurrentIndex == spritesCount)     ? 1 : 
-                (CurrentIndex == spritesCount - 1) ? 0 : spritesCount
+                (CurrentIndex >= spritesCount - 1) ? 0 : CurrentIndex + 1 
             ];
             Row2Sprite = AvailableSprites[
-                (CurrentIndex == spritesCount)     ? 2 :
-                (CurrentIndex == spritesCount - 1) ? 1 : spritesCount
+                (CurrentIndex >= spritesCount - 1) ? 1 : 
+                (CurrentIndex >= spritesCount - 2) ? 0 : CurrentIndex + 2
             ];
+            Row0.Source = Row0Sprite.Source;
+            Row1.Source = Row1Sprite.Source;
+            Row2.Source = Row2Sprite.Source;
         }
 
         public Sprite GetResult()

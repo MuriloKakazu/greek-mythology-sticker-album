@@ -40,7 +40,7 @@ namespace stickeralbum.Design.Controls {
             { "Desconhecido", Gender.Unknown }
         };
 
-        Dictionary<String, String> godName_x_id = new Dictionary<string, string>();
+        Dictionary<String, String> name_x_id = new Dictionary<string, string>();
 
         public StickerRegister_Semigod() {
             InitializeComponent();
@@ -49,7 +49,7 @@ namespace stickeralbum.Design.Controls {
             //StickerNewStricker.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
             ComboBoxRarity.ItemsSource = rarityOptions.Keys;
             ComboBoxGender.ItemsSource = genderOptions.Keys;
-            ComboBoxRelatedGod.ItemsSource = godName_x_id.Keys;
+            ComboBoxRelatedGod.ItemsSource = name_x_id.Keys;
             ComboBoxRarity.SelectedIndex = ComboBoxRelatedGod.SelectedIndex = ComboBoxGender.SelectedIndex = 0;
         }
 
@@ -109,6 +109,7 @@ namespace stickeralbum.Design.Controls {
             }
             if(StickerNewStricker.StickerImage.Source == Sprite.Get("unknown").Source) {
                 LabelTip.Foreground = redBg;
+                hasError = true;
             } else {
                 LabelTip.Foreground = new SolidColorBrush(Colors.Black);
             }
@@ -121,11 +122,11 @@ namespace stickeralbum.Design.Controls {
             Generics.LinkedList<Sprite> spritesMetadata = JsonConvert.DeserializeObject<Generics.LinkedList<Sprite>>(File.ReadAllText(Paths.CustomSpritesMetadata));
             spritesMetadata.Add(new Sprite() {
                 ID = imgGuid,
-                Path = Path.Combine(Paths.CustomSpritesDirectory, imgGuid)
+                Path = Path.Combine(imgGuid)
             });
             File.WriteAllText(Paths.CustomSpritesMetadata, JsonConvert.SerializeObject(spritesMetadata, Formatting.Indented));
 
-            Generics.LinkedList<SemiGod> customSemigods = EntityUtils.AllSemiGods().Where(x => x.IsCustom).ToLinkedList();
+            Generics.LinkedList<SemiGod> customSemigods = SemiGod.GetAll().Where(x => x.IsCustom).ToLinkedList();
 
             SemiGod newCustomSemiGod = new SemiGod() {
                 Name = TextBoxName.Text,
@@ -137,7 +138,7 @@ namespace stickeralbum.Design.Controls {
             Console.WriteLine(ComboBoxRelatedGod.Text);
             Console.WriteLine(ComboBoxRarity.Text);
             Console.WriteLine(ComboBoxGender.Text);
-            godName_x_id.TryGetValue(ComboBoxRelatedGod.Text, out newCustomSemiGod.RelatedGodID);
+            name_x_id.TryGetValue(ComboBoxRelatedGod.Text, out newCustomSemiGod.RelatedGodID);
             rarityOptions.TryGetValue(ComboBoxRarity.Text, out newCustomSemiGod.Rarity);
             genderOptions.TryGetValue(ComboBoxGender.Text, out newCustomSemiGod.Gender);
 
@@ -145,7 +146,7 @@ namespace stickeralbum.Design.Controls {
 
             File.WriteAllText(Paths.CustomSemiGodsMetadata, JsonConvert.SerializeObject(customSemigods, Formatting.Indented));
             Cache.Clear();
-            Cache.LoadCustoms();
+            Cache.Load();
             Game.GameMaster.Player.Inventory.Add(new SimpleSticker() {
                 ItemID = newCustomSemiGod.ID
             });
