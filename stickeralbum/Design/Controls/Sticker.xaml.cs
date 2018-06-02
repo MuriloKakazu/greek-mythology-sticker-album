@@ -53,6 +53,12 @@ namespace stickeralbum.Design.Controls {
             } else {
                 this.MakeSecret();
             }
+            if (this.Entity.IsCustom) {
+                this.StickerImage.Stretch = Stretch.Fill;
+                this.StickerImage.StretchDirection = StretchDirection.Both;
+                this.StickerImage.Width  = this.StickerFrame.ActualWidth;
+                this.StickerImage.Height = this.StickerFrame.ActualHeight;
+            }
         }
 
         public virtual void OnDataDropped(object sender, EventArgs e) { }

@@ -40,7 +40,7 @@ namespace stickeralbum.Design.Controls {
             { "Desconhecido", Gender.Unknown }
         };
 
-        Dictionary<String, String> godName_x_id = new Dictionary<string, string>();
+        Dictionary<String, String> name_x_id = new Dictionary<string, string>();
 
         public StickerRegister_Semigod() {
             InitializeComponent();
@@ -49,7 +49,7 @@ namespace stickeralbum.Design.Controls {
             //StickerNewStricker.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
             ComboBoxRarity.ItemsSource = rarityOptions.Keys;
             ComboBoxGender.ItemsSource = genderOptions.Keys;
-            ComboBoxRelatedGod.ItemsSource = godName_x_id.Keys;
+            ComboBoxRelatedGod.ItemsSource = name_x_id.Keys;
             ComboBoxRarity.SelectedIndex = ComboBoxRelatedGod.SelectedIndex = ComboBoxGender.SelectedIndex = 0;
         }
 
@@ -140,7 +140,7 @@ namespace stickeralbum.Design.Controls {
             Console.WriteLine(ComboBoxRelatedGod.Text);
             Console.WriteLine(ComboBoxRarity.Text);
             Console.WriteLine(ComboBoxGender.Text);
-            godName_x_id.TryGetValue(ComboBoxRelatedGod.Text, out newCustomSemiGod.RelatedGodID);
+            name_x_id.TryGetValue(ComboBoxRelatedGod.Text, out newCustomSemiGod.RelatedGodID);
             rarityOptions.TryGetValue(ComboBoxRarity.Text, out newCustomSemiGod.Rarity);
             genderOptions.TryGetValue(ComboBoxGender.Text, out newCustomSemiGod.Gender);
 

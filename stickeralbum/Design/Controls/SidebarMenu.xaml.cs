@@ -98,6 +98,7 @@ namespace stickeralbum.Design.Controls {
 
         private void MinigameButton_MouseDown(object sender, MouseButtonEventArgs e) {
             ChangeState(ControlState.Compact);
+            App.ClientWindow.SetCurrentPage(new SlotMinigame());
         }
 
         private void OptionsButton_MouseDown(object sender, MouseButtonEventArgs e) {

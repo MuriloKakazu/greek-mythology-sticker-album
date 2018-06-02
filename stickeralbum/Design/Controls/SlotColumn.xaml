@@ -7,10 +7,12 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <StackPanel>
-            <Image x:Name="Row0"/>
-            <Image x:Name="Row1"/>
-            <Image x:Name="Row2"/>
-        </StackPanel>
+        <DockPanel Background="#FF4B4B4B" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">
+                <Image x:Name="Row0" Width="100" Height="175" RenderOptions.BitmapScalingMode="Fant" RenderOptions.CachingHint="Cache" RenderOptions.EdgeMode="Aliased" VerticalAlignment="Center" Stretch="Fill" Margin="2"/>
+                <Image x:Name="Row1" Width="100" Height="175" RenderOptions.BitmapScalingMode="Fant" RenderOptions.CachingHint="Cache" RenderOptions.EdgeMode="Aliased" VerticalAlignment="Center" Stretch="Fill" Margin="2"/>
+                <Image x:Name="Row2" Width="100" Height="175" RenderOptions.BitmapScalingMode="Fant" RenderOptions.CachingHint="Cache" RenderOptions.EdgeMode="Aliased" VerticalAlignment="Center" Stretch="Fill" Margin="2"/>
+            </StackPanel>
+        </DockPanel>
     </Grid>
 </UserControl>
