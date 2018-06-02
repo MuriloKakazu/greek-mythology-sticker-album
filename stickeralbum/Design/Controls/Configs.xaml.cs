@@ -22,14 +22,19 @@ namespace stickeralbum.Design.Controls {
     public partial class Configs : UserControl {
 
         public float volume;
+        public bool autoContext = false;
 
         public Configs() {
             InitializeComponent();
+            ButtonSave.IsEnabled = false;
             volume = Game.GameMaster.Settings.Volume;
         }
 
         private void CheckBoxMuted_Click(object sender, RoutedEventArgs e) {
+            autoContext = true;
             SliderVolume.Value = CheckBoxMuted.IsChecked.Value ? 0 : volume;
+            autoContext = false;
+            ButtonSave.IsEnabled = true;
         }
 
         private void ButtonRestore_Click(object sender, RoutedEventArgs e) {
@@ -40,11 +45,32 @@ namespace stickeralbum.Design.Controls {
             File.WriteAllText(Paths.CustomSpritesMetadata, "[\n\n]");
             DirectoryInfo di = new DirectoryInfo(Paths.CustomSpritesDirectory);
             Game.GameMaster.Player.Inventory.RemoveCustoms();
+            Console.WriteLine(Game.GameMaster.Player.Inventory.Stickers);
             Cache.Clear();
+
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
             foreach(FileInfo file in di.GetFiles()) {
-                file.Delete();
+                //file.Delete();
             }
             Cache.Load();
+        }
+
+        private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            if(!autoContext) {
+                if(CheckBoxMuted.IsChecked.Value) {
+                    CheckBoxMuted.IsChecked = false;
+                }
+                volume = (float)SliderVolume.Value;
+            }
+            ButtonSave.IsEnabled = true;
+        }
+
+        private void ButtonSave_Click(object sender, RoutedEventArgs e) {
+            Game.GameMaster.Settings.Volume = volume;
+            Game.GameMaster.SaveAll();
+            ButtonSave.IsEnabled = false;
         }
     }
 }

@@ -29,7 +29,7 @@
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
             <Label Content="Volume" Grid.Column="0" Grid.Row="0" FontFamily="Diogenes" FontSize="28px" Margin="0px, 0px, 20px, 0px" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-            <Slider x:Name="SliderVolume" Maximum="1" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" TickFrequency="0.1"/>
+            <Slider x:Name="SliderVolume" Maximum="1" VerticalAlignment="Center" Grid.Column="1" Grid.Row="0" TickFrequency="0.1" ValueChanged="SliderVolume_ValueChanged"/>
             <Label Content="Mute" Grid.Column="0" Grid.Row="1" FontFamily="Diogenes" FontSize="22px" Margin="0px, 0px, 20px, 0px" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             <CheckBox x:Name="CheckBoxMuted" Grid.Column="1" Grid.Row="1" Margin="30px,0px,0px,0px" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="0" Click="CheckBoxMuted_Click"/>
             <Label Content="Anti Aliasing" Grid.Column="0" Grid.Row="3" FontFamily="Diogenes" FontSize="22px" Margin="0px, 0px, 20px, 0px" VerticalAlignment="Center" HorizontalAlignment="Right"/>
@@ -37,6 +37,6 @@
 
         </Grid>
         <Button x:Name="ButtonRestore" Content="Restaurar jogo" Grid.Column="0" Grid.Row="2" MaxHeight="60px" MaxWidth="320px" FontFamily="Diogenes" FontSize="36" VerticalAlignment="Bottom" Background="#FF872424" Click="ButtonRestore_Click"/>
-        <Button x:Name="ButtonSave" Content="Salvar" Grid.Column="0" Grid.Row="3" MaxHeight="60px" MaxWidth="320px" FontFamily="Diogenes" FontSize="36"/>
+        <Button x:Name="ButtonSave" Content="Salvar" Grid.Column="0" Grid.Row="3" MaxHeight="60px" MaxWidth="320px" FontFamily="Diogenes" FontSize="36" Click="ButtonSave_Click"/>
     </Grid>
 </UserControl>
