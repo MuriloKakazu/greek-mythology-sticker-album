@@ -58,6 +58,7 @@ namespace stickeralbum.Design.Controls {
 
         public void Spin(Int32 timeMs) {
             StopTimer.Interval = timeMs;
+            SlideTimer.Interval = 25 + RNG.Next(10);
             SlideTimer.Start();
             StopTimer.Start();
         }

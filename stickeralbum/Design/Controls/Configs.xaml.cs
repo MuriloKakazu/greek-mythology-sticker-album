@@ -1,4 +1,6 @@
-﻿using stickeralbum.IO;
+﻿using stickeralbum.Debug;
+using stickeralbum.Game;
+using stickeralbum.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,17 +35,28 @@ namespace stickeralbum.Design.Controls {
         }
 
         private void ButtonRestore_Click(object sender, RoutedEventArgs e) {
-            File.WriteAllText(Paths.CustomCreaturesMetadata, "[\n\n]");
-            File.WriteAllText(Paths.CustomSemiGodsMetadata, "[\n\n]");
-            File.WriteAllText(Paths.CustomGodsMetadata, "[\n\n]");
-            File.WriteAllText(Paths.CustomTitansMetadata, "[\n\n]");
-            File.WriteAllText(Paths.CustomSpritesMetadata, "[\n\n]");
             DirectoryInfo di = new DirectoryInfo(Paths.CustomSpritesDirectory);
-            Game.GameMaster.Player.Inventory.RemoveCustoms();
+            var emptyJson = "[\n\n]";
+
+            File.WriteAllText(Paths.CustomGodsMetadata,      emptyJson);
+            File.WriteAllText(Paths.CustomTitansMetadata,    emptyJson);
+            File.WriteAllText(Paths.CustomSpritesMetadata,   emptyJson);
+            File.WriteAllText(Paths.CustomSemiGodsMetadata,  emptyJson);
+            File.WriteAllText(Paths.CustomCreaturesMetadata, emptyJson);
+
+            GameMaster.Player.Inventory.RemoveCustoms();
             Cache.Clear();
-            foreach(FileInfo file in di.GetFiles()) {
-                file.Delete();
+            GC.Collect();
+            GC.WaitForPendingFinalizers();
+
+            foreach (FileInfo file in di.GetFiles()) {
+                try {
+                    file.Delete();
+                } catch (Exception ex) {
+                    DebugUtils.LogError(ex.Message);
+                }
             }
+
             Cache.Load();
         }
     }

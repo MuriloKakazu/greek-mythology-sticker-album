@@ -20,7 +20,9 @@ namespace stickeralbum.Design {
         public Boolean IsCustom;
 
         public void LoadImage() {
-            Source = new BitmapImage(new Uri(Path));
+            Source = new BitmapImage(new Uri(Path)) {
+                CacheOption = BitmapCacheOption.OnLoad
+            };
             if (!IsCustom && Source.Width <= 512 && Source.Height <= 512) {
                 DarkenedSource = Source.GetAllBlack();
             }

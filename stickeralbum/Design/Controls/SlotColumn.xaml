@@ -9,9 +9,9 @@
     <Grid>
         <DockPanel Background="#FF4B4B4B" HorizontalAlignment="Center" VerticalAlignment="Center">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0">
-                <Image x:Name="Row0" Width="100" Height="175" RenderOptions.BitmapScalingMode="Fant" RenderOptions.CachingHint="Cache" RenderOptions.EdgeMode="Aliased" VerticalAlignment="Center" Stretch="Fill" Margin="2"/>
-                <Image x:Name="Row1" Width="100" Height="175" RenderOptions.BitmapScalingMode="Fant" RenderOptions.CachingHint="Cache" RenderOptions.EdgeMode="Aliased" VerticalAlignment="Center" Stretch="Fill" Margin="2"/>
-                <Image x:Name="Row2" Width="100" Height="175" RenderOptions.BitmapScalingMode="Fant" RenderOptions.CachingHint="Cache" RenderOptions.EdgeMode="Aliased" VerticalAlignment="Center" Stretch="Fill" Margin="2"/>
+                <Image x:Name="Row0" Width="114.57" Height="175" RenderOptions.BitmapScalingMode="Fant" RenderOptions.CachingHint="Cache" RenderOptions.EdgeMode="Aliased" VerticalAlignment="Center" Stretch="Fill" Margin="2" Opacity="0.35"/>
+                <Image x:Name="Row1" Width="114.57" Height="175" RenderOptions.BitmapScalingMode="Fant" RenderOptions.CachingHint="Cache" RenderOptions.EdgeMode="Aliased" VerticalAlignment="Center" Stretch="Fill" Margin="2"/>
+                <Image x:Name="Row2" Width="114.57" Height="175" RenderOptions.BitmapScalingMode="Fant" RenderOptions.CachingHint="Cache" RenderOptions.EdgeMode="Aliased" VerticalAlignment="Center" Stretch="Fill" Margin="2" Opacity="0.35"/>
             </StackPanel>
         </DockPanel>
     </Grid>

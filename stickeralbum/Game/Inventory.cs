@@ -14,7 +14,7 @@ namespace stickeralbum.Game {
             => Stickers = new LinkedList<SimpleSticker>();
 
         public void RemoveCustoms() =>
-            Stickers.Remove(Stickers.Where(x => x.Entity.IsCustom));
+            Stickers = Stickers.Remove(Stickers.Where(x => x.Entity.IsCustom));
 
         public Boolean ContainsKey(String itemKey)
             => CountItem(itemKey) > 0;
