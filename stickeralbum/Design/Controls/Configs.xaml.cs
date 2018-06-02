@@ -43,9 +43,12 @@ namespace stickeralbum.Design.Controls {
             File.WriteAllText(Paths.CustomGodsMetadata, "[\n\n]");
             File.WriteAllText(Paths.CustomTitansMetadata, "[\n\n]");
             File.WriteAllText(Paths.CustomSpritesMetadata, "[\n\n]");
+            Console.WriteLine("[CACHE] - Metadata removed");
             DirectoryInfo di = new DirectoryInfo(Paths.CustomSpritesDirectory);
             Game.GameMaster.Player.Inventory.RemoveCustoms();
+            Console.WriteLine("[CACHE] - Custom stickers removed");
             Console.WriteLine(Game.GameMaster.Player.Inventory.Stickers);
+            Game.GameMaster.SaveAll();
             Cache.Clear();
 
             GC.Collect();
