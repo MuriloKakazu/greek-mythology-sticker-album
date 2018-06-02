@@ -51,31 +51,31 @@ namespace stickeralbum.Design.Controls {
                 var res2 = Slot2.GetResult();
                 dice = RNG.Next(100);
                 if (res0 == res1 && res0 == res2) {
-                    if (dice < 30) {
+                    if (dice < 70) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Rare).Random();
-                    } else if (dice < 65) {
+                    } else if (dice < 90) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.VeryRare).Random();
                     } else if (dice <= 100) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Epic).Random();
                     }
                 } else if (res0 == res1 || res1 == res2 || res0 == res2) {
-                    if (dice < 25) {
+                    if (dice < 75) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Uncommon).Random();
-                    } else if (dice < 50) {
+                    } else if (dice < 90) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Rare).Random();
-                    } else if (dice < 80) {
+                    } else if (dice < 95) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.VeryRare).Random();
                     } else if (dice <= 100) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Epic).Random();
                     }
                 } else {
-                    if (dice < 25) {
+                    if (dice < 50) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Common).Random();
-                    } else if (dice < 50) {
+                    } else if (dice < 70) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Uncommon).Random();
-                    } else if (dice < 80) {
+                    } else if (dice < 95) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Rare).Random();
-                    } else if (dice < 90) {
+                    } else if (dice < 99) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.VeryRare).Random();
                     } else if (dice <= 100) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Epic).Random();

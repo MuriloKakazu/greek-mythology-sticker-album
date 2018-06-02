@@ -13,8 +13,8 @@
                     <Grid>
                         <Image x:Name="TrashBin" AllowDrop="True" Drop="TrashBin_Drop" Margin="35" RenderOptions.BitmapScalingMode="Fant" RenderOptions.CachingHint="Cache" RenderOptions.EdgeMode="Aliased" RenderOptions.ClearTypeHint="Enabled" DragEnter="TrashBin_DragEnter" DragLeave="TrashBin_DragLeave"/>
                         <DockPanel LastChildFill="False" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="False">
-                            <Image x:Name="CoinIcon" Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" IsHitTestVisible="False" DockPanel.Dock="Right" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" RenderOptions.CachingHint="Cache" RenderOptions.ClearTypeHint="Auto"/>
-                            <Label x:Name="CoinQuantity" FontWeight="Bold" FontFamily="Diogenes" FontSize="26" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="Hidden" Foreground="Red" IsHitTestVisible="False"/>
+                            <Image x:Name="CoinIcon" Width="40" Height="40" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Hidden" IsHitTestVisible="False" DockPanel.Dock="Right" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" RenderOptions.CachingHint="Cache" RenderOptions.ClearTypeHint="Auto" Opacity="0.95"/>
+                            <Label x:Name="CoinQuantity" FontWeight="Bold" FontFamily="Diogenes" FontSize="26" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Visibility="Hidden" Foreground="Red" IsHitTestVisible="False" Opacity="0.95"/>
                         </DockPanel>
                     </Grid>
                 </DockPanel>

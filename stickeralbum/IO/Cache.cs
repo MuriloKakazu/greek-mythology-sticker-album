@@ -22,9 +22,8 @@ namespace stickeralbum.IO
                 => Key = key;
         }
 
-        public static void Clear() {
-            CachedObjects.Clear();
-        }
+        public static void Clear() 
+            => CachedObjects.Clear();
 
         public static void Load() {
             try {
