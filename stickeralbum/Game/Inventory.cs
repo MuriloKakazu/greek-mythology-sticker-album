@@ -25,9 +25,11 @@ namespace stickeralbum.Game {
         }
 
         public void Remove(String itemKey, Int32 quantity) {
-            for (var i = 0; i < quantity; i++)
-                if (ContainsKey(itemKey))
+            for (var i = 0; i < quantity; i++) {
+                if (ContainsKey(itemKey)) {
                     Stickers.Remove(Stickers.Where(x => x.ItemID == itemKey).ToArray()[0]);
+                }
+            }
         }
 
         public Int32 CountItem(String itemKey)

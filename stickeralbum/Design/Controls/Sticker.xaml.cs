@@ -34,94 +34,70 @@ namespace stickeralbum.Design.Controls {
         public delegate void DataDroppedEventHandler(object sender, EventArgs e);
 
         public Sticker() {
-            InitializeComponent();
-            DataDropped += OnDataDropped;
+            this.InitializeComponent();
+            this.DataDropped += this.OnDataDropped;
         }
 
         public Sticker(Entity e, Boolean overrideValidation = false) :
-            this() => SetEntity(e, overrideValidation);
+            this() => this.SetEntity(e, overrideValidation);
 
         public void SetEntity(Entity e, Boolean overrideValidation = false) {
             this.Entity = e;
 
-            if (Entity.IsUnlocked || overrideValidation) {
+            if (this.Entity.IsUnlocked || overrideValidation) {
                 //this.Background = new ImageBrush(Entity.Background.Source);
                 this.StickerFrame.Source = Sprite.Get(e.Rarity).Source;
-                RenderOptions.SetEdgeMode(this.StickerImage, EdgeMode.Aliased);
-                RenderOptions.SetBitmapScalingMode(this.StickerImage, BitmapScalingMode.Fant);
-                RenderOptions.SetCachingHint(this.StickerImage, CachingHint.Cache);
-                RenderOptions.SetClearTypeHint(this.StickerImage, ClearTypeHint.Enabled);
                 this.StickerImage.Source = e.Sprite.Source;
                 this.StickerName.Content = e.Name;
                 this.StickerName.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
             } else {
-                MakeSecret();
+                this.MakeSecret();
             }
         }
 
         public virtual void OnDataDropped(object sender, EventArgs e) { }
 
         public void Refresh() {
-            StickerImage.Width = StickerFrame.ActualWidth;
-            StickerImage.Height = StickerFrame.ActualHeight;
-            SpaceFiller.Height = Math.Round((this.ActualHeight - StickerFrame.ActualHeight) / 2, 2);
-            SpaceFiller.Width = this.ActualWidth;
-            StickerName.Margin = new Thickness(0, SpaceFiller.Height, 0, 0);
-            var targetFontSize = 11f / 200f * (ActualHeight - SpaceFiller.Height);
-            if (targetFontSize <= 0) return;
-            StickerName.FontSize = targetFontSize;
-            StickerName.FontWeight = FontWeights.Normal;
+            this.StickerImage.Width  = this.StickerFrame.ActualWidth;
+            this.StickerImage.Height = this.StickerFrame.ActualHeight;
+            this.SpaceFiller.Height  = Math.Round((this.ActualHeight - this.StickerFrame.ActualHeight) / 2, 2);
+            this.SpaceFiller.Width   = this.ActualWidth;
+            this.StickerName.Margin  = new Thickness(0, SpaceFiller.Height, 0, 0);
+            var targetFontSize  = 11f / 200f * (this.ActualHeight - this.SpaceFiller.Height);
+            if (targetFontSize > 0) {
+                this.StickerName.FontSize = targetFontSize;
+                this.StickerName.FontWeight = FontWeights.Normal;
+            }
         }
 
         public void MakeSecret() {
             this.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
             //this.StickerImage.Source = Sprite.Get("unknown").Source;
-            this.StickerImage.Source = (Entity.IsCustom) ? Sprite.Get("unknown").Source : Entity.Sprite.DarkenedSource;
-            this.StickerName.Content = Entity.Name;
+            this.StickerImage.Source = (this.Entity.IsCustom) ? Sprite.Get("unknown").Source : this.Entity.Sprite.DarkenedSource;
+            this.StickerName.Content = this.Entity.Name;
             //this.StickerName.Content = String.Concat(Enumerable.Repeat("?", Entity.Name.Length));
             this.StickerName.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
         }
 
-        public WriteableBitmap GetAllBlackVersionOfBitmap(BitmapSource source) {
-            var stride = (Int32)(source.PixelWidth * source.Width);
-            var data = new byte[stride * source.PixelHeight];
-            source.CopyPixels(data, stride, 0);
-            var target = new WriteableBitmap(source);
-
-            for (var i = 0; i < data.Length / 4; i++) {
-                data[i * 4] = 0;
-                data[i * 4 + 1] = 0;
-                data[i * 4 + 2] = 0;
-                //data[i * 4 + 3];
-            }
-
-            target.WritePixels(new Int32Rect(
-                0, 0, source.PixelWidth, source.PixelHeight
-            ), data, stride, 0);
-            return target;
-        }
-
         private void Self_SizeChanged(object sender, SizeChangedEventArgs e) {
-            Refresh();
+            this.Refresh();
         }
 
         private void StickerFrame_MouseEnter(object sender, MouseEventArgs e) {
-            StickerImage.Width = StickerFrame.ActualWidth - 20;
-            StickerImage.Height = StickerFrame.ActualHeight - 30;
-            StickerName.FontWeight = FontWeights.Bold;
+            this.StickerImage.Width  = StickerFrame.ActualWidth  - 20;
+            this.StickerImage.Height = StickerFrame.ActualHeight - 30;
+            this.StickerName.FontWeight = FontWeights.Bold;
         }
 
         private void StickerFrame_MouseLeave(object sender, MouseEventArgs e) {
-            Refresh();
+            this.Refresh();
         }
 
-        private void Self_DragEnter(object sender, DragEventArgs e) {
-            this.RenderTransform = new RotateTransform(2.0, 300, 200);
-        }
+        private void Self_DragEnter(object sender, DragEventArgs e)
+            => this.RenderTransform = new RotateTransform(2, 300, 200);
 
-        private void Self_DragLeave(object sender, DragEventArgs e) {
-            this.RenderTransform = null;
-        }
+        private void Self_DragLeave(object sender, DragEventArgs e) 
+            => this.RenderTransform = null;
 
         private void Self_DragOver(object sender, DragEventArgs e) {
 
@@ -129,16 +105,19 @@ namespace stickeralbum.Design.Controls {
 
         private void Self_Drop(object sender, DragEventArgs e) {
             this.RenderTransform = null;
-            if (AllowDrop) {
-                Console.WriteLine((sender as Sticker).Entity.ID);
-                var droppedSticker = e.Data.GetData(e.Data.GetFormats()[0]) as Sticker;
-                var droppedEntity = droppedSticker.Entity;
-                if (this.Entity.ID == droppedEntity.ID && !Entity.IsUnlocked) {
-                    DebugUtils.Log($"Valid Entity Dropped => {droppedEntity.ID}");
-                    GameMaster.Player.Inventory.Remove(droppedEntity.ID, 1);
-                    GameMaster.Player.Unlock(droppedEntity.ID);
-                    SetEntity(Entity);
-                    droppedSticker.DataDropped.Invoke(droppedSticker, EventArgs.Empty);
+            var formats = e.Data.GetFormats();
+            if (formats.Length > 0) {
+                var data = e.Data.GetData(e.Data.GetFormats()[0]);
+                if (this.AllowDrop && data is Sticker) {
+                    var droppedSticker = data as Sticker;
+                    var droppedEntity  = droppedSticker.Entity;
+                    if (this.Entity.ID == droppedEntity.ID && !Entity.IsUnlocked) {
+                        DebugUtils.Log($"Valid Entity Dropped => {droppedEntity.ID}");
+                        GameMaster.Player.Inventory.Remove(droppedEntity.ID, 1);
+                        GameMaster.Player.Unlock(droppedEntity.ID);
+                        this.SetEntity(Entity);
+                        droppedSticker.DataDropped.Invoke(droppedSticker, EventArgs.Empty);
+                    }
                 }
             }
         }
@@ -156,33 +135,33 @@ namespace stickeralbum.Design.Controls {
             GetCursorPos(ref w32Mouse);
 
             this.DragDropPreview.Left = w32Mouse.X;
-            this.DragDropPreview.Top = w32Mouse.Y;
+            this.DragDropPreview.Top  = w32Mouse.Y;
         }
 
-        private void CreateDragDropWindow(Visual dragElement) {
-            this.DragDropPreview = new Window();
-            DragDropPreview.WindowStyle = WindowStyle.None;
-            DragDropPreview.AllowsTransparency = true;
-            DragDropPreview.AllowDrop = false;
-            DragDropPreview.Background = null;
-            DragDropPreview.IsHitTestVisible = false;
-            DragDropPreview.SizeToContent = SizeToContent.WidthAndHeight;
-            DragDropPreview.Topmost = true;
-            DragDropPreview.ShowInTaskbar = false;
+        private void CreateDragDropPreview(Visual dragElement) {
+            this.DragDropPreview = new Window() {
+                WindowStyle        = WindowStyle.None,
+                AllowsTransparency = true,
+                AllowDrop          = false,
+                Background         = null,
+                IsHitTestVisible   = false,
+                SizeToContent      = SizeToContent.WidthAndHeight,
+                Topmost            = true,
+                ShowInTaskbar      = false
+            };
 
-            Rectangle r = new Rectangle();
-            r.Width = ((FrameworkElement)dragElement).ActualWidth;
-            r.Height = ((FrameworkElement)dragElement).ActualHeight;
-            r.Fill = new VisualBrush(dragElement);
-            this.DragDropPreview.Content = r;
-
+            Rectangle rect = new Rectangle() {
+                Width  = ((FrameworkElement)dragElement).ActualWidth,
+                Height = ((FrameworkElement)dragElement).ActualHeight,
+                Fill   = new VisualBrush(dragElement)
+            };
+            this.DragDropPreview.Content = rect;
 
             Win32Point w32Mouse = new Win32Point();
             GetCursorPos(ref w32Mouse);
 
-
             this.DragDropPreview.Left = w32Mouse.X;
-            this.DragDropPreview.Top = w32Mouse.Y;
+            this.DragDropPreview.Top  = w32Mouse.Y;
             this.DragDropPreview.Show();
         }
 
@@ -197,14 +176,12 @@ namespace stickeralbum.Design.Controls {
         };
 
         private void Self_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
-            if (AllowDrag) {
-
-                // create the visual feedback drag and drop item
-                CreateDragDropWindow(this);
+            if (this.AllowDrag) {
+                this.CreateDragDropPreview(this);
                 this.RenderTransform = new RotateTransform(2, 300, 200);
                 DragDrop.DoDragDrop(this, this, DragDropEffects.Move);
-                DragDropPreview.Close();
-                DragDropPreview = null;
+                this.DragDropPreview.Close();
+                this.DragDropPreview = null;
                 this.RenderTransform = null;
             }
         }

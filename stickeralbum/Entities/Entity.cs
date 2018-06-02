@@ -3,8 +3,10 @@ using stickeralbum.Design;
 using stickeralbum.Enums;
 using stickeralbum.Game;
 using stickeralbum.Game.Items;
+using stickeralbum.Generics;
 using stickeralbum.IO;
 using System;
+using System.Linq;
 
 namespace stickeralbum.Entities {
     public abstract class Entity : Cacheable {
@@ -53,5 +55,11 @@ namespace stickeralbum.Entities {
         [JsonIgnore]
         public Boolean IsUnlocked
             => GameMaster.Player.HasUnlocked(this);
+
+        public static LinkedList<Entity> GetAll()
+            => Cache.GetAll()
+              .Where(x => x is Entity)
+              .Cast<Entity>()
+              .ToLinkedList();
     }
 }

@@ -40,10 +40,10 @@ namespace stickeralbum.Design.Controls {
 
         public StickerRegister_God() {
             InitializeComponent();
-            EntityUtils.AllTitans().GetMales().ForEach(x => fatherName_x_id.Add(x.Name, x.ID));
-            EntityUtils.AllGods().GetMales().ForEach(x => fatherName_x_id.Add(x.Name, x.ID));
-            EntityUtils.AllTitans().GetFemales().ForEach(x => motherName_x_id.Add(x.Name, x.ID));
-            EntityUtils.AllGods().GetFemales().ForEach(x => motherName_x_id.Add(x.Name, x.ID));
+            Titan.GetAll().GetMales().ForEach(x => fatherName_x_id.Add(x.Name, x.ID));
+            God.GetAll().GetMales().ForEach(x => fatherName_x_id.Add(x.Name, x.ID));
+            Titan.GetAll().GetFemales().ForEach(x => motherName_x_id.Add(x.Name, x.ID));
+            God.GetAll().GetFemales().ForEach(x => motherName_x_id.Add(x.Name, x.ID));
             StickerNewStricker.StickerImage.Source = Sprite.Get("unknown").Source;
             //StickerNewStricker.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
             ComboBoxRarity.ItemsSource = rarityOptions.Keys;
@@ -127,7 +127,7 @@ namespace stickeralbum.Design.Controls {
             });
             File.WriteAllText(Paths.CustomSpritesMetadata, JsonConvert.SerializeObject(spritesMetadata, Formatting.Indented));            
 
-            Generics.LinkedList<God> customGods = EntityUtils.AllGods().Where(x => x.IsCustom).ToLinkedList();
+            Generics.LinkedList<God> customGods = God.GetAll().Where(x => x.IsCustom).ToLinkedList();
 
             God newCustomGod = new God() {
                 Name = TextBoxName.Text,
