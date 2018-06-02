@@ -102,6 +102,7 @@ namespace stickeralbum.Design.Controls {
 
         private void OptionsButton_MouseDown(object sender, MouseButtonEventArgs e) {
             ChangeState(ControlState.Compact);
+            App.ClientWindow.SetCurrentPage(new Configs());
         }
     }
 }

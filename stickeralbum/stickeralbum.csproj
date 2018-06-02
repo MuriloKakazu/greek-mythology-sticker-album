@@ -85,6 +85,9 @@
     <Compile Include="Design\Controls\AlbumInteractionBar.xaml.cs">
       <DependentUpon>AlbumInteractionBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Design\Controls\Configs.xaml.cs">
+      <DependentUpon>Configs.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\Controls\FilterSidepanel.xaml.cs">
       <DependentUpon>FilterSidepanel.xaml</DependentUpon>
     </Compile>
@@ -188,6 +191,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Design\Controls\AlbumPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\Configs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
