@@ -64,6 +64,14 @@
                             </StackPanel>
                         </Expander>
                     </DockPanel>
+                    <DockPanel>
+                        <Expander DockPanel.Dock="Right" Cursor="Hand" FontWeight="Bold" Foreground="White" Header="Lógica Exclusiva" IsExpanded="True">
+                            <StackPanel Background="#FF4B4B4B">
+                                <CheckBox x:Name="FilterUnlockedOnly" DockPanel.Dock="Right" Content="Desbloqueadas" Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterUnlockedOnly_Checked" Unchecked="FilterUnlockedOnly_Unchecked"/>
+                                <CheckBox x:Name="FilterLockedOnly"   DockPanel.Dock="Right" Content="Bloqueadas"    Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterLockedOnly_Checked"   Unchecked="FilterLockedOnly_Unchecked"/>
+                            </StackPanel>
+                        </Expander>
+                    </DockPanel>
                 </StackPanel>
             </DockPanel>
         </Expander>

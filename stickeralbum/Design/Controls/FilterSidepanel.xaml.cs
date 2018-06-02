@@ -126,6 +126,18 @@ namespace stickeralbum.Design.Controls {
             FilterChanged?.Invoke(this, EventArgs.Empty);
         }
 
+        private void FilterUnlockedOnly_Checked(object sender, RoutedEventArgs e) {
+            FilterSettings.SetKey("unlockedonly", (Boolean)FilterUnlockedOnly.IsChecked);
+            FilterLockedOnly.IsChecked = false;
+            FilterChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void FilterLockedOnly_Checked(object sender, RoutedEventArgs e) {
+            FilterSettings.SetKey("lockedonly", (Boolean)FilterLockedOnly.IsChecked);
+            FilterUnlockedOnly.IsChecked = false;
+            FilterChanged?.Invoke(this, EventArgs.Empty);
+        }
+
         //
 
         private void FilterTitan_Unchecked(object sender, RoutedEventArgs e) {
@@ -185,6 +197,16 @@ namespace stickeralbum.Design.Controls {
 
         private void FilterCustom_Unchecked(object sender, RoutedEventArgs e) {
             FilterSettings.SetKey("custom", (Boolean)FilterCustom.IsChecked);
+            FilterChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void FilterUnlockedOnly_Unchecked(object sender, RoutedEventArgs e) {
+            FilterSettings.SetKey("unlockedonly", (Boolean)FilterUnlockedOnly.IsChecked);
+            FilterChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void FilterLockedOnly_Unchecked(object sender, RoutedEventArgs e) {
+            FilterSettings.SetKey("lockedonly", (Boolean)FilterLockedOnly.IsChecked);
             FilterChanged?.Invoke(this, EventArgs.Empty);
         }
     }

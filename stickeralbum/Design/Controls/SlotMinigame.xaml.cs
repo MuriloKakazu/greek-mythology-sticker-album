@@ -6,6 +6,7 @@ using stickeralbum.Game.Items;
 using stickeralbum.Generics;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -26,13 +27,18 @@ namespace stickeralbum.Design.Controls {
     public partial class SlotMinigame : UserControl {
         Random RNG = new Random();
         Int32 Spins;
+        Boolean IsSpinning;
         public SlotMinigame() {
             InitializeComponent();
             Spins = 0;
-            Spin();
             Slot0.FinishedSpin += Slot_FinishedSpin;
             Slot1.FinishedSpin += Slot_FinishedSpin;
             Slot2.FinishedSpin += Slot_FinishedSpin;
+            if (!DesignerProperties.GetIsInDesignMode(this)) {
+                this.SpinButton.Source = Sprite.Get("redbutton_released").Source;
+                this.CoinIcon.Source = Sprite.Get("coin").Source;
+                Refresh();
+            }
         }
 
         private void Slot_FinishedSpin(object sender, EventArgs e) {
@@ -77,6 +83,7 @@ namespace stickeralbum.Design.Controls {
                 }
                 GameMaster.Player.Inventory.Add(new SimpleSticker() { ItemID = prize.ID });
                 DebugUtils.Log($"Prize => {prize.ID} - {prize.Rarity}!");
+                IsSpinning = false;
             }
         }
 
@@ -90,6 +97,25 @@ namespace stickeralbum.Design.Controls {
 
         private void JackpotMachine_SizeChanged(object sender, SizeChangedEventArgs e) {
 
+        }
+
+        public void Refresh() {
+            CoinsCount.Content = GameMaster.Player.Coins;
+        }
+
+        private void SpinButton_MouseDown(object sender, MouseButtonEventArgs e) {
+            this.SpinButton.Source = Sprite.Get("redbutton_pressed").Source;
+            var player = GameMaster.Player;
+            if (!IsSpinning && player.Coins > 0) {
+                IsSpinning = true;
+                player.Coins -= 1;
+                Refresh();
+                Spin();
+            }
+        }
+
+        private void SpinButton_MouseUp(object sender, MouseButtonEventArgs e) {
+            this.SpinButton.Source = Sprite.Get("redbutton_released").Source;
         }
     }
 }

@@ -153,7 +153,8 @@ namespace stickeralbum.Design.Controls {
                 IsHitTestVisible   = false,
                 SizeToContent      = SizeToContent.WidthAndHeight,
                 Topmost            = true,
-                ShowInTaskbar      = false
+                ShowInTaskbar      = false,
+                Opacity            = 0.75f
             };
 
             Rectangle rect = new Rectangle() {

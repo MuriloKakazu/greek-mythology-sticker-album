@@ -61,5 +61,13 @@ namespace stickeralbum.Entities {
               .Where(x => x is Entity)
               .Cast<Entity>()
               .ToLinkedList();
+
+        public Int64 GetCoinValue()
+            => (Rarity == Rarity.Common)   ? 1 :
+               (Rarity == Rarity.Uncommon) ? 2 :
+               (Rarity == Rarity.Rare)     ? 3 :
+               (Rarity == Rarity.VeryRare) ? 4 :
+               (Rarity == Rarity.Epic)     ? 5 : 0;
+
     }
 }

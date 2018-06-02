@@ -60,11 +60,17 @@ namespace stickeralbum.Design.Controls
             var filters = FilterPanel.FilterSettings.GetKeys().Where(x => (Boolean)settings.Get(x)).ToLinkedList();
 
             filtered.Add(sourceCopy.Where(x => filters.Contains(x.Entity.GetType().Name.ToLower()) && !filtered.Contains(x)));
-            if (filters.Contains("custom")) {
-                filtered.Add(sourceCopy.Where(x => x.Entity.IsCustom && !filtered.Contains(x)));
+            if (!filters.Contains("custom")) {
+                filtered.Remove(sourceCopy.Where(x => x.Entity.IsCustom));
             }
             filtered.Remove(filtered.Where(x => !filters.Contains(x.Entity.Rarity.ToString().ToLower())));
             filtered.Remove(filtered.Where(x => !filters.Contains(x.Entity.Gender.ToString().ToLower())));
+
+            if (filters.Contains("unlockedonly")) {
+                filtered.Remove(filtered.Where(x => !x.Entity.IsUnlocked));
+            } else if (filters.Contains("lockedonly")) {
+                filtered.Remove(filtered.Where(x => x.Entity.IsUnlocked));
+            }
 
             if (settings.Query != null) {
                 filtered = filtered.Where(x => x.Entity.Name.ToLower().Contains(settings.Query.ToLower())).ToLinkedList();
