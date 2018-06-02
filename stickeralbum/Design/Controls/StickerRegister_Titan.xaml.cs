@@ -46,8 +46,8 @@ namespace stickeralbum.Design.Controls
 
         public StickerRegister_Titan() {
             InitializeComponent();
-            EntityUtils.AllTitans().GetMales().ForEach(x => fatherName_x_id.Add(x.Name, x.ID));
-            EntityUtils.AllTitans().GetFemales().ForEach(x => motherName_x_id.Add(x.Name, x.ID));
+            Titan.GetAll().GetMales().ForEach(x => fatherName_x_id.Add(x.Name, x.ID));
+            Titan.GetAll().GetFemales().ForEach(x => motherName_x_id.Add(x.Name, x.ID));
             StickerNewStricker.StickerImage.Source = Sprite.Get("unknown").Source;
             //StickerNewStricker.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
             ComboBoxRarity.ItemsSource = rarityOptions.Keys;
@@ -132,7 +132,7 @@ namespace stickeralbum.Design.Controls
             });
             File.WriteAllText(Paths.CustomSpritesMetadata, JsonConvert.SerializeObject(spritesMetadata, Formatting.Indented));
 
-            Generics.LinkedList<Titan> customTitans = EntityUtils.AllTitans().Where(x => x.IsCustom).ToLinkedList();
+            Generics.LinkedList<Titan> customTitans = Titan.GetAll().Where(x => x.IsCustom).ToLinkedList();
 
             Titan newCustomTitan = new Titan() {
                 Name = TextBoxName.Text,
