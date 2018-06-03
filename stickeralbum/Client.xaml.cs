@@ -1,6 +1,7 @@
 ﻿using NAudio.Wave;
 using stickeralbum.Audio;
 using stickeralbum.Design;
+using stickeralbum.Design.Controls;
 using stickeralbum.Entities;
 using stickeralbum.Game;
 using stickeralbum.Game.Items;
@@ -33,6 +34,8 @@ namespace stickeralbum
             Cache.Load();
             //Cache.DumpLog();
             InitializeComponent();
+            App.ClientWindow.SetCurrentPage(new Homepage());
+            soundPlayer = new SoundPlayer();
             this.Background = new ImageBrush(Sprite.Get("bg_oldpaper").Source);
             if (!SoundTrack.Get("st_main").IsPlaying) {
                 SoundPlayer.StopAll("st_blacksmith");
