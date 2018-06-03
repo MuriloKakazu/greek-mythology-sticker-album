@@ -20,7 +20,7 @@ namespace stickeralbum.Audio {
         public void Setup() {
             using (var audioFileReader = new AudioFileReader(Path)) {
                 WaveFormat = audioFileReader.WaveFormat;
-                var wholeFile = new LinkedList<Single>();
+                var wholeFile  = new LinkedList<Single>();
                 var readBuffer = new Single[audioFileReader.WaveFormat.SampleRate * audioFileReader.WaveFormat.Channels];
                 int samplesRead;
                 while ((samplesRead = audioFileReader.Read(readBuffer, 0, readBuffer.Length)) > 0) {

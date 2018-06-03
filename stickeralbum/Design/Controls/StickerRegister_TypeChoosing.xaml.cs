@@ -31,9 +31,6 @@ namespace stickeralbum.Design.Controls {
 
             if (!SoundTrack.Get("st_blacksmith").IsPlaying) {
                 SoundPlayer.StopAll("st_main");
-                DebugUtils.Log(SoundPlayer.AllTracksPlaying().Count());
-                DebugUtils.Log(SoundPlayer.GetInstances().Where(x => x.Track.ID == "st_main").Count());
-                DebugUtils.Log(SoundPlayer.GetInstances().Count());
                 SoundPlayer.Instance.Play(SoundTrack.Get("st_blacksmith"), loop: true);
             }
             ComboBoxType.SelectedIndex = 0;

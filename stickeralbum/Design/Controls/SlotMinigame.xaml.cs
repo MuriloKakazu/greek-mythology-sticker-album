@@ -90,7 +90,6 @@ namespace stickeralbum.Design.Controls {
                 }
                 GameMaster.Player.Inventory.Add(new SimpleSticker() { ItemID = prize.ID });
                 DebugUtils.Log($"Minigame prize => <{prize.ID}> => {prize.Rarity}!");
-                SoundPlayer.StopAll("sfx_slot");
                 SoundPlayer.Instance.Play(SoundTrack.Get("sfx_coindrop"));
                 IsSpinning = false;
             }
@@ -98,11 +97,11 @@ namespace stickeralbum.Design.Controls {
 
         public void Spin() {
             Spins = 0;
-            var t = RNG.Next(1, 5) * 1000;
+            var t = 1000;
             Slot0.Spin(t);
-            Slot1.Spin(t + 2 * 1000);
-            Slot2.Spin(t + 4 * 1000);
-            SoundPlayer.Instance.Play(SoundTrack.Get("sfx_slot"), loop: true);
+            Slot1.Spin(t * 2);
+            Slot2.Spin(t * 3);
+            SoundPlayer.Instance.Play(SoundTrack.Get("sfx_slot" + RNG.Next(0, 3)));
         }
 
         private void JackpotMachine_SizeChanged(object sender, SizeChangedEventArgs e) {

@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using stickeralbum.Audio;
 using stickeralbum.Debug;
 using stickeralbum.Entities;
 using stickeralbum.Enums;
@@ -46,8 +47,8 @@ namespace stickeralbum.Design.Controls {
 
             if (this.Entity.IsUnlocked || overrideValidation) {
                 //this.Background = new ImageBrush(Entity.Background.Source);
-                this.StickerFrame.Source = Sprite.Get(e.Rarity).Source;
-                this.StickerImage.Source = e.Sprite.Source;
+                this.StickerFrame.Source = Sprite.Get(e.Rarity)?.Source;
+                this.StickerImage.Source = e.Sprite?.Source;
                 this.StickerName.Content = e.Name;
                 this.StickerName.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
             } else {
@@ -79,8 +80,8 @@ namespace stickeralbum.Design.Controls {
         public void MakeSecret() {
             this.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
             //this.StickerImage.Source = Sprite.Get("unknown").Source;
-            this.StickerImage.Source = (this.Entity.IsCustom) ? Sprite.Get("unknown").Source : this.Entity.Sprite.DarkenedSource;
-            this.StickerName.Content = this.Entity.Name;
+            this.StickerImage.Source = (this.Entity.IsCustom) ? Sprite.Get("unknown")?.Source : this.Entity.Sprite?.DarkenedSource;
+            this.StickerName.Content =  this.Entity.Name;
             //this.StickerName.Content = String.Concat(Enumerable.Repeat("?", Entity.Name.Length));
             this.StickerName.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
         }
@@ -123,6 +124,7 @@ namespace stickeralbum.Design.Controls {
                         GameMaster.Player.Unlock(droppedEntity.ID);
                         this.SetEntity(Entity);
                         droppedSticker.DataDropped.Invoke(droppedSticker, EventArgs.Empty);
+                        SoundPlayer.Instance.Play(SoundTrack.Get("sfx_click"));
                     }
                 }
             }

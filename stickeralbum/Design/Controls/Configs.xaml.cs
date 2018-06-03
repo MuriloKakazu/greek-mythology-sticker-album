@@ -30,12 +30,10 @@ namespace stickeralbum.Design.Controls {
         public Configs() {
             InitializeComponent();
             ButtonSave.IsEnabled = false;
-            Console.WriteLine(Game.GameMaster.Settings.Volume);
+            Console.WriteLine(GameMaster.Settings.Volume);
             autoContext = true;
-            volume = SliderVolume.Value = (double)Game.GameMaster.Settings.Volume;
+            volume = SliderVolume.Value = GameMaster.Settings.Volume;
             autoContext = false;
-
-        }
             volume = GameMaster.Settings.Volume;
 
             if (!SoundTrack.Get("st_main").IsPlaying) {
