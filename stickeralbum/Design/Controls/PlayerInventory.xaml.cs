@@ -1,4 +1,5 @@
-﻿using stickeralbum.Debug;
+﻿using stickeralbum.Audio;
+using stickeralbum.Debug;
 using stickeralbum.Enums;
 using stickeralbum.Extensions;
 using stickeralbum.Game;
@@ -73,6 +74,7 @@ namespace stickeralbum.Design.Controls
                     DebugUtils.Log($"Entity Trashed => {droppedEntity.ID}");
                     GameMaster.Player.Inventory.Remove(droppedEntity.ID, 1);
                     droppedSticker.DetachParent();
+                    SoundPlayer.Instance.Play(SoundTrack.Get("sfx_coindrop"));
                 }
             }
             CoinIcon.Visibility     = Visibility.Hidden;

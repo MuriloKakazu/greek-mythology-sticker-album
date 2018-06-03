@@ -1,57 +1,128 @@
 ﻿using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
+using stickeralbum.Debug;
 using stickeralbum.Game;
+using stickeralbum.Generics;
 using System;
+using System.Linq;
+using STDGEN = System.Collections.Generic;
 
 namespace stickeralbum.Audio {
     public class SoundPlayer : IDisposable {
-        #region Properties
-        private static WaveOutEvent Device { get; set; }
-        private static MixingSampleProvider Mixer { get; set; }
-        public static readonly SoundPlayer Instance = new SoundPlayer(44100, 2);
-        public static PlaybackState State { get { return Device.PlaybackState; } }
-        public static Single Volume { get { return GameMaster.Settings.Volume; } set { GameMaster.Settings.Volume = Device.Volume = value; } }
-        public static Boolean DestroyOnPlaybackEnd { get; set; }
-        #endregion
+        private static LinkedList<SoundPlayer> Instances;
+        private WaveOutEvent Device;
+        private MixingSampleProvider Mixer;
+
+        public static SoundPlayer Instance 
+            => Instances.Add(new SoundPlayer(44100, 2));
+
+        public PlaybackState State { get; set; }
+
+        public Single Volume {
+            get => Device.Volume;
+            set => GameMaster.Settings.Volume = Device.Volume = value;
+        }
+        public Boolean Loop { get; protected set; }
+        public SoundTrack Track { get; protected set; }
+
+        static SoundPlayer() {
+            Instances = new LinkedList<SoundPlayer>();
+        }
 
         public SoundPlayer(Int32 sampleRate = 44100, Int32 channelCount = 2) {
             Device = new WaveOutEvent();
-            Mixer = new MixingSampleProvider(
+            Mixer  = new MixingSampleProvider(
                 WaveFormat.CreateIeeeFloatWaveFormat(sampleRate, channelCount)
             );
             Mixer.ReadFully = true;
-            Volume = GameMaster.Settings.Volume;
             Device.Init(Mixer);
-            Device.Play();
+            Device.PlaybackStopped += Device_PlaybackStopped;
+            Mixer.MixerInputEnded += Mixer_MixerInputEnded;
         }
 
-        private void AddMixerInput(ISampleProvider input) {
-            Mixer.AddMixerInput(ConvertToRightChannelCount(input));
+        private void Mixer_MixerInputEnded(object sender, SampleProviderEventArgs e) {
+            State = PlaybackState.Stopped;
+            DebugUtils.LogAudio($"Input for <{Track.ID}> stopped.");
+            if (Loop) {
+                Instance.Play(Track, Loop);
+            }
         }
+
+        private void Device_PlaybackStopped(object sender, StoppedEventArgs e) {
+            State = PlaybackState.Stopped;
+            if (e?.Exception != null) {
+                DebugUtils.LogError($"Playback for <{Track?.ID}> stopped with an Exception => {e?.Exception?.Message}");
+            } else {
+                DebugUtils.LogAudio($"Playback for <{Track?.ID}> stopped.");
+            }
+
+            if (!Loop) {
+                Dispose();
+            }
+        }
+
+        private void AddMixerInput(ISampleProvider input) 
+            => Mixer.AddMixerInput(ConvertToRightChannelCount(input));
 
         private ISampleProvider ConvertToRightChannelCount(ISampleProvider input) {
-            if (input.WaveFormat.Channels == Mixer.WaveFormat.Channels) return input;
-            if (input.WaveFormat.Channels == 1 && Mixer.WaveFormat.Channels == 2) return new MonoToStereoSampleProvider(input);
+            var inputWfCh = input.WaveFormat.Channels;
+            var mixerWfCh = Mixer.WaveFormat.Channels;
+            if (inputWfCh == mixerWfCh) {
+                return input;
+            }
+            if (inputWfCh == 1 && mixerWfCh == 2) {
+                return new MonoToStereoSampleProvider(input);
+            }
             return null;
         }
 
-        public void Play(String fileName) {
-            if (String.IsNullOrWhiteSpace(fileName)) return;
-
-            var input = new AudioFileReader(fileName);
-            input.Volume = Volume = GameMaster.Settings.Volume;
-
-            AddMixerInput(new AutoDisposableStream(input));
+        public void Stop() {
+            Loop = false;
+            Device_PlaybackStopped(null, null);
         }
 
-        public void Play(SoundTrack track) {
-            if (track == null) return;
-
-            Volume = GameMaster.Settings.Volume;
-            AddMixerInput(new SoundTrackSampleProvider(track));
+        public void Play(SoundTrack track, Boolean loop = false) {
+            if (track == null || Device == null || Mixer == null) {
+                DebugUtils.LogError($"Error playing track => <{track?.ID}>. Reason => Null reference in SoundPlayer");
+                return;
+            }
+            try {
+                StopAll(track.ID);
+                //track.Setup();
+                Track = track;
+                Loop = loop;
+                Volume = GameMaster.Settings.Volume;
+                AddMixerInput(new SoundSampleProvider(track));
+                State = PlaybackState.Playing;
+                Device.Play();
+                DebugUtils.LogAudio($"Playing track => <{track.ID}> Volume => {Volume * 100f}%");
+            } catch (Exception e) {
+                DebugUtils.LogError($"Error playing track => <{track.ID}>. Reason => {e.Message}");
+            }
         }
+
+        public static void StopAll()
+            => Instances.ForEach(x => {
+               x.Stop();
+            });
+
+        public static void StopAll(String id)
+            => Instances.ForEach(x => {
+               if (x?.Track?.ID == id) {
+                   x.Stop();
+               }
+            });
+
+        public static STDGEN.IEnumerable<SoundPlayer> 
+            GetInstances() => Instances;
+
+        public static STDGEN.IEnumerable<SoundTrack> AllTracksPlaying()
+            => from x in Instances where x.State == PlaybackState.Playing select x.Track;
 
         public void Dispose() {
+            Track = null;
+            Mixer.RemoveAllMixerInputs();
+            Instances.Remove(this);
             Device.Dispose();
         }
     }

@@ -40,6 +40,8 @@ namespace stickeralbum.IO {
             => $"{MetadataDirectory}semigods.json";
         public static String SpritesMetadata
             => $"{MetadataDirectory}sprites.json";
+        public static String SoundFXMetadata
+            => $"{MetadataDirectory}soundfx.json";
         public static String CustomGodsMetadata
             => $"{CustomMetadataDirectory}gods.json";
         public static String CustomTitansMetadata

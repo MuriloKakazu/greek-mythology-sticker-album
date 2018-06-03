@@ -1,4 +1,7 @@
-﻿using stickeralbum.IO;
+﻿using stickeralbum.Audio;
+using stickeralbum.Debug;
+using stickeralbum.Game;
+using stickeralbum.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -33,6 +36,13 @@ namespace stickeralbum.Design.Controls {
             autoContext = false;
 
         }
+            volume = GameMaster.Settings.Volume;
+
+            if (!SoundTrack.Get("st_main").IsPlaying) {
+                SoundPlayer.StopAll();
+                SoundPlayer.Instance.Play(SoundTrack.Get("st_main"), loop: true);
+            }
+        }
 
         private void CheckBoxMuted_Click(object sender, RoutedEventArgs e) {
             autoContext = true;
@@ -42,17 +52,21 @@ namespace stickeralbum.Design.Controls {
         }
 
         private void ButtonRestore_Click(object sender, RoutedEventArgs e) {
-            File.WriteAllText(Paths.CustomCreaturesMetadata, "[\n\n]");
-            File.WriteAllText(Paths.CustomSemiGodsMetadata, "[\n\n]");
-            File.WriteAllText(Paths.CustomGodsMetadata, "[\n\n]");
-            File.WriteAllText(Paths.CustomTitansMetadata, "[\n\n]");
-            File.WriteAllText(Paths.CustomSpritesMetadata, "[\n\n]");
-            Console.WriteLine("[CACHE] - Metadata removed");
+            var emptyJson = "[\n\n]";
+            File.WriteAllText(Paths.CustomCreaturesMetadata, emptyJson);
+            File.WriteAllText(Paths.CustomSemiGodsMetadata,  emptyJson);
+            File.WriteAllText(Paths.CustomGodsMetadata,      emptyJson);
+            File.WriteAllText(Paths.CustomTitansMetadata,    emptyJson);
+            File.WriteAllText(Paths.CustomSpritesMetadata,   emptyJson);
+            //Console.WriteLine("[CACHE] - Metadata removed");
+            DebugUtils.LogCache("Metadata removed");
             DirectoryInfo di = new DirectoryInfo(Paths.CustomSpritesDirectory);
-            Game.GameMaster.Player.Inventory.RemoveCustoms();
-            Console.WriteLine("[CACHE] - Custom stickers removed");
-            Console.WriteLine(Game.GameMaster.Player.Inventory.Stickers);
-            Game.GameMaster.SaveAll();
+            GameMaster.Player.Inventory.RemoveCustoms();
+            //Console.WriteLine("[CACHE] - Custom stickers removed");
+            DebugUtils.LogCache("Custom stickers removed");
+            //Console.WriteLine(Game.GameMaster.Player.Inventory.Stickers);
+            DebugUtils.Log(GameMaster.Player.Inventory.Stickers);
+            GameMaster.SaveAll();
             Cache.Clear();
 
             GC.Collect();

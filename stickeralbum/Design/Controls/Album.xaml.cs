@@ -1,4 +1,5 @@
-﻿using stickeralbum.Debug;
+﻿using stickeralbum.Audio;
+using stickeralbum.Debug;
 using stickeralbum.Entities;
 using stickeralbum.Enums;
 using stickeralbum.Extensions;
@@ -32,6 +33,11 @@ namespace stickeralbum.Design.Controls
         public Album() {
             InitializeComponent();
             FilterPanel.FilterChanged += InteractionBar_FilterChanged;
+
+            if (!SoundTrack.Get("st_main").IsPlaying) {
+                SoundPlayer.StopAll("st_blacksmith");
+                SoundPlayer.Instance.Play(SoundTrack.Get("st_main"), loop: true);
+            }
         }
 
         public Album(Sticker[] stickers): 
@@ -112,6 +118,7 @@ namespace stickeralbum.Design.Controls
             this.CurrentPage = page;
             this.AlbumArea.Children.Clear();
             this.AlbumArea.Children.Add(page);
+            SoundPlayer.Instance.Play(SoundTrack.Get("sfx_pageturn"));
             return true;
         }
 

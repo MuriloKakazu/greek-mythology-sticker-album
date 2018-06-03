@@ -1,4 +1,5 @@
-﻿using stickeralbum.Entities;
+﻿using stickeralbum.Audio;
+using stickeralbum.Entities;
 using stickeralbum.IO;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,7 @@ namespace stickeralbum.Design.Controls {
             StickerNewSticker.StickerFrame.Source = sticker.StickerFrame.Source;
             StickerNewSticker.StickerImage.Source = sticker.StickerImage.Source;
             StickerNewSticker.StickerName.Content = sticker.StickerName.Content;
+            SoundPlayer.Instance.Play(SoundTrack.Get("sfx_coindrop"));
         }
 
         private void ButtonAlbum_Click(object sender, RoutedEventArgs e) {

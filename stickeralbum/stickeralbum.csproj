@@ -80,6 +80,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Audio\SoundSampleProvider.cs" />
     <Compile Include="Debug\DebugUtils.cs" />
     <Compile Include="Debug\Tests\EntityTest.cs" />
     <Compile Include="Design\Controls\Configs.xaml.cs">
@@ -171,10 +172,8 @@
     <Compile Include="Entities\God.cs" />
     <Compile Include="Enums\Rarity.cs" />
     <Compile Include="Entities\SemiGod.cs" />
-    <Compile Include="Audio\AutoDisposableStream.cs" />
-    <Compile Include="Audio\SoundPlayer.cs" />
     <Compile Include="Audio\SoundTrack.cs" />
-    <Compile Include="Audio\SoundTrackSampleProvider.cs" />
+    <Compile Include="Audio\SoundPlayer.cs" />
     <Compile Include="Generics\LinkedList.cs" />
     <Compile Include="Generics\Node.cs" />
     <Compile Include="Game\Settings.cs" />

@@ -28,22 +28,17 @@ namespace stickeralbum
     /// </summary>
     public partial class Client : Window
     {
-        public SoundPlayer soundPlayer;
         public Client() {
-            Cache.Load();
-            Cache.DumpLog();
             GameMaster.LoadAll();
-            //GameMaster.Player.Inventory.Add(new SimpleSticker() { ItemID = "god_zeus" });
-            //GameMaster.SaveAll();
+            Cache.Load();
+            //Cache.DumpLog();
             InitializeComponent();
             App.ClientWindow.SetCurrentPage(new Homepage());
-            soundPlayer = new SoundPlayer();
             this.Background = new ImageBrush(Sprite.Get("bg_oldpaper").Source);
-            var reader = new Mp3FileReader(Paths.AudioDirectory + "st_album.mp3");
-            var waveOut = new WaveOut();
-            waveOut.Init(reader);
-            waveOut.Play();
-            //soundPlayer.Play(Paths.AudioDirectory + "fx_album.mp3");
+            if (!SoundTrack.Get("st_main").IsPlaying) {
+                SoundPlayer.StopAll("st_blacksmith");
+                SoundPlayer.Instance.Play(SoundTrack.Get("st_main"), loop: true);
+            }
             //TestUtil.RunAllTests();
         }
 
