@@ -28,14 +28,12 @@ namespace stickeralbum
     /// </summary>
     public partial class Client : Window
     {
-        public SoundPlayer soundPlayer;
         public Client() {
             GameMaster.LoadAll();
             Cache.Load();
             //Cache.DumpLog();
             InitializeComponent();
             App.ClientWindow.SetCurrentPage(new Homepage());
-            soundPlayer = new SoundPlayer();
             this.Background = new ImageBrush(Sprite.Get("bg_oldpaper").Source);
             if (!SoundTrack.Get("st_main").IsPlaying) {
                 SoundPlayer.StopAll("st_blacksmith");
