@@ -39,9 +39,8 @@ namespace stickeralbum.Audio {
             if (String.IsNullOrWhiteSpace(fileName)) return;
 
             var input = new AudioFileReader(fileName);
-            Volume = GameMaster.Settings.Volume;
+            input.Volume = Volume = GameMaster.Settings.Volume;
 
-            input.Volume = Volume;
             AddMixerInput(new AutoDisposableStream(input));
         }
 

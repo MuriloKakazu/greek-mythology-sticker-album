@@ -30,7 +30,7 @@ namespace stickeralbum.IO
                 DebugUtils.LogIO("Populating cache...");
                 LoadDefaults();
                 LoadCustoms();
-                DebugUtils.LogIO("Cache populated!");
+                DebugUtils.LogIO($"Cache populated. {CachedObjects.Keys.Count} Objects Loaded.");
             } catch (Exception e) {
                 DebugUtils.LogError($"Error populating cache. Reason: {e.Message}");
             }
