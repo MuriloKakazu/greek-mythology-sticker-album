@@ -88,6 +88,9 @@
     <Compile Include="Design\Controls\FilterSidepanel.xaml.cs">
       <DependentUpon>FilterSidepanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Design\Controls\Homepage.xaml.cs">
+      <DependentUpon>Homepage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Design\Controls\PlayerInventory.xaml.cs">
       <DependentUpon>PlayerInventory.xaml</DependentUpon>
     </Compile>
@@ -189,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Design\Controls\FilterSidepanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\Homepage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

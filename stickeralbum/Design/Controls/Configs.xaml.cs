@@ -1,6 +1,4 @@
-﻿using stickeralbum.Debug;
-using stickeralbum.Game;
-using stickeralbum.IO;
+﻿using stickeralbum.IO;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,40 +22,58 @@ namespace stickeralbum.Design.Controls {
     public partial class Configs : UserControl {
 
         public float volume;
+        public bool autoContext = false;
 
         public Configs() {
             InitializeComponent();
+            ButtonSave.IsEnabled = false;
             volume = Game.GameMaster.Settings.Volume;
         }
 
         private void CheckBoxMuted_Click(object sender, RoutedEventArgs e) {
+            autoContext = true;
             SliderVolume.Value = CheckBoxMuted.IsChecked.Value ? 0 : volume;
+            autoContext = false;
+            ButtonSave.IsEnabled = true;
         }
 
         private void ButtonRestore_Click(object sender, RoutedEventArgs e) {
+            File.WriteAllText(Paths.CustomCreaturesMetadata, "[\n\n]");
+            File.WriteAllText(Paths.CustomSemiGodsMetadata, "[\n\n]");
+            File.WriteAllText(Paths.CustomGodsMetadata, "[\n\n]");
+            File.WriteAllText(Paths.CustomTitansMetadata, "[\n\n]");
+            File.WriteAllText(Paths.CustomSpritesMetadata, "[\n\n]");
+            Console.WriteLine("[CACHE] - Metadata removed");
             DirectoryInfo di = new DirectoryInfo(Paths.CustomSpritesDirectory);
-            var emptyJson = "[\n\n]";
-
-            File.WriteAllText(Paths.CustomGodsMetadata,      emptyJson);
-            File.WriteAllText(Paths.CustomTitansMetadata,    emptyJson);
-            File.WriteAllText(Paths.CustomSpritesMetadata,   emptyJson);
-            File.WriteAllText(Paths.CustomSemiGodsMetadata,  emptyJson);
-            File.WriteAllText(Paths.CustomCreaturesMetadata, emptyJson);
-
-            GameMaster.Player.Inventory.RemoveCustoms();
+            Game.GameMaster.Player.Inventory.RemoveCustoms();
+            Console.WriteLine("[CACHE] - Custom stickers removed");
+            Console.WriteLine(Game.GameMaster.Player.Inventory.Stickers);
+            Game.GameMaster.SaveAll();
             Cache.Clear();
+
             GC.Collect();
             GC.WaitForPendingFinalizers();
 
-            foreach (FileInfo file in di.GetFiles()) {
-                try {
-                    file.Delete();
-                } catch (Exception ex) {
-                    DebugUtils.LogError(ex.Message);
-                }
+            foreach(FileInfo file in di.GetFiles()) {
+                //file.Delete();
             }
-
             Cache.Load();
+        }
+
+        private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            if(!autoContext) {
+                if(CheckBoxMuted.IsChecked.Value) {
+                    CheckBoxMuted.IsChecked = false;
+                }
+                volume = (float)SliderVolume.Value;
+            }
+            ButtonSave.IsEnabled = true;
+        }
+
+        private void ButtonSave_Click(object sender, RoutedEventArgs e) {
+            Game.GameMaster.Settings.Volume = volume;
+            Game.GameMaster.SaveAll();
+            ButtonSave.IsEnabled = false;
         }
     }
 }
