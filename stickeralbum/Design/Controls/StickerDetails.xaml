@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="stickeralbum.Design.Controls.StickerDetails"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:stickeralbum.Design.Controls"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <!--Aqui vai o StackPanel, coloca 2 properties nele : Grid.Row="0" Grid.Column="0"-->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="3*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0" Grid.Row="0" x:Name="StackPanelParents" Orientation="Horizontal"/>
+            <local:Sticker x:Name="StickerSelected" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" Height="300" Width="212"/>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label x:Name="LabelName" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" Content="NAME" FontFamily="Diogenes" FontSize="42px" HorizontalAlignment="Center" FontWeight="ExtraBold"/>
+            <TextBlock x:Name="TextBlockDescription" Text="dui pretium urna, eget rutrum ipsum justo eget mauris. Aenean eget augue ac ipsum cursus suscipit sed non leo. Pellentesque faucibus nisi a sollicitudin consectetur. Ut molestie vel nunc non pretium. Nullam eu cursus felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam tincidunt tempus interdum. Nullam imperdiet est a neque consequat pellentesque." TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" FontFamily="Diogenes" FontSize="18px" HorizontalAlignment="Stretch" Margin="10px,0px" TextAlignment="Center"/>
+        </Grid>
+    </Grid>
+</UserControl>

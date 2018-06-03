@@ -21,13 +21,17 @@ namespace stickeralbum.Design.Controls {
     /// </summary>
     public partial class Configs : UserControl {
 
-        public float volume;
+        public double volume;
         public bool autoContext = false;
 
         public Configs() {
             InitializeComponent();
             ButtonSave.IsEnabled = false;
-            volume = Game.GameMaster.Settings.Volume;
+            Console.WriteLine(Game.GameMaster.Settings.Volume);
+            autoContext = true;
+            volume = SliderVolume.Value = (double)Game.GameMaster.Settings.Volume;
+            autoContext = false;
+
         }
 
         private void CheckBoxMuted_Click(object sender, RoutedEventArgs e) {
@@ -65,15 +69,21 @@ namespace stickeralbum.Design.Controls {
                 if(CheckBoxMuted.IsChecked.Value) {
                     CheckBoxMuted.IsChecked = false;
                 }
-                volume = (float)SliderVolume.Value;
+                Console.WriteLine(SliderVolume.Value);
+                volume = SliderVolume.Value;
+                ButtonSave.IsEnabled = true;
             }
-            ButtonSave.IsEnabled = true;
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e) {
-            Game.GameMaster.Settings.Volume = volume;
+            Game.GameMaster.Settings.Volume = (float)volume;
+            Game.GameMaster.Settings.AntiAliasing = CheckBoxAA.IsChecked.Value;
             Game.GameMaster.SaveAll();
             ButtonSave.IsEnabled = false;
+        }
+
+        private void CheckBoxAA_Click(object sender, RoutedEventArgs e) {
+            ButtonSave.IsEnabled = true;
         }
     }
 }

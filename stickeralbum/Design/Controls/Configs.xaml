@@ -33,7 +33,7 @@
             <Label Content="Mute" Grid.Column="0" Grid.Row="1" FontFamily="Diogenes" FontSize="22px" Margin="0px, 0px, 20px, 0px" VerticalAlignment="Center" HorizontalAlignment="Right"/>
             <CheckBox x:Name="CheckBoxMuted" Grid.Column="1" Grid.Row="1" Margin="30px,0px,0px,0px" VerticalAlignment="Center" HorizontalAlignment="Left" Padding="0" Click="CheckBoxMuted_Click"/>
             <Label Content="Anti Aliasing" Grid.Column="0" Grid.Row="3" FontFamily="Diogenes" FontSize="22px" Margin="0px, 0px, 20px, 0px" VerticalAlignment="Center" HorizontalAlignment="Right"/>
-            <CheckBox x:Name="CheckBoxAA" Grid.Column="1" Grid.Row="2" Margin="30px,0px,0px,0px" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="CheckBoxAA" Grid.Column="1" Grid.Row="2" Margin="30px,0px,0px,0px" VerticalAlignment="Center" HorizontalAlignment="Left" Click="CheckBoxAA_Click"/>
 
         </Grid>
         <Button x:Name="ButtonRestore" Content="Restaurar jogo" Grid.Column="0" Grid.Row="2" MaxHeight="60px" MaxWidth="320px" FontFamily="Diogenes" FontSize="36" VerticalAlignment="Bottom" Background="#FF872424" Click="ButtonRestore_Click"/>

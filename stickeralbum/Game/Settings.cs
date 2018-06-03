@@ -6,5 +6,6 @@ namespace stickeralbum.Game {
     public class Settings {
         public Single Volume;
         public Theme  Theme;
+        public bool   AntiAliasing;
     }
 }

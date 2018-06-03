@@ -26,6 +26,7 @@ namespace stickeralbum.Design.Controls {
                 "Deus",
                 "Titã"
             };
+            ComboBoxType.SelectedIndex = 0;
         }
 
         private void ButtonNext_Click(object sender, RoutedEventArgs e) {
