@@ -1,6 +1,7 @@
 ﻿using NAudio.Wave;
 using stickeralbum.Audio;
 using stickeralbum.Design;
+using stickeralbum.Design.Controls;
 using stickeralbum.Entities;
 using stickeralbum.Game;
 using stickeralbum.Game.Items;
@@ -35,6 +36,7 @@ namespace stickeralbum
             //GameMaster.Player.Inventory.Add(new SimpleSticker() { ItemID = "god_zeus" });
             //GameMaster.SaveAll();
             InitializeComponent();
+            App.ClientWindow.SetCurrentPage(new Homepage());
             soundPlayer = new SoundPlayer();
             this.Background = new ImageBrush(Sprite.Get("bg_oldpaper").Source);
             var reader = new Mp3FileReader(Paths.AudioDirectory + "st_album.mp3");
