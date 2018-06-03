@@ -39,6 +39,9 @@ namespace stickeralbum.Debug
         public static void LogIO(String message)
             => Log($"[IO] => {message}", ConsoleColor.Green);
 
+        public static void LogAudio(String message)
+            => Log($"[AUDIO] => {message}", ConsoleColor.Magenta);
+
         public static void LogCache(String message)
             => Log($"[CACHE] => {message}", ConsoleColor.Magenta);
 

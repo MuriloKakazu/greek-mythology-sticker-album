@@ -1,4 +1,5 @@
-﻿using stickeralbum.Debug;
+﻿using stickeralbum.Audio;
+using stickeralbum.Debug;
 using stickeralbum.Entities;
 using stickeralbum.Enums;
 using stickeralbum.Game;
@@ -28,6 +29,7 @@ namespace stickeralbum.Design.Controls {
         Random RNG = new Random();
         Int32 Spins;
         Boolean IsSpinning;
+
         public SlotMinigame() {
             InitializeComponent();
             Spins = 0;
@@ -38,6 +40,11 @@ namespace stickeralbum.Design.Controls {
                 this.SpinButton.Source = Sprite.Get("redbutton_released").Source;
                 this.CoinIcon.Source = Sprite.Get("coin").Source;
                 Refresh();
+            }
+
+            if (!SoundTrack.Get("st_main").IsPlaying) {
+                SoundPlayer.StopAll("st_blacksmith");
+                SoundPlayer.Instance.Play(SoundTrack.Get("st_main"), loop: true);
             }
         }
 
@@ -82,7 +89,9 @@ namespace stickeralbum.Design.Controls {
                     }
                 }
                 GameMaster.Player.Inventory.Add(new SimpleSticker() { ItemID = prize.ID });
-                DebugUtils.Log($"Prize => {prize.ID} - {prize.Rarity}!");
+                DebugUtils.Log($"Minigame prize => <{prize.ID}> => {prize.Rarity}!");
+                SoundPlayer.StopAll("sfx_slot");
+                SoundPlayer.Instance.Play(SoundTrack.Get("sfx_coindrop"));
                 IsSpinning = false;
             }
         }
@@ -93,6 +102,7 @@ namespace stickeralbum.Design.Controls {
             Slot0.Spin(t);
             Slot1.Spin(t + 2 * 1000);
             Slot2.Spin(t + 4 * 1000);
+            SoundPlayer.Instance.Play(SoundTrack.Get("sfx_slot"), loop: true);
         }
 
         private void JackpotMachine_SizeChanged(object sender, SizeChangedEventArgs e) {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using stickeralbum.Audio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,6 +21,11 @@ namespace stickeralbum.Design.Controls {
     public partial class Homepage : UserControl {
         public Homepage() {
             InitializeComponent();
+
+            if (!SoundTrack.Get("st_main").IsPlaying) {
+                SoundPlayer.StopAll("st_blacksmith");
+                SoundPlayer.Instance.Play(SoundTrack.Get("st_main"), loop: true);
+            }
         }
     }
 }
