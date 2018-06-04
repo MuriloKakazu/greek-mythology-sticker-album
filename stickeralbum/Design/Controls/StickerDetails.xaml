@@ -33,12 +33,14 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="2*"/>
+                <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Label x:Name="LabelName" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" Content="NAME" FontFamily="Diogenes" FontSize="42px" HorizontalAlignment="Center" FontWeight="ExtraBold"/>
-            <TextBlock x:Name="TextBlockDescription" Text="dui pretium urna, eget rutrum ipsum justo eget mauris. Aenean eget augue ac ipsum cursus suscipit sed non leo. Pellentesque faucibus nisi a sollicitudin consectetur. Ut molestie vel nunc non pretium. Nullam eu cursus felis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Etiam tincidunt tempus interdum. Nullam imperdiet est a neque consequat pellentesque." TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" FontFamily="Diogenes" FontSize="18px" HorizontalAlignment="Stretch" Margin="10px,0px" TextAlignment="Center"/>
+            <TextBlock x:Name="TextBlockDescription" Text="" TextWrapping="Wrap" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" FontFamily="Diogenes" FontSize="18px" HorizontalAlignment="Stretch" Margin="10px,0px" TextAlignment="Center"/>
+            <Label x:Name="LabelDangerLevel" Grid.Column="0" Grid.Row="2" VerticalAlignment="Top" Content="Dangder" FontFamily="Diogenes" FontSize="26px" HorizontalAlignment="Center"/>
         </Grid>
     </Grid>
 </UserControl>

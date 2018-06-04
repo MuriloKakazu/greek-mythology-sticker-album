@@ -46,6 +46,7 @@ namespace stickeralbum.Design.Controls {
             } else if(TargetEntity is SemiGod) {
                 if((TargetEntity as SemiGod).RelatedGod != null) StackPanelParents.Children.Add(new Sticker((TargetEntity as SemiGod).RelatedGod));
             }
+            if(TargetEntity is Creature) LabelDangerLevel.Content = "Nível de perigo: " + (TargetEntity as Creature).DangerLevel;
             if (TargetEntity.Father == null && TargetEntity.Mother == null) {
                 ParentsLabel.Visibility = Visibility.Hidden;
             }
