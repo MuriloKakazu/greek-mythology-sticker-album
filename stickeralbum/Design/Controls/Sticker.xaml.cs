@@ -1,10 +1,12 @@
 ﻿using Newtonsoft.Json;
+using stickeralbum.Audio;
 using stickeralbum.Debug;
 using stickeralbum.Entities;
 using stickeralbum.Enums;
 using stickeralbum.Game;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -29,6 +31,7 @@ namespace stickeralbum.Design.Controls {
     public partial class Sticker : UserControl {
         public Entity Entity { get; protected set; }
         public Boolean AllowDrag { get; set; }
+        public Boolean ShowDescriptionOnDoubleClick;
         protected Window DragDropPreview;
         public event DataDroppedEventHandler DataDropped;
         public delegate void DataDroppedEventHandler(object sender, EventArgs e);
@@ -36,6 +39,33 @@ namespace stickeralbum.Design.Controls {
         public Sticker() {
             this.InitializeComponent();
             this.DataDropped += this.OnDataDropped;
+            if (!DesignerProperties.GetIsInDesignMode(this)) {
+                SetAntiAliasing();
+            }
+        }
+
+        public void SetAntiAliasing() {
+            if (GameMaster.Settings.AntiAliasing) {
+                RenderOptions.SetBitmapScalingMode(StickerImage, BitmapScalingMode.Fant);
+                RenderOptions.SetClearTypeHint(StickerImage, ClearTypeHint.Enabled);
+                RenderOptions.SetEdgeMode(StickerImage, EdgeMode.Aliased);
+                RenderOptions.SetBitmapScalingMode(StickerFrame, BitmapScalingMode.Fant);
+                RenderOptions.SetClearTypeHint(StickerFrame, ClearTypeHint.Enabled);
+                RenderOptions.SetEdgeMode(StickerFrame, EdgeMode.Aliased);
+                RenderOptions.SetBitmapScalingMode(BackgroundImage, BitmapScalingMode.Fant);
+                RenderOptions.SetClearTypeHint(BackgroundImage, ClearTypeHint.Enabled);
+                RenderOptions.SetEdgeMode(StickerFrame, EdgeMode.Aliased);
+            } else {
+                RenderOptions.SetBitmapScalingMode(StickerImage, BitmapScalingMode.LowQuality);
+                RenderOptions.SetClearTypeHint(StickerImage, ClearTypeHint.Auto);
+                RenderOptions.SetEdgeMode(StickerImage, EdgeMode.Unspecified);
+                RenderOptions.SetBitmapScalingMode(StickerFrame, BitmapScalingMode.LowQuality);
+                RenderOptions.SetClearTypeHint(StickerFrame, ClearTypeHint.Auto);
+                RenderOptions.SetEdgeMode(StickerFrame, EdgeMode.Unspecified);
+                RenderOptions.SetBitmapScalingMode(BackgroundImage, BitmapScalingMode.LowQuality);
+                RenderOptions.SetClearTypeHint(BackgroundImage, ClearTypeHint.Auto);
+                RenderOptions.SetEdgeMode(BackgroundImage, EdgeMode.Unspecified);
+            }
         }
 
         public Sticker(Entity e, Boolean overrideValidation = false) :
@@ -45,10 +75,10 @@ namespace stickeralbum.Design.Controls {
             this.Entity = e;
 
             if (this.Entity.IsUnlocked || overrideValidation) {
-                //this.Background = new ImageBrush(Entity.Background.Source);
-                this.StickerFrame.Source = Sprite.Get(e.Rarity).Source;
-                this.StickerImage.Source = e.Sprite.Source;
-                this.StickerName.Content = e.Name;
+                this.BackgroundImage.Source = e.Background?.Source;
+                this.StickerFrame.Source    = Sprite.Get(e.Rarity)?.Source;
+                this.StickerImage.Source    = e.Sprite?.Source;
+                this.StickerName.Content    = e.Name;
                 this.StickerName.Foreground = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
             } else {
                 this.MakeSecret();
@@ -64,11 +94,13 @@ namespace stickeralbum.Design.Controls {
         public virtual void OnDataDropped(object sender, EventArgs e) { }
 
         public void Refresh() {
-            this.StickerImage.Width  = this.StickerFrame.ActualWidth;
-            this.StickerImage.Height = this.StickerFrame.ActualHeight;
-            this.SpaceFiller.Height  = Math.Round((this.ActualHeight - this.StickerFrame.ActualHeight) / 2, 2);
-            this.SpaceFiller.Width   = this.ActualWidth;
-            this.StickerName.Margin  = new Thickness(0, SpaceFiller.Height, 0, 0);
+            this.BackgroundImage.Width  = this.StickerFrame.ActualWidth;
+            this.BackgroundImage.Height = this.StickerFrame.ActualHeight;
+            this.StickerImage.Width     = this.StickerFrame.ActualWidth;
+            this.StickerImage.Height    = this.StickerFrame.ActualHeight;
+            this.SpaceFiller.Height     = Math.Round((this.ActualHeight - this.StickerFrame.ActualHeight) / 2, 2);
+            this.SpaceFiller.Width      = this.ActualWidth;
+            this.StickerName.Margin     = new Thickness(0, SpaceFiller.Height, 0, 0);
             var targetFontSize  = 11f / 200f * (this.ActualHeight - this.SpaceFiller.Height);
             if (targetFontSize > 0) {
                 this.StickerName.FontSize = targetFontSize;
@@ -79,8 +111,8 @@ namespace stickeralbum.Design.Controls {
         public void MakeSecret() {
             this.StickerFrame.Source = Sprite.Get(Rarity.Unknown).Source;
             //this.StickerImage.Source = Sprite.Get("unknown").Source;
-            this.StickerImage.Source = (this.Entity.IsCustom) ? Sprite.Get("unknown").Source : this.Entity.Sprite.DarkenedSource;
-            this.StickerName.Content = this.Entity.Name;
+            this.StickerImage.Source = (this.Entity.IsCustom) ? Sprite.Get("unknown")?.Source : this.Entity.Sprite?.DarkenedSource;
+            this.StickerName.Content =  this.Entity.Name;
             //this.StickerName.Content = String.Concat(Enumerable.Repeat("?", Entity.Name.Length));
             this.StickerName.Foreground = new SolidColorBrush(Color.FromArgb(255, 255, 255, 255));
         }
@@ -90,8 +122,8 @@ namespace stickeralbum.Design.Controls {
         }
 
         private void StickerFrame_MouseEnter(object sender, MouseEventArgs e) {
-            this.StickerImage.Width  = StickerFrame.ActualWidth  - 20;
-            this.StickerImage.Height = StickerFrame.ActualHeight - 30;
+            this.StickerImage.Width  = StickerFrame.ActualWidth  - 10;
+            this.StickerImage.Height = StickerFrame.ActualHeight - 15;
             this.StickerName.FontWeight = FontWeights.Bold;
         }
 
@@ -123,6 +155,7 @@ namespace stickeralbum.Design.Controls {
                         GameMaster.Player.Unlock(droppedEntity.ID);
                         this.SetEntity(Entity);
                         droppedSticker.DataDropped.Invoke(droppedSticker, EventArgs.Empty);
+                        SoundPlayer.Instance.Play(SoundTrack.Get("sfx_ring"));
                     }
                 }
             }
@@ -190,6 +223,12 @@ namespace stickeralbum.Design.Controls {
                 this.DragDropPreview.Close();
                 this.DragDropPreview = null;
                 this.RenderTransform = null;
+            }
+        }
+
+        private void Self_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            if (ShowDescriptionOnDoubleClick && Entity.IsUnlocked) {
+                App.ClientWindow.SetCurrentPage(new StickerDetails(this.Entity));
             }
         }
     }

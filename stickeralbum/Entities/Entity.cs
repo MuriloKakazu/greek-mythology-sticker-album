@@ -45,7 +45,7 @@ namespace stickeralbum.Entities {
             => Sprite.Get(SpriteID);
         [JsonIgnore]
         public Sprite Background
-            => Sprite.Get(SpriteID);
+            => Sprite.Get(BackgroundID);
         [JsonIgnore]
         public Entity Father
             => Get(FatherID);
@@ -63,11 +63,12 @@ namespace stickeralbum.Entities {
               .ToLinkedList();
 
         public Int64 GetCoinValue()
-            => (Rarity == Rarity.Common)   ? 1 :
-               (Rarity == Rarity.Uncommon) ? 2 :
-               (Rarity == Rarity.Rare)     ? 3 :
-               (Rarity == Rarity.VeryRare) ? 4 :
-               (Rarity == Rarity.Epic)     ? 5 : 0;
+            => (Rarity == Rarity.Common)    ? 1 :
+               (Rarity == Rarity.Uncommon)  ? 1 :
+               (Rarity == Rarity.Rare)      ? 2 :
+               (Rarity == Rarity.VeryRare)  ? 2 :
+               (Rarity == Rarity.Epic)      ? 3 :
+               (Rarity == Rarity.Legendary) ? 50 : 0;
 
     }
 }

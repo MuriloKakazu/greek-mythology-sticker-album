@@ -23,7 +23,7 @@ namespace stickeralbum.Design.Controls {
             if (!DesignerProperties.GetIsInDesignMode(this)) {
                 try {
                     FilterChanged += new FilterChangedEventHandler(OnFilterChanged);
-                    SearchIcon.Source = Sprite.Get(IconType.Search, IconColor.White).Source;
+                    SearchIcon.Source = Sprite.Get(IconType.Search).Source;
                 } catch (Exception e) {
                     DebugUtils.LogError(e.Message);
                 }

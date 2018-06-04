@@ -78,7 +78,8 @@ namespace stickeralbum.Audio {
 
         public void Stop() {
             Loop = false;
-            Device_PlaybackStopped(null, null);
+            //Device_PlaybackStopped(null, null);
+            Device.Stop();
         }
 
         public void Play(SoundTrack track, Boolean loop = false) {
@@ -89,15 +90,15 @@ namespace stickeralbum.Audio {
             try {
                 StopAll(track.ID);
                 //track.Setup();
-                Track = track;
-                Loop = loop;
+                Track  = track;
+                Loop   = loop;
                 Volume = GameMaster.Settings.Volume;
+                State  = PlaybackState.Playing;
                 AddMixerInput(new SoundSampleProvider(track));
-                State = PlaybackState.Playing;
                 Device.Play();
-                DebugUtils.LogAudio($"Playing track => <{track.ID}> Volume => {Volume * 100f}%");
+                DebugUtils.LogAudio($"Playing track => <{track?.ID}> Volume => {Volume * 100f}%");
             } catch (Exception e) {
-                DebugUtils.LogError($"Error playing track => <{track.ID}>. Reason => {e.Message}");
+                DebugUtils.LogError($"Error playing track => <{track?.ID}>. Reason => {e.Message}");
             }
         }
 
@@ -117,7 +118,7 @@ namespace stickeralbum.Audio {
             GetInstances() => Instances;
 
         public static STDGEN.IEnumerable<SoundTrack> AllTracksPlaying()
-            => from x in Instances where x.State == PlaybackState.Playing select x.Track;
+            => from x in Instances where x?.State == PlaybackState.Playing select x?.Track;
 
         public void Dispose() {
             Track = null;

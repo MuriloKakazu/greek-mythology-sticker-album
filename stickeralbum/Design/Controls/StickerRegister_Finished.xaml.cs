@@ -27,7 +27,7 @@ namespace stickeralbum.Design.Controls {
             StickerNewSticker.StickerFrame.Source = sticker.StickerFrame.Source;
             StickerNewSticker.StickerImage.Source = sticker.StickerImage.Source;
             StickerNewSticker.StickerName.Content = sticker.StickerName.Content;
-            SoundPlayer.Instance.Play(SoundTrack.Get("sfx_coindrop"));
+            SoundPlayer.Instance.Play(SoundTrack.Get("sfx_forge"));
         }
 
         private void ButtonAlbum_Click(object sender, RoutedEventArgs e) {

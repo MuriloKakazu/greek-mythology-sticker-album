@@ -20,10 +20,9 @@
         <DockPanel Background="#FF2D2D2D">
             <local:BarItem x:Name="QuitButton" DockPanel.Dock="Bottom" MouseDown="QuitButton_MouseDown"/>
             <StackPanel Width="200" DockPanel.Dock="Top">
-                <local:BarItem x:Name="Expander" MouseDown="Expander_MouseDown"/>
+                <local:BarItem x:Name="HomeButton" MouseDown="HomeButton_MouseDown"/>
                 <local:BarItem x:Name="AlbumButton" MouseDown="AlbumButton_MouseDown"/>
                 <local:BarItem x:Name="NewStickerButton" MouseDown="NewStickerButton_MouseDown"/>
-                <local:BarItem x:Name="ShopButton" MouseDown="ShopButton_MouseDown"/>
                 <local:BarItem x:Name="MinigameButton" MouseDown="MinigameButton_MouseDown"/>
                 <local:BarItem x:Name="SettingsButton" MouseDown="OptionsButton_MouseDown"/>
             </StackPanel>

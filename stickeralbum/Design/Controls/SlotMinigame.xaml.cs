@@ -62,8 +62,10 @@ namespace stickeralbum.Design.Controls {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Rare).Random();
                     } else if (dice < 90) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.VeryRare).Random();
-                    } else if (dice <= 100) {
+                    } else if (dice <= 99) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Epic).Random();
+                    } else if (dice == 100) {
+                        prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Legendary).Random();
                     }
                 } else if (res0 == res1 || res1 == res2 || res0 == res2) {
                     if (dice < 75) {
@@ -88,21 +90,25 @@ namespace stickeralbum.Design.Controls {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Epic).Random();
                     }
                 }
+                var prizeSticker = new Sticker(prize, overrideValidation: true);
+                prizeSticker.Width  = 150;
+                prizeSticker.Height = 225;
+                LastPrizePanel.Children.Clear();
+                LastPrizePanel.Children.Add(prizeSticker);
                 GameMaster.Player.Inventory.Add(new SimpleSticker() { ItemID = prize.ID });
                 DebugUtils.Log($"Minigame prize => <{prize.ID}> => {prize.Rarity}!");
-                SoundPlayer.StopAll("sfx_slot");
-                SoundPlayer.Instance.Play(SoundTrack.Get("sfx_coindrop"));
+                SoundPlayer.Instance.Play(SoundTrack.Get("sfx_coins"));
                 IsSpinning = false;
             }
         }
 
         public void Spin() {
             Spins = 0;
-            var t = RNG.Next(1, 5) * 1000;
+            var t = 1000;
             Slot0.Spin(t);
-            Slot1.Spin(t + 2 * 1000);
-            Slot2.Spin(t + 4 * 1000);
-            SoundPlayer.Instance.Play(SoundTrack.Get("sfx_slot"), loop: true);
+            Slot1.Spin(t * 2);
+            Slot2.Spin(t * 3);
+            SoundPlayer.Instance.Play(SoundTrack.Get("sfx_slot" + RNG.Next(0, 3)));
         }
 
         private void JackpotMachine_SizeChanged(object sender, SizeChangedEventArgs e) {

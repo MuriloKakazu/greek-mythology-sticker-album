@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using stickeralbum.Debug;
 using stickeralbum.Entities;
 
 namespace stickeralbum.Design.Controls {
@@ -20,24 +21,36 @@ namespace stickeralbum.Design.Controls {
     /// </summary>
     public partial class StickerDetails : UserControl {
 
+        Entity TargetEntity;
         
-        public StickerDetails(Sticker _sticker) {
+        public StickerDetails(Entity e) {
             InitializeComponent();
-            StickerSelected = _sticker;
+            TargetEntity = e;
             Setup();
-
         }
 
         private void Setup() {
-            LabelName.Content = StickerSelected.StickerName.Content;
-            TextBlockDescription.Text = StickerSelected.Entity.Description;
-            Entity stickerEntity = StickerSelected.Entity;
-            if(stickerEntity is God || stickerEntity is Titan) {
-                if(stickerEntity.Father != null) StackPanelParents.Children.Add(new Sticker(stickerEntity.Father));
-                if(stickerEntity.Mother != null) StackPanelParents.Children.Add(new Sticker(stickerEntity.Mother));
-            } else if(stickerEntity is SemiGod) {
-                if((stickerEntity as SemiGod).RelatedGod != null) StackPanelParents.Children.Add(new Sticker((stickerEntity as SemiGod).RelatedGod));
+            LabelName.Content         = TargetEntity.Name;
+            TextBlockDescription.Text = TargetEntity.Description;
+            if(TargetEntity is God || TargetEntity is Titan) {
+                if (TargetEntity.Father != null) {
+                    var father = new Sticker(TargetEntity.Father);
+                    father.ShowDescriptionOnDoubleClick = true;
+                    StackPanelParents.Children.Add(father);
+                }
+                if (TargetEntity.Mother != null) {
+                    var mother = new Sticker(TargetEntity.Mother);
+                    mother.ShowDescriptionOnDoubleClick = true;
+                    StackPanelParents.Children.Add(mother);
+                }
+            } else if(TargetEntity is SemiGod) {
+                if((TargetEntity as SemiGod).RelatedGod != null) StackPanelParents.Children.Add(new Sticker((TargetEntity as SemiGod).RelatedGod));
             }
+            if (TargetEntity.Father == null && TargetEntity.Mother == null) {
+                ParentsLabel.Visibility = Visibility.Hidden;
+            }
+            DebugUtils.Log("TargetEntity => " + TargetEntity.ID);
+            SelectedStickerPanel.Children.Add(new Sticker(TargetEntity));
         }
     }
 }

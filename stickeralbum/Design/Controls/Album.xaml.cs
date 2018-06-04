@@ -56,8 +56,9 @@ namespace stickeralbum.Design.Controls
         }
 
         public void Setup(Sticker[] stickers)
-            => GeneratePagesForStickers((AllStickers = stickers)
-              .OrderBy(x => x.Entity.Rarity).ToArray());
+            => GeneratePagesForStickers((AllStickers = stickers.ToLinkedList()
+                                        .ForEach(x => x.ShowDescriptionOnDoubleClick = true)
+                                        .OrderBy(x => x.Entity.Rarity).ToArray()));
 
         public void Filter(FilterSettings settings) {
             var filtered = new LinkedList<Sticker>();

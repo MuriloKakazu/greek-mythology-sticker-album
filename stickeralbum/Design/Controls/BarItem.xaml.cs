@@ -1,4 +1,6 @@
-﻿using System;
+﻿using stickeralbum.Audio;
+using stickeralbum.Game;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -19,8 +21,24 @@ namespace stickeralbum.Design.Controls {
     /// Interaction logic for SideBarItem.xaml
     /// </summary>
     public partial class BarItem : UserControl {
-        public BarItem() 
-            => InitializeComponent();
+        public BarItem() {
+            InitializeComponent();
+            if (!DesignerProperties.GetIsInDesignMode(this)) {
+                SetAntiAliasing();
+            }
+        }
+
+        public void SetAntiAliasing() {
+            if (GameMaster.Settings.AntiAliasing) {
+                RenderOptions.SetBitmapScalingMode(Icon, BitmapScalingMode.Fant);
+                RenderOptions.SetClearTypeHint(Icon, ClearTypeHint.Enabled);
+                RenderOptions.SetEdgeMode(Icon, EdgeMode.Aliased);
+            } else {
+                RenderOptions.SetBitmapScalingMode(Icon, BitmapScalingMode.LowQuality);
+                RenderOptions.SetClearTypeHint(Icon, ClearTypeHint.Auto);
+                RenderOptions.SetEdgeMode(Icon, EdgeMode.Unspecified);
+            }
+        }
 
         public void SetText(String text) 
             => Label.Content = text;
@@ -36,5 +54,8 @@ namespace stickeralbum.Design.Controls {
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e) 
             => Background.Opacity = 0;
+
+        private void UserControl_MouseDown(object sender, MouseButtonEventArgs e) 
+            => SoundPlayer.Instance.Play(SoundTrack.Get("sfx_ring"));
     }
 }

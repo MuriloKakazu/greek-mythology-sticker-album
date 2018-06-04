@@ -46,22 +46,22 @@ namespace stickeralbum.Design.Controls {
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e) {
             ChangeState(ControlState.Compact);
-            Expander.SetText("Menu");
+            HomeButton.SetText("Home");
             QuitButton.SetText("Sair");
             AlbumButton.SetText("Álbum");
             MinigameButton.SetText("Minigame");
             SettingsButton.SetText("Configurações");
-            ShopButton.SetText("Loja de Figurinhas");
+            //ShopButton.SetText("Loja de Figurinhas");
             NewStickerButton.SetText("Forja de Figurinhas");
 
             if (DesignerProperties.GetIsInDesignMode(this)) return;
-            QuitButton.SetIcon(Sprite.Get(IconType.Exit, IconColor.White));
-            Expander.SetIcon(Sprite.Get(IconType.NavMenu, IconColor.White));
-            MinigameButton.SetIcon(Sprite.Get(IconType.Gamepad, IconColor.White));
-            SettingsButton.SetIcon(Sprite.Get(IconType.Settings, IconColor.White));
-            NewStickerButton.SetIcon(Sprite.Get(IconType.AddItem, IconColor.White));
-            ShopButton.SetIcon(Sprite.Get(IconType.ShoppingBasket, IconColor.White));
-            AlbumButton.SetIcon(Sprite.Get(IconType.StickerCollection, IconColor.White));
+            QuitButton.SetIcon(Sprite.Get(IconType.Exit));
+            HomeButton.SetIcon(Sprite.Get(IconType.Home));
+            MinigameButton.SetIcon(Sprite.Get(IconType.Gamepad));
+            SettingsButton.SetIcon(Sprite.Get(IconType.Settings));
+            NewStickerButton.SetIcon(Sprite.Get(IconType.AddItem));
+            //ShopButton.SetIcon(Sprite.Get(IconType.ShoppingBasket, IconColor.White));
+            AlbumButton.SetIcon(Sprite.Get(IconType.StickerCollection));
         }
 
         private void Expander_MouseDown(object sender, MouseButtonEventArgs e) {
@@ -91,10 +91,6 @@ namespace stickeralbum.Design.Controls {
             App.ClientWindow.SetCurrentPage(new StickerRegister_TypeChoosing());
         }
 
-        private void ShopButton_MouseDown(object sender, MouseButtonEventArgs e) {
-            ChangeState(ControlState.Compact);
-        }
-
         private void MinigameButton_MouseDown(object sender, MouseButtonEventArgs e) {
             ChangeState(ControlState.Compact);
             App.ClientWindow.SetCurrentPage(new SlotMinigame());
@@ -103,6 +99,11 @@ namespace stickeralbum.Design.Controls {
         private void OptionsButton_MouseDown(object sender, MouseButtonEventArgs e) {
             ChangeState(ControlState.Compact);
             App.ClientWindow.SetCurrentPage(new Configs());
+        }
+
+        private void HomeButton_MouseDown(object sender, MouseButtonEventArgs e) {
+            ChangeState(ControlState.Compact);
+            App.ClientWindow.SetCurrentPage(new Homepage());
         }
     }
 }

@@ -12,14 +12,18 @@
                 <local:SlotColumn x:Name="Slot0" />
                 <local:SlotColumn x:Name="Slot1" />
                 <local:SlotColumn x:Name="Slot2" />
-                <DockPanel LastChildFill="False">
+                <DockPanel>
                     <DockPanel DockPanel.Dock="Top">
                         <Label x:Name="CoinsCount" Content="" Foreground="White" FontWeight="Bold" FontSize="20" FontFamily="Diogenes" DockPanel.Dock="Right" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
-                        <Image x:Name="CoinIcon" Height="35" Width="35" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" RenderOptions.CachingHint="Cache" RenderOptions.ClearTypeHint="Auto" Margin="5"/>
+                        <Image x:Name="CoinIcon" Height="35" Width="35" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" RenderOptions.CachingHint="Cache" RenderOptions.ClearTypeHint="Auto" Margin="5" HorizontalAlignment="Left"/>
                     </DockPanel>
                     <DockPanel DockPanel.Dock="Bottom">
                         <Label DockPanel.Dock="Bottom" Margin="10,0,10,10" Content="SPIN" FontWeight="Bold" FontFamily="Diogenes" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" FontSize="20" VerticalContentAlignment="Center" ScrollViewer.VerticalScrollBarVisibility="Disabled"/>
                         <Image x:Name="SpinButton" Width="60" Height="60" Margin="10,0" MouseDown="SpinButton_MouseDown" MouseUp="SpinButton_MouseUp" DockPanel.Dock="Top" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" RenderOptions.CachingHint="Cache" RenderOptions.ClearTypeHint="Auto" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </DockPanel>
+                    <DockPanel Margin="0,50">
+                        <Label DockPanel.Dock="Top" Content="Último Prêmio:" FontWeight="Bold" FontFamily="Diogenes" FontSize="18" Foreground="White" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <DockPanel x:Name="LastPrizePanel" DockPanel.Dock="Top" Margin="15,0"/>
                     </DockPanel>
                 </DockPanel>
             </StackPanel>
