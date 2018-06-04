@@ -3,22 +3,22 @@ using System.Collections.Generic;
 
 namespace stickeralbum.Game {
     public class FilterSettings {
-        protected Dictionary<String, Boolean> InternalMap;
+        protected Dictionary<String, Object> InternalMap;
         public String Query;
 
         public FilterSettings()
-            => InternalMap = new Dictionary<string, bool>();
+            => InternalMap = new Dictionary<String, Object>();
 
         public Boolean ContainsKey(String key)
             => InternalMap.ContainsKey(key);
 
-        public FilterSettings Add(String key, Boolean value) {
+        public FilterSettings Add(String key, Object value) {
             InternalMap.Add(key, value);
             return this;
         }
 
-        public Boolean? Get(String key)
-            => InternalMap.TryGetValue(key, out Boolean value) ? (Boolean?)value : null;
+        public Object Get(String key)
+            => InternalMap.TryGetValue(key, out Object value) ? value : null;
 
         public FilterSettings Clear() {
             InternalMap.Clear();
@@ -31,7 +31,7 @@ namespace stickeralbum.Game {
             return output;
         }
 
-        public FilterSettings SetKey(String key, Boolean value) {
+        public FilterSettings SetKey(String key, Object value) {
             InternalMap.Remove(key);
             InternalMap.Add(key, value);
             return this;

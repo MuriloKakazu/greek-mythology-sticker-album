@@ -63,12 +63,12 @@ namespace stickeralbum.Entities {
               .ToLinkedList();
 
         public Int64 GetCoinValue()
-            => (Rarity == Rarity.Common)    ? 1 :
-               (Rarity == Rarity.Uncommon)  ? 1 :
-               (Rarity == Rarity.Rare)      ? 2 :
+            => (Rarity == Rarity.Common)    ? 0 :
+               (Rarity == Rarity.Uncommon)  ? 0 :
+               (Rarity == Rarity.Rare)      ? 1 :
                (Rarity == Rarity.VeryRare)  ? 2 :
-               (Rarity == Rarity.Epic)      ? 3 :
-               (Rarity == Rarity.Legendary) ? 50 : 0;
+               (Rarity == Rarity.Epic)      ? 2 :
+               (Rarity == Rarity.Legendary) ? 20 : 0;
 
     }
 }

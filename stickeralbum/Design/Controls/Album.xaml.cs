@@ -64,14 +64,20 @@ namespace stickeralbum.Design.Controls
             var filtered = new LinkedList<Sticker>();
             var sourceCopy = new LinkedList<Sticker>();
             AllStickers.ToLinkedList().ForEach(x => sourceCopy.Add(new Sticker(x.Entity)));
-            var filters = FilterPanel.FilterSettings.GetKeys().Where(x => (Boolean)settings.Get(x)).ToLinkedList();
+            var filters = settings.GetKeys().ToLinkedList();
+            filters.Remove(filters.Where(x => settings.Get(x) is Boolean && (Boolean) settings.Get(x) == false));
+            filters.Remove(filters.Where(x => settings.Get(x) == null));
 
             filtered.Add(sourceCopy.Where(x => filters.Contains(x.Entity.GetType().Name.ToLower()) && !filtered.Contains(x)));
             if (!filters.Contains("custom")) {
                 filtered.Remove(sourceCopy.Where(x => x.Entity.IsCustom));
             }
             filtered.Remove(filtered.Where(x => !filters.Contains(x.Entity.Rarity.ToString().ToLower())));
-            filtered.Remove(filtered.Where(x => !filters.Contains(x.Entity.Gender.ToString().ToLower())));
+            filtered.Remove(filtered.Where(x => x.Entity.Gender != Gender.None && !filters.Contains(x.Entity.Gender.ToString().ToLower())));
+
+            if (!filters.Contains("nogender")) {
+                filtered.Remove(filtered.Where(x => x.Entity.Gender == Gender.None));
+            }
 
             if (filters.Contains("unlockedonly")) {
                 filtered.Remove(filtered.Where(x => !x.Entity.IsUnlocked));
@@ -84,7 +90,19 @@ namespace stickeralbum.Design.Controls
                 DebugUtils.Log($"Filter query => {settings.Query}");
                 DebugUtils.Log($"Filtered query result => {filtered.Count}");
             }
-            GeneratePagesForStickers(filtered.OrderBy(x => x.Entity.Rarity).ToArray());
+            if (filters.Contains("orderby")) {
+                var orderBy = settings.Get("orderby").ToString();
+                if (orderBy == "nome") {
+                    filtered = filtered.OrderBy(x => x.Entity.Name).ToLinkedList();
+                } else if (orderBy == "raridade") {
+                    filtered = filtered.OrderBy(x => x.Entity.Rarity).ToLinkedList();
+                } else if (orderBy == "sexo") {
+                    filtered = filtered.OrderBy(x => x.Entity.Gender).ToLinkedList();
+                }
+            }
+
+            filtered.ForEach(x => x.ShowDescriptionOnDoubleClick = true);
+            GeneratePagesForStickers(filtered.ToArray());
         }
 
         public void Refresh() {

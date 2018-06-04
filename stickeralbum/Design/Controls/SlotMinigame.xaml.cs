@@ -58,21 +58,19 @@ namespace stickeralbum.Design.Controls {
                 var res2 = Slot2.GetResult();
                 dice = RNG.Next(100);
                 if (res0 == res1 && res0 == res2) {
-                    if (dice < 70) {
-                        prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Rare).Random();
-                    } else if (dice < 90) {
+                    if (dice < 65) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.VeryRare).Random();
-                    } else if (dice <= 99) {
+                    } else if (dice < 80) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Epic).Random();
-                    } else if (dice == 100) {
+                    } else if (dice <= 95) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Legendary).Random();
                     }
                 } else if (res0 == res1 || res1 == res2 || res0 == res2) {
-                    if (dice < 75) {
+                    if (dice < 30) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Uncommon).Random();
-                    } else if (dice < 90) {
+                    } else if (dice < 60) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Rare).Random();
-                    } else if (dice < 95) {
+                    } else if (dice < 90) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.VeryRare).Random();
                     } else if (dice <= 100) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Epic).Random();

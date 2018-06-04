@@ -47,8 +47,7 @@ namespace stickeralbum.Design.Controls
         Dictionary<String, Gender> genderOptions = new Dictionary<String, Gender>{
             { "Masculino"   , Gender.Male },
             { "Feminino"    , Gender.Female },
-            { "Nenhum"      , Gender.None },
-            { "Desconhecido", Gender.Unknown }
+            { "Nenhum"      , Gender.None }
         };
 
         Microsoft.Win32.OpenFileDialog dlg;

@@ -46,6 +46,8 @@ namespace stickeralbum.Design.Controls {
 
         private void SetDefaultFilterSettings()
             => FilterSettings.Clear()
+              .Add("orderby",  "raridade")
+              .Add("chaos",     true)
               .Add("titan",     true)
               .Add("god",       true)
               .Add("semigod",   true)
@@ -55,14 +57,21 @@ namespace stickeralbum.Design.Controls {
               .Add("rare",      true)
               .Add("veryrare",  true)
               .Add("epic",      true)
+              .Add("legendary", true)
               .Add("male",      true)
               .Add("female",    true)
+              .Add("nogender", true)
               .Add("custom",    true);
 
         public virtual void OnFilterChanged(object sender, EventArgs e) { DebugUtils.Log("Filter Changed!"); }
 
         private void SearchBox_TextChanged(object sender, TextChangedEventArgs e) {
             FilterSettings.Query = (SearchBox.Text.Length > 0) ? SearchBox.Text : null;
+            FilterChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void FilterChaos_Checked(object sender, RoutedEventArgs e) {
+            FilterSettings.SetKey("chaos", (Boolean)FilterChaos.IsChecked);
             FilterChanged?.Invoke(this, EventArgs.Empty);
         }
 
@@ -111,6 +120,11 @@ namespace stickeralbum.Design.Controls {
             FilterChanged?.Invoke(this, EventArgs.Empty);
         }
 
+        private void FilterLegendary_Checked(object sender, RoutedEventArgs e) {
+            FilterSettings.SetKey("legendary", (Boolean)FilterLegendary.IsChecked);
+            FilterChanged?.Invoke(this, EventArgs.Empty);
+        }
+
         private void FilterMale_Checked(object sender, RoutedEventArgs e) {
             FilterSettings.SetKey("male", (Boolean)FilterMale.IsChecked);
             FilterChanged?.Invoke(this, EventArgs.Empty);
@@ -139,6 +153,11 @@ namespace stickeralbum.Design.Controls {
         }
 
         //
+
+        private void FilterChaos_Unchecked(object sender, RoutedEventArgs e) {
+            FilterSettings.SetKey("chaos", (Boolean)FilterChaos.IsChecked);
+            FilterChanged?.Invoke(this, EventArgs.Empty);
+        }
 
         private void FilterTitan_Unchecked(object sender, RoutedEventArgs e) {
             FilterSettings.SetKey("titan", (Boolean)FilterTitan.IsChecked);
@@ -185,6 +204,11 @@ namespace stickeralbum.Design.Controls {
             FilterChanged?.Invoke(this, EventArgs.Empty);
         }
 
+        private void FilterLegendary_Unchecked(object sender, RoutedEventArgs e) {
+            FilterSettings.SetKey("legendary", (Boolean)FilterLegendary.IsChecked);
+            FilterChanged?.Invoke(this, EventArgs.Empty);
+        }
+
         private void FilterMale_Unchecked(object sender, RoutedEventArgs e) {
             FilterSettings.SetKey("male", (Boolean)FilterMale.IsChecked);
             FilterChanged?.Invoke(this, EventArgs.Empty);
@@ -207,6 +231,23 @@ namespace stickeralbum.Design.Controls {
 
         private void FilterLockedOnly_Unchecked(object sender, RoutedEventArgs e) {
             FilterSettings.SetKey("lockedonly", (Boolean)FilterLockedOnly.IsChecked);
+            FilterChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        //
+
+        private void OrderBySelection_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            FilterSettings.SetKey("orderby", (OrderBySelection.SelectedItem as ComboBoxItem).Content.ToString().ToLower());
+            FilterChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void FilterNoGender_Unchecked(object sender, RoutedEventArgs e) {
+            FilterSettings.SetKey("nogender", (Boolean)FilterNoGender.IsChecked);
+            FilterChanged?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void FilterNoGender_Checked(object sender, RoutedEventArgs e) {
+            FilterSettings.SetKey("nogender", (Boolean)FilterNoGender.IsChecked);
             FilterChanged?.Invoke(this, EventArgs.Empty);
         }
     }
