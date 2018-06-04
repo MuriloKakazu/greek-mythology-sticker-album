@@ -30,12 +30,11 @@ namespace stickeralbum.Design.Controls {
         public Configs() {
             InitializeComponent();
             ButtonSave.IsEnabled = false;
-            Console.WriteLine(Game.GameMaster.Settings.Volume);
+            Console.WriteLine(GameMaster.Settings.Volume);
+            CheckBoxAA.IsChecked = GameMaster.Settings.AntiAliasing;
             autoContext = true;
-            volume = SliderVolume.Value = (double)Game.GameMaster.Settings.Volume;
+            volume = SliderVolume.Value = GameMaster.Settings.Volume;
             autoContext = false;
-
-        }
             volume = GameMaster.Settings.Volume;
 
             if (!SoundTrack.Get("st_main").IsPlaying) {
@@ -90,9 +89,9 @@ namespace stickeralbum.Design.Controls {
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e) {
-            Game.GameMaster.Settings.Volume = (float)volume;
-            Game.GameMaster.Settings.AntiAliasing = CheckBoxAA.IsChecked.Value;
-            Game.GameMaster.SaveAll();
+            GameMaster.Settings.Volume = (float)volume;
+            GameMaster.Settings.AntiAliasing = CheckBoxAA.IsChecked.Value;
+            GameMaster.SaveAll();
             ButtonSave.IsEnabled = false;
         }
 
