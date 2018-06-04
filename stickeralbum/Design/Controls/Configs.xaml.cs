@@ -31,7 +31,10 @@ namespace stickeralbum.Design.Controls {
             InitializeComponent();
             ButtonSave.IsEnabled = false;
             Console.WriteLine(GameMaster.Settings.Volume);
+<<<<<<< HEAD
             CheckBoxAA.IsChecked = GameMaster.Settings.AntiAliasing;
+=======
+>>>>>>> adb373a6ab161c13d4c6d8ccd668fea27c65396a
             autoContext = true;
             volume = SliderVolume.Value = GameMaster.Settings.Volume;
             autoContext = false;
@@ -96,7 +99,8 @@ namespace stickeralbum.Design.Controls {
         }
 
         private void CheckBoxAA_Click(object sender, RoutedEventArgs e) {
-            ButtonSave.IsEnabled = true;
+
+            //////////ButtonSave.IsEnabled = true;*-
         }
     }
 }
