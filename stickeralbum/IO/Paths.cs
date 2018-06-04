@@ -30,6 +30,8 @@ namespace stickeralbum.IO {
             => $"{ApplicationDirectory}save.data";
         public static String IconsMetadata
             => $"{MetadataDirectory}icons.json";
+        public static String ChaosMetadata
+            => $"{MetadataDirectory}chaos.json";
         public static String GodsMetadata
             => $"{MetadataDirectory}gods.json";
         public static String TitansMetadata

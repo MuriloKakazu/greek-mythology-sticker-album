@@ -12,18 +12,18 @@ using stickeralbum.Audio;
 namespace stickeralbum.IO
 {
     public static class Cache {
-        private static STDGEN.Dictionary<String, Cacheable> CachedObjects 
+        private static STDGEN.Dictionary<String, Cacheable> CachedObjects
                  = new STDGEN.Dictionary<String, Cacheable>();
 
         private class ObjectNotFoundInCacheException : Exception {
             private String Key;
-            public new String Message 
+            public new String Message
                 => $"No object with key <{Key}> found in cache.";
-            public ObjectNotFoundInCacheException(String key) 
+            public ObjectNotFoundInCacheException(String key)
                 => Key = key;
         }
 
-        public static void Clear() 
+        public static void Clear()
             => CachedObjects.Clear();
 
         public static void Load() {
@@ -47,6 +47,7 @@ namespace stickeralbum.IO
 
         public static void LoadDefaults() {
             LoadGods();
+            LoadChaos();
             LoadIcons();
             LoadTitans();
             LoadSprites();
@@ -63,6 +64,18 @@ namespace stickeralbum.IO
             LoadCustomCreatures();
         }
 
+        private static Chaos LoadChaos() {
+            try {
+                var x = JsonConvert.DeserializeObject<Chaos>(
+                    File.ReadAllText(Paths.ChaosMetadata)
+                );
+                Add(x);
+                return x;
+            } catch (Exception e) {
+                DebugUtils.LogError($"Could not load Chaos. Reason => {e.Message}");
+                return null;
+            }
+        }
         private static LinkedList<Creature> LoadCustomCreatures()
             => JsonConvert.DeserializeObject<LinkedList<Creature>>
               (File.ReadAllText(Paths.CustomCreaturesMetadata))
@@ -208,18 +221,31 @@ namespace stickeralbum.IO
                   }
               });
 
-        private static void Add(Cacheable value) 
-            => CachedObjects.Add(value.ID.ToString(), value);
+        private static void Add(Cacheable value) {
+            CachedObjects.Add(value.ID.ToString(), value);
+            DebugUtils.LogCache($"Object <{value.ID}> added to cache.");
+        }
 
-        private static void AddRange(LinkedList<Cacheable> values) 
-            => values.ForEach(x => Add(x));
+        private static void AddRange(LinkedList<Cacheable> values)
+            => values.ForEach(x => {
+                Add(x);
+            });
 
         public static Boolean ContainsKey(String key)  
             => CachedObjects.ContainsKey(key);
 
-        public static Cacheable Get(String key)
-            => (CachedObjects.TryGetValue(key, out Cacheable value)) ?
-                value : null/*throw new ObjectNotFoundInCacheException(key)*/;
+        public static Cacheable Get(String key) {
+            if (key == null) {
+                DebugUtils.LogWarning("Cache can not return null key Object");
+                return null;
+            }
+            if (CachedObjects.TryGetValue(key, out Cacheable value)) {
+                return value;
+            } else {
+                DebugUtils.LogWarning($"No Object with key <{key}> found in cache.");
+                return null;
+            }
+        }
 
         public static LinkedList<Cacheable> GetAll()
             => CachedObjects.Values.ToLinkedList();

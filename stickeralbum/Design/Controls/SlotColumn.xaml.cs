@@ -1,5 +1,6 @@
 ﻿using stickeralbum.Audio;
 using stickeralbum.Debug;
+using stickeralbum.Game;
 using stickeralbum.Generics;
 using System;
 using System.ComponentModel;
@@ -36,6 +37,7 @@ namespace stickeralbum.Design.Controls {
         public SlotColumn() {
             InitializeComponent();
             if (!DesignerProperties.GetIsInDesignMode(this)) {
+                SetAntiAliasing();
                 AvailableSprites = Sprite.GetAll().Where(x => x.ID.StartsWith("spin_")).ToLinkedList();
                 CurrentIndex = RNG.Next(AvailableSprites.Count);
                 StopTimer = new Timer();
@@ -45,6 +47,30 @@ namespace stickeralbum.Design.Controls {
                 SlideTimer.Tick += SlideTimer_Elapsed;
                 FinishedSpin += OnFinishedSpin;
                 Slide();
+            }
+        }
+
+        public void SetAntiAliasing() {
+            if (GameMaster.Settings.AntiAliasing) {
+                RenderOptions.SetBitmapScalingMode(Row0, BitmapScalingMode.Fant);
+                RenderOptions.SetClearTypeHint(Row0, ClearTypeHint.Enabled);
+                RenderOptions.SetEdgeMode(Row0, EdgeMode.Aliased);
+                RenderOptions.SetBitmapScalingMode(Row1, BitmapScalingMode.Fant);
+                RenderOptions.SetClearTypeHint(Row1, ClearTypeHint.Enabled);
+                RenderOptions.SetEdgeMode(Row1, EdgeMode.Aliased);
+                RenderOptions.SetBitmapScalingMode(Row2, BitmapScalingMode.Fant);
+                RenderOptions.SetClearTypeHint(Row2, ClearTypeHint.Enabled);
+                RenderOptions.SetEdgeMode(Row2, EdgeMode.Aliased);
+            } else {
+                RenderOptions.SetBitmapScalingMode(Row0, BitmapScalingMode.LowQuality);
+                RenderOptions.SetClearTypeHint(Row0, ClearTypeHint.Auto);
+                RenderOptions.SetEdgeMode(Row0, EdgeMode.Unspecified);
+                RenderOptions.SetBitmapScalingMode(Row1, BitmapScalingMode.LowQuality);
+                RenderOptions.SetClearTypeHint(Row1, ClearTypeHint.Auto);
+                RenderOptions.SetEdgeMode(Row1, EdgeMode.Unspecified);
+                RenderOptions.SetBitmapScalingMode(Row2, BitmapScalingMode.LowQuality);
+                RenderOptions.SetClearTypeHint(Row2, ClearTypeHint.Auto);
+                RenderOptions.SetEdgeMode(Row2, EdgeMode.Unspecified);
             }
         }
 

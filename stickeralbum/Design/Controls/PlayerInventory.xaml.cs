@@ -31,22 +31,43 @@ namespace stickeralbum.Design.Controls
         public PlayerInventory() { 
             InitializeComponent();
             if (!DesignerProperties.GetIsInDesignMode(this)) {
+                SetAntiAliasing();
                 TrashBin.Source = Sprite.Get("trashbin").Source;
                 CoinIcon.Source = Sprite.Get("coin").Source;
                 Setup();
             }
         }
 
+        public void SetAntiAliasing() {
+            if (GameMaster.Settings.AntiAliasing) {
+                RenderOptions.SetBitmapScalingMode(TrashBin, BitmapScalingMode.Fant);
+                RenderOptions.SetClearTypeHint(TrashBin, ClearTypeHint.Enabled);
+                RenderOptions.SetEdgeMode(TrashBin, EdgeMode.Aliased);
+                RenderOptions.SetBitmapScalingMode(CoinIcon, BitmapScalingMode.Fant);
+                RenderOptions.SetClearTypeHint(TrashBin, ClearTypeHint.Enabled);
+                RenderOptions.SetEdgeMode(CoinIcon, EdgeMode.Aliased);
+            } else {
+                RenderOptions.SetBitmapScalingMode(CoinIcon, BitmapScalingMode.LowQuality);
+                RenderOptions.SetClearTypeHint(CoinIcon, ClearTypeHint.Auto);
+                RenderOptions.SetEdgeMode(CoinIcon, EdgeMode.Unspecified);
+                RenderOptions.SetBitmapScalingMode(TrashBin, BitmapScalingMode.LowQuality);
+                RenderOptions.SetClearTypeHint(TrashBin, ClearTypeHint.Auto);
+                RenderOptions.SetEdgeMode(TrashBin, EdgeMode.Unspecified);
+            }
+        }
+
         public void Setup() {
             Clear();
             var stickerList = new LinkedList<Sticker>();
-            GameMaster.Player.Inventory.Stickers.ForEach(x => stickerList.Add(new Sticker(x.Entity, overrideValidation: true)));
+            GameMaster.Player.Inventory.Stickers.Reverse().ToLinkedList().ForEach(x => stickerList.Add(new Sticker(x.Entity, overrideValidation: true)));
             this.Stickers = stickerList.ToArray();
-            stickerList.ForEach(x => x.DetachParent())
-                       .ForEach(x => x.AllowDrag = true)
-                       .ForEach(x => x.AllowDrop = false)
-                       .ForEach(x => x.DataDropped += Sticker_DataDropped)
-                       .ForEach(x => Collection.Children.Add(x));
+            stickerList.ForEach(x => {
+                x.DetachParent();
+                x.AllowDrag = true;
+                x.AllowDrop = false;
+                x.DataDropped += Sticker_DataDropped;
+                Collection.Children.Add(x);
+            });
         }
 
         private void Sticker_DataDropped(object sender, EventArgs e) {
@@ -74,7 +95,7 @@ namespace stickeralbum.Design.Controls
                     DebugUtils.Log($"Entity Trashed => {droppedEntity.ID}");
                     GameMaster.Player.Inventory.Remove(droppedEntity.ID, 1);
                     droppedSticker.DetachParent();
-                    SoundPlayer.Instance.Play(SoundTrack.Get("sfx_coindrop"));
+                    SoundPlayer.Instance.Play(SoundTrack.Get("sfx_coins"));
                 }
             }
             CoinIcon.Visibility     = Visibility.Hidden;

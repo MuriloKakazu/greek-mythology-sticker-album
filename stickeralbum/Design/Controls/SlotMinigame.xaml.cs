@@ -62,8 +62,10 @@ namespace stickeralbum.Design.Controls {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Rare).Random();
                     } else if (dice < 90) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.VeryRare).Random();
-                    } else if (dice <= 100) {
+                    } else if (dice <= 99) {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Epic).Random();
+                    } else if (dice == 100) {
+                        prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Legendary).Random();
                     }
                 } else if (res0 == res1 || res1 == res2 || res0 == res2) {
                     if (dice < 75) {
@@ -88,9 +90,14 @@ namespace stickeralbum.Design.Controls {
                         prize = Entity.GetAll().Where(x => x.Rarity == Rarity.Epic).Random();
                     }
                 }
+                var prizeSticker = new Sticker(prize, overrideValidation: true);
+                prizeSticker.Width  = 150;
+                prizeSticker.Height = 225;
+                LastPrizePanel.Children.Clear();
+                LastPrizePanel.Children.Add(prizeSticker);
                 GameMaster.Player.Inventory.Add(new SimpleSticker() { ItemID = prize.ID });
                 DebugUtils.Log($"Minigame prize => <{prize.ID}> => {prize.Rarity}!");
-                SoundPlayer.Instance.Play(SoundTrack.Get("sfx_coindrop"));
+                SoundPlayer.Instance.Play(SoundTrack.Get("sfx_coins"));
                 IsSpinning = false;
             }
         }

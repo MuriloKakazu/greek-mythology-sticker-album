@@ -10,6 +10,11 @@ using System.Linq;
 namespace stickeralbum.Audio {
     public class SoundTrack : Cacheable {
         public String Path { get; set; }
+
+        [JsonIgnore]
+        public float[] AudioData { get; private set; }
+        [JsonIgnore]
+        public WaveFormat WaveFormat { get; private set; }
         [JsonIgnore]
         public Boolean IsPlaying
             => SoundPlayer.AllTracksPlaying().Contains(this);
@@ -18,19 +23,21 @@ namespace stickeralbum.Audio {
             => Cache.Get(id) as SoundTrack;
 
         public void Setup() {
-            using (var audioFileReader = new AudioFileReader(Path)) {
-                WaveFormat = audioFileReader.WaveFormat;
-                var wholeFile  = new LinkedList<Single>();
-                var readBuffer = new Single[audioFileReader.WaveFormat.SampleRate * audioFileReader.WaveFormat.Channels];
-                int samplesRead;
-                while ((samplesRead = audioFileReader.Read(readBuffer, 0, readBuffer.Length)) > 0) {
-                    wholeFile.Add(readBuffer.Take(samplesRead));
+            try {
+                using (var audioFileReader = new AudioFileReader(Path)) {
+                    WaveFormat = audioFileReader.WaveFormat;
+                    var wholeFile = new LinkedList<Single>();
+                    var readBuffer = new Single[audioFileReader.WaveFormat.SampleRate * audioFileReader.WaveFormat.Channels];
+                    int samplesRead;
+                    while ((samplesRead = audioFileReader.Read(readBuffer, 0, readBuffer.Length)) > 0) {
+                        wholeFile.Add(readBuffer.Take(samplesRead));
+                    }
+                    AudioData = wholeFile.ToArray();
+                    DebugUtils.LogAudio($"Finished reading SFX <{ID}>.");
                 }
-                AudioData = wholeFile.ToArray();
+            } catch (Exception e) {
+                DebugUtils.LogError($"Error reading SFX <{ID}>. Reason => {e.Message}");
             }
         }
-
-        public float[] AudioData { get; private set; }
-        public WaveFormat WaveFormat { get; private set; }
     }
 }

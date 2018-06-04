@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using stickeralbum.Debug;
 using stickeralbum.Enums;
 using stickeralbum.Extensions;
 using stickeralbum.Generics;
@@ -20,11 +21,23 @@ namespace stickeralbum.Design {
         public Boolean IsCustom;
 
         public void LoadImage() {
-            Source = new BitmapImage(new Uri(Path)) {
-                CacheOption = BitmapCacheOption.OnLoad
-            };
+            try {
+                Source = new BitmapImage(new Uri(Path)) {
+                    CacheOption = BitmapCacheOption.OnLoad
+                };
+                DebugUtils.LogIO($"Loaded file from <{ID}>");
+            } catch (Exception e) {
+                DebugUtils.LogError($"Error loading file from <{ID}>. Reason => {e.Message}");
+            }
             if (!IsCustom && Source.Width <= 512 && Source.Height <= 512) {
-                DarkenedSource = Source.GetAllBlack();
+                try {
+                    DarkenedSource = Source.GetAllBlack();
+                    DebugUtils.LogIO($"Loaded shadow for sprite <{ID}>");
+                } catch (Exception e) {
+                    DebugUtils.LogError($"Error loading shadow for sprite <{ID}>. Reason => {e.Message}");
+                }
+            } else {
+                DebugUtils.LogIO($"Won't load shadow for sprite <{ID}>. The sprite is either custom or too big");
             }
         }
 
@@ -34,8 +47,8 @@ namespace stickeralbum.Design {
         public static Sprite Get(Rarity rarity)
             => Get($"frame_{rarity.ToString().ToLower()}");
 
-        public static Sprite Get(IconType type, IconColor color)
-            => Get($"icon_{type.ToString().ToLower()}_{color.ToString().ToLower()}");
+        public static Sprite Get(IconType type)
+            => Get($"icon_{type.ToString().ToLower()}");
 
         public override String ToString() 
             => this.Path;

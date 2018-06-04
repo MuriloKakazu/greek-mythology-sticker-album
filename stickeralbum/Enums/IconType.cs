@@ -2,9 +2,9 @@
 {
     public enum IconType {
         Edit,
+        Home,
         Exit,
         Search,
-        NavMenu,
         Gamepad,
         AddItem,
         Settings,

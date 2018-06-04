@@ -13,6 +13,7 @@ using System.Linq;
 using Newtonsoft.Json;
 using stickeralbum.Generics;
 using stickeralbum.Game.Items;
+using stickeralbum.Debug;
 
 namespace stickeralbum.Design.Controls {
     /// <summary>
@@ -95,66 +96,70 @@ namespace stickeralbum.Design.Controls {
         SolidColorBrush pinkBg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ffddcc"));
         SolidColorBrush redBg = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#ff0000"));
         private void ButtonRegister_Click(object sender, System.Windows.RoutedEventArgs e) {
-            bool hasError = false;
-            if(TextBoxName.Text == null || TextBoxName.Text == "") {
-                TextBoxName.Background = pinkBg;
-                hasError = true;
-            } else {
-                TextBoxName.Background = normalBg;
+            try {
+                bool hasError = false;
+                if (TextBoxName.Text == null || TextBoxName.Text == "") {
+                    TextBoxName.Background = pinkBg;
+                    hasError = true;
+                } else {
+                    TextBoxName.Background = normalBg;
+                }
+                if (TextBoxDescription.Text == null || TextBoxDescription.Text == "") {
+                    TextBoxDescription.Background = pinkBg;
+                    hasError = true;
+                } else {
+                    TextBoxDescription.Background = normalBg;
+                }
+                if (StickerNewStricker.StickerImage.Source == Sprite.Get("unknown").Source) {
+                    LabelTip.Foreground = redBg;
+                    hasError = true;
+                } else {
+                    LabelTip.Foreground = new SolidColorBrush(Colors.Black);
+                }
+                if (hasError) {
+                    return;
+                }
+                String imgGuid = Guid.NewGuid().ToString();
+                File.Copy(dlg.FileName, Path.Combine(Paths.CustomSpritesDirectory, imgGuid));
+                Generics.LinkedList<Sprite> spritesMetadata = JsonConvert.DeserializeObject<Generics.LinkedList<Sprite>>(File.ReadAllText(Paths.CustomSpritesMetadata));
+                spritesMetadata.Add(new Sprite() {
+                    ID = imgGuid,
+                    Path = imgGuid,
+                    IsCustom = true
+                });
+                File.WriteAllText(Paths.CustomSpritesMetadata, JsonConvert.SerializeObject(spritesMetadata, Formatting.Indented));
+
+                Generics.LinkedList<God> customGods = God.GetAll().Where(x => x.IsCustom).ToLinkedList();
+
+                God newCustomGod = new God() {
+                    Name = TextBoxName.Text,
+                    Description = TextBoxDescription.Text,
+                    ID = Guid.NewGuid().ToString(),
+                    SpriteID = imgGuid,
+                    IsCustom = true
+                };
+
+                fatherName_x_id.TryGetValue(ComboBoxFather.Text, out newCustomGod.FatherID);
+                motherName_x_id.TryGetValue(ComboBoxMother.Text, out newCustomGod.MotherID);
+                rarityOptions.TryGetValue(ComboBoxRarity.Text, out newCustomGod.Rarity);
+                genderOptions.TryGetValue(ComboBoxGender.Text, out newCustomGod.Gender);
+
+                customGods.Add(newCustomGod);
+
+                File.WriteAllText(Paths.CustomGodsMetadata, JsonConvert.SerializeObject(customGods, Formatting.Indented));
+
+                Cache.Clear();
+                Cache.Load();
+                Cache.DumpLog();
+
+                Game.GameMaster.Player.Inventory.Add(new SimpleSticker() {
+                    ItemID = newCustomGod.ID
+                });
+
+                App.ClientWindow.SetCurrentPage(new StickerRegister_Finished(StickerNewStricker));
+            } catch (Exception ex) {
+                DebugUtils.LogError("Error creating sticker => " + ex.Message);
             }
-            if(TextBoxDescription.Text == null || TextBoxDescription.Text == "") {
-                TextBoxDescription.Background = pinkBg;
-                hasError = true;
-            } else {
-                TextBoxDescription.Background = normalBg;
-            }
-            if(StickerNewStricker.StickerImage.Source == Sprite.Get("unknown").Source){
-                LabelTip.Foreground = redBg;
-                hasError = true;
-            } else {
-                LabelTip.Foreground = new SolidColorBrush(Colors.Black);
-            }
-            if(hasError) {
-                return;
-            }
-            String imgGuid = Guid.NewGuid().ToString();
-            File.Copy(dlg.FileName, Path.Combine(Paths.CustomSpritesDirectory, imgGuid));
-            Generics.LinkedList<Sprite> spritesMetadata = JsonConvert.DeserializeObject<Generics.LinkedList<Sprite>>(File.ReadAllText(Paths.CustomSpritesMetadata));
-            spritesMetadata.Add(new Sprite() {
-                ID = imgGuid,
-                Path = imgGuid,
-                IsCustom = true
-            });
-            File.WriteAllText(Paths.CustomSpritesMetadata, JsonConvert.SerializeObject(spritesMetadata, Formatting.Indented));            
-
-            Generics.LinkedList<God> customGods = God.GetAll().Where(x => x.IsCustom).ToLinkedList();
-
-            God newCustomGod = new God() {
-                Name = TextBoxName.Text,
-                Description = TextBoxDescription.Text,
-                ID = Guid.NewGuid().ToString(),
-                SpriteID = imgGuid,
-                IsCustom = true
-            };
-
-            fatherName_x_id.TryGetValue(ComboBoxFather.Text, out newCustomGod.FatherID);
-            motherName_x_id.TryGetValue(ComboBoxMother.Text, out newCustomGod.MotherID);
-            rarityOptions.TryGetValue(ComboBoxRarity.Text, out newCustomGod.Rarity);
-            genderOptions.TryGetValue(ComboBoxGender.Text, out newCustomGod.Gender);
-            
-            customGods.Add(newCustomGod);
-
-            File.WriteAllText(Paths.CustomGodsMetadata, JsonConvert.SerializeObject(customGods, Formatting.Indented));
-
-            Cache.Clear();
-            Cache.Load();
-            Cache.DumpLog();
-
-            Game.GameMaster.Player.Inventory.Add(new SimpleSticker() {
-                ItemID = newCustomGod.ID
-            });
-
-            App.ClientWindow.SetCurrentPage(new StickerRegister_Finished(StickerNewStricker));
         }
     }
 }
