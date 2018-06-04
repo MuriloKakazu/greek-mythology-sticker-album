@@ -228,7 +228,8 @@ namespace stickeralbum.Design.Controls {
 
         private void Self_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
             if (ShowDescriptionOnDoubleClick && Entity.IsUnlocked) {
-                App.ClientWindow.SetCurrentPage(new StickerDetails(this.Entity));
+                //App.ClientWindow.SetCurrentPage(new StickerDetails(this.Entity));
+                App.ClientWindow.SetCurrentPage(new StickerInfo(this.Entity));
             }
         }
     }

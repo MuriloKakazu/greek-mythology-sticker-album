@@ -2,12 +2,14 @@
 {
     public enum IconType {
         Edit,
-        Home,
         Exit,
+        Home,
+        Save,
         Search,
         Gamepad,
         AddItem,
         Settings,
+        NewWarning,
         ShoppingBasket,
         StickerCollection,
     }

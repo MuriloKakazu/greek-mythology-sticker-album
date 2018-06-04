@@ -7,13 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="300" Background="#FF2D2D2D">
     <Grid>
-        <Expander Foreground="White" Background="#FF2D2D2D" Header="Filtros" ExpandDirection="Right" IsExpanded="True">
+        <Expander Foreground="White" Background="#FF2D2D2D" Header="Filtros" ExpandDirection="Right" IsExpanded="True" FontFamily="Diogenes">
             <DockPanel Background="#FF4B4B4B" MinWidth="200">
                 <StackPanel DockPanel.Dock="Top">
                     <DockPanel Background="#FF2D2D2D">
                         <Image   x:Name="SearchIcon" Width="20" Height="20" Margin="5" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" RenderOptions.ClearTypeHint="Auto"/>
                         <Grid>
-                            <TextBox x:Name="SearchBox"  Margin="0,8,5,8" TextChanged="SearchBox_TextChanged" VerticalContentAlignment="Center" Cursor="Pen" Height="20" ToolTip="Pesquisar figurinhas pelo nome"/>
+                            <TextBox x:Name="SearchBox"  Margin="0,8,5,8" TextChanged="SearchBox_TextChanged" VerticalContentAlignment="Center" Cursor="Pen" ToolTip="Pesquisar figurinhas pelo nome"/>
                             <TextBlock IsHitTestVisible="False" Text="Pesquisar" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" Foreground="DarkGray" Background="White">
                                 <TextBlock.Style>
                                     <Style TargetType="{x:Type TextBlock}">
@@ -29,8 +29,8 @@
                         </Grid>
                     </DockPanel>
                     <DockPanel>
-                        <Label Content="Ordernação: " Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
-                        <ComboBox x:Name="OrderBySelection" Margin="5" SelectedIndex="1" SelectionChanged="OrderBySelection_SelectionChanged">
+                        <Label Content="Ordernação: " Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Diogenes"/>
+                        <ComboBox x:Name="OrderBySelection" Margin="5" SelectedIndex="1" SelectionChanged="OrderBySelection_SelectionChanged" FontFamily="Diogenes">
                             <ComboBoxItem Content="Nome"/>
                             <ComboBoxItem Content="Raridade"/>
                             <ComboBoxItem Content="Sexo"/>

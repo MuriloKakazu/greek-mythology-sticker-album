@@ -13,7 +13,8 @@ namespace stickeralbum.Debug
             String lines = "";
             Buffer.ForEach(x => lines += x + Environment.NewLine);
             try {
-                File.WriteAllText(Paths.LogsDirectory + DateTime.Now + ".log", lines);
+                var filename = Paths.LogsDirectory + DateTime.Now.ToFileTime() + ".log";
+                File.WriteAllText(filename, lines);
                 Buffer.Clear();
             } catch (Exception e) {
                 LogError($"Couldn't save log. Reason: {e.Message}");

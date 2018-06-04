@@ -1,5 +1,8 @@
-﻿using stickeralbum.Entities;
+﻿using stickeralbum.Audio;
+using stickeralbum.Debug;
+using stickeralbum.Entities;
 using stickeralbum.Enums;
+using stickeralbum.Game;
 using stickeralbum.Generics;
 using stickeralbum.IO;
 using System;
@@ -53,6 +56,8 @@ namespace stickeralbum.Design.Controls {
             SettingsButton.SetText("Configurações");
             //ShopButton.SetText("Loja de Figurinhas");
             NewStickerButton.SetText("Forja de Figurinhas");
+            SaveButton.SetText("Salvar");
+            GiftButton.SetText("Recompensa Diária!");
 
             if (DesignerProperties.GetIsInDesignMode(this)) return;
             QuitButton.SetIcon(Sprite.Get(IconType.Exit));
@@ -62,6 +67,14 @@ namespace stickeralbum.Design.Controls {
             NewStickerButton.SetIcon(Sprite.Get(IconType.AddItem));
             //ShopButton.SetIcon(Sprite.Get(IconType.ShoppingBasket, IconColor.White));
             AlbumButton.SetIcon(Sprite.Get(IconType.StickerCollection));
+            SaveButton.SetIcon(Sprite.Get(IconType.Save));
+            GiftButton.SetIcon(Sprite.Get(IconType.NewWarning));
+
+            if (DateTime.Today > GameMaster.Player.LastGift) {
+                GiftButton.Visibility = Visibility.Visible;
+            } else {
+                GiftButton.Visibility = Visibility.Hidden;
+            }
         }
 
         private void Expander_MouseDown(object sender, MouseButtonEventArgs e) {
@@ -104,6 +117,22 @@ namespace stickeralbum.Design.Controls {
         private void HomeButton_MouseDown(object sender, MouseButtonEventArgs e) {
             ChangeState(ControlState.Compact);
             App.ClientWindow.SetCurrentPage(new Homepage());
+        }
+
+        private void SaveButton_MouseDown(object sender, MouseButtonEventArgs e) {
+            ChangeState(ControlState.Compact);
+            GameMaster.SaveAll();
+            DebugUtils.FlushBuffer();
+        }
+
+        private void GiftButton_MouseDown(object sender, MouseButtonEventArgs e) {
+            if (DateTime.Today > GameMaster.Player.LastGift) {
+                ChangeState(ControlState.Compact);
+                GiftButton.Visibility = Visibility.Hidden;
+                GameMaster.Player.LastGift = DateTime.Today;
+                GameMaster.Player.Coins += 10;
+                SoundPlayer.Instance.Play(SoundTrack.Get("sfx_coins"));
+            }
         }
     }
 }

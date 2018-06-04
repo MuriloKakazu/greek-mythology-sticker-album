@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="800" Background="#FF2D2D2D">
     <Grid>
-        <Expander x:Name="Expander" Header="Inventário" Foreground="White" Background="#FF2D2D2D" IsExpanded="True">
+        <Expander x:Name="Expander" Header="Inventário" Foreground="White" Background="#FF2D2D2D" IsExpanded="True" FontFamily="Diogenes">
             <DockPanel Background="#FF4B4B4B">
                 <DockPanel DockPanel.Dock="Right">
                     <Grid>

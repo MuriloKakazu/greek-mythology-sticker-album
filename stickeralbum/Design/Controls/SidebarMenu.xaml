@@ -18,13 +18,15 @@
     
     <Grid>
         <DockPanel Background="#FF2D2D2D">
-            <local:BarItem x:Name="QuitButton" DockPanel.Dock="Bottom" MouseDown="QuitButton_MouseDown"/>
+            <local:BarItem x:Name="QuitButton" DockPanel.Dock="Bottom" MouseDown="QuitButton_MouseDown" FontFamily="Diogenes"/>
+            <local:BarItem x:Name="GiftButton" DockPanel.Dock="Bottom" MouseDown="GiftButton_MouseDown" FontFamily="Diogenes"/>
             <StackPanel Width="200" DockPanel.Dock="Top">
-                <local:BarItem x:Name="HomeButton" MouseDown="HomeButton_MouseDown"/>
-                <local:BarItem x:Name="AlbumButton" MouseDown="AlbumButton_MouseDown"/>
-                <local:BarItem x:Name="NewStickerButton" MouseDown="NewStickerButton_MouseDown"/>
-                <local:BarItem x:Name="MinigameButton" MouseDown="MinigameButton_MouseDown"/>
-                <local:BarItem x:Name="SettingsButton" MouseDown="OptionsButton_MouseDown"/>
+                <local:BarItem x:Name="HomeButton" MouseDown="HomeButton_MouseDown" FontFamily="Diogenes"/>
+                <local:BarItem x:Name="AlbumButton" MouseDown="AlbumButton_MouseDown" FontFamily="Diogenes"/>
+                <local:BarItem x:Name="NewStickerButton" MouseDown="NewStickerButton_MouseDown" FontFamily="Diogenes"/>
+                <local:BarItem x:Name="MinigameButton" MouseDown="MinigameButton_MouseDown" FontFamily="Diogenes"/>
+                <local:BarItem x:Name="SettingsButton" MouseDown="OptionsButton_MouseDown" FontFamily="Diogenes"/>
+                <local:BarItem x:Name="SaveButton" MouseDown="SaveButton_MouseDown" FontFamily="Diogenes"/>
             </StackPanel>
         </DockPanel>
     </Grid>

@@ -1,0 +1,35 @@
+﻿<UserControl x:Class="stickeralbum.Design.Controls.StickerInfo"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:stickeralbum.Design.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <ScrollViewer>
+            <DockPanel Margin="50">
+                <DockPanel x:Name="TargetStickerContainer" DockPanel.Dock="Top"/>
+                <DockPanel DockPanel.Dock="Top" Margin="0,20">
+                    <StackPanel>
+                        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Label Content="Descrição:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" FontFamily="Diogenes"/>
+                            <TextBlock x:Name="DescriptionContainer" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Diogenes" FontWeight="Bold" FontSize="14"/>
+                        </StackPanel>
+                        <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" LastChildFill="False" Margin="0,20">
+                            <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Label x:Name="FatherLabel" Content="Pai:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" DockPanel.Dock="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontWeight="Bold" FontFamily="Diogenes"/>
+                                <DockPanel x:Name="FatherContainer" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top"/>
+                            </DockPanel>
+                            <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Label x:Name="MotherLabel" Content="Mãe:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" DockPanel.Dock="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Diogenes" FontWeight="Bold"/>
+                                <DockPanel x:Name="MotherContainer" HorizontalAlignment="Center" VerticalAlignment="Center" DockPanel.Dock="Top"/>
+                            </DockPanel>
+                        </DockPanel>
+                        <StackPanel x:Name="OtherInfoContainer" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+                </DockPanel>
+            </DockPanel>
+        </ScrollViewer>
+    </Grid>
+</UserControl>

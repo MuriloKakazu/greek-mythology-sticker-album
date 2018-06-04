@@ -8,6 +8,7 @@ namespace stickeralbum.Game {
         public Int64 Coins { get; set; }
         public Inventory Inventory { get; set; }
         public LinkedList<String> UnlockedIDs { get; set; }
+        public DateTime LastGift;
 
         public Player() {
             Inventory = new Inventory();
