@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="stickeralbum.Design.Controls.Homepage"
+      x:Name="_this"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:stickeralbum.Design.Controls"
+      mc:Ignorable="d" MinHeight="700" MinWidth="1000">
+    <!--Grid que divide a tela no meio-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="3*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1.5*"/>
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content ="Greek Mithology" FontSize="90" FontWeight="ExtraBold" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" Padding="0" FontFamily="Diogenes" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label Content ="The Sticker Album" FontSize="56px" FontWeight="ExtraBold" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Padding="0" FontFamily="Diogenes" VerticalContentAlignment="Top" HorizontalContentAlignment="Center"/>
+        <Label Content ="Developers:" FontSize="56px" FontWeight="ExtraBold" Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom" Padding="0" FontFamily="Diogenes" VerticalContentAlignment="Top" HorizontalContentAlignment="Center"/>
+        <Label Content ="Murilo Yuri Kakazu" FontSize="36px" FontWeight="ExtraBold" Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom" Padding="0" FontFamily="Diogenes" VerticalContentAlignment="Top" HorizontalContentAlignment="Center"/>
+        <Label Content ="Murilo Parra Pires" FontSize="36px" FontWeight="ExtraBold" Grid.Column="0" Grid.Row="4" VerticalAlignment="Top" Padding="0" FontFamily="Diogenes" VerticalContentAlignment="Top" HorizontalContentAlignment="Center"/>
+    </Grid>
+</UserControl>

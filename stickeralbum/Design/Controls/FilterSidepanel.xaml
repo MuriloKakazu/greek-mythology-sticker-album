@@ -1,0 +1,94 @@
+﻿<UserControl x:Class="stickeralbum.Design.Controls.FilterSidepanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:stickeralbum.Design.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="300" Background="#FF2D2D2D">
+    <Grid>
+        <Expander Foreground="White" Background="#FF2D2D2D" Header="Filtros" ExpandDirection="Right" IsExpanded="True" FontFamily="Diogenes">
+            <DockPanel Background="#FF4B4B4B" MinWidth="200">
+                <StackPanel DockPanel.Dock="Top">
+                    <DockPanel Background="#FF2D2D2D">
+                        <Image   x:Name="SearchIcon" Width="20" Height="20" Margin="5" RenderOptions.BitmapScalingMode="HighQuality" RenderOptions.EdgeMode="Aliased" RenderOptions.ClearTypeHint="Auto"/>
+                        <Grid>
+                            <TextBox x:Name="SearchBox"  Margin="0,8,5,8" TextChanged="SearchBox_TextChanged" VerticalContentAlignment="Center" Cursor="Pen" ToolTip="Pesquisar figurinhas pelo nome"/>
+                            <TextBlock IsHitTestVisible="False" Text="Pesquisar" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="5,0,0,0" Foreground="DarkGray" Background="White">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=SearchBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
+                    </DockPanel>
+                    <DockPanel>
+                        <Label Content="Ordernação: " Foreground="White" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontFamily="Diogenes"/>
+                        <ComboBox x:Name="OrderBySelection" Margin="5" SelectedIndex="1" SelectionChanged="OrderBySelection_SelectionChanged" FontFamily="Diogenes">
+                            <ComboBoxItem Content="Nome"/>
+                            <ComboBoxItem Content="Raridade"/>
+                            <ComboBoxItem Content="Sexo"/>
+                        </ComboBox>
+                    </DockPanel>
+                </StackPanel>
+                <ScrollViewer CanContentScroll="True" DockPanel.Dock="Top">
+                    <StackPanel ScrollViewer.HorizontalScrollBarVisibility="Visible" CanVerticallyScroll="True" CanHorizontallyScroll="True" ScrollViewer.CanContentScroll="True">
+                        <DockPanel>
+                            <Expander DockPanel.Dock="Right" Cursor="Hand" Header="Tipo" FontWeight="Bold" Foreground="White" IsExpanded="True">
+                                <StackPanel Background="#FF4B4B4B">
+                                    <CheckBox x:Name="FilterChaos"    DockPanel.Dock="Right" Content="Caos"     Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterChaos_Checked" Unchecked="FilterChaos_Unchecked" IsChecked="True"/>
+                                    <CheckBox x:Name="FilterTitan"    DockPanel.Dock="Right" Content="Titã"     Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterTitan_Checked" Unchecked="FilterTitan_Unchecked" IsChecked="True"/>
+                                    <CheckBox x:Name="FilterGod"      DockPanel.Dock="Right" Content="Deus"     Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterGod_Checked" Unchecked="FilterGod_Unchecked" IsChecked="True"/>
+                                    <CheckBox x:Name="FilterSemiGod"  DockPanel.Dock="Right" Content="Semideus" Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterSemiGod_Checked" Unchecked="FilterSemiGod_Unchecked" IsChecked="True"/>
+                                    <CheckBox x:Name="FilterCreature" DockPanel.Dock="Right" Content="Criatura" Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterCreature_Checked" Unchecked="FilterCreature_Unchecked" IsChecked="True"/>
+                                </StackPanel>
+                            </Expander>
+                        </DockPanel>
+                        <DockPanel>
+                            <Expander DockPanel.Dock="Right" Cursor="Hand" Header="Raridade" FontWeight="Bold" Foreground="White" IsExpanded="True">
+                                <StackPanel Background="#FF4B4B4B">
+                                    <CheckBox x:Name="FilterCommon"    DockPanel.Dock="Right" Content="Comum"      Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" IsChecked="True" Checked="FilterCommon_Checked"    Unchecked="FilterCommon_Unchecked"/>
+                                    <CheckBox x:Name="FilterUncommon"  DockPanel.Dock="Right" Content="Incomum"    Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" IsChecked="True" Checked="FilterUncommon_Checked"  Unchecked="FilterUncommon_Unchecked"/>
+                                    <CheckBox x:Name="FilterRare"      DockPanel.Dock="Right" Content="Raro"       Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" IsChecked="True" Checked="FilterRare_Checked"      Unchecked="FilterRare_Unchecked"/>
+                                    <CheckBox x:Name="FilterVeryRare"  DockPanel.Dock="Right" Content="Muito Raro" Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" IsChecked="True" Checked="FilterVeryRare_Checked"  Unchecked="FilterVeryRare_Unchecked"/>
+                                    <CheckBox x:Name="FilterEpic"      DockPanel.Dock="Right" Content="Épico"      Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" IsChecked="True" Checked="FilterEpic_Checked"      Unchecked="FilterEpic_Unchecked"/>
+                                    <CheckBox x:Name="FilterLegendary" DockPanel.Dock="Right" Content="Lendário"   Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" IsChecked="True" Checked="FilterLegendary_Checked" Unchecked="FilterLegendary_Unchecked"/>
+                                </StackPanel>
+                            </Expander>
+                        </DockPanel>
+                        <DockPanel>
+                            <Expander DockPanel.Dock="Right" Cursor="Hand" Header="Sexo" FontWeight="Bold" Foreground="White" IsExpanded="True">
+                                <StackPanel Background="#FF4B4B4B">
+                                    <CheckBox x:Name="FilterMale"     DockPanel.Dock="Right" Content="Masculino" Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterMale_Checked" Unchecked="FilterMale_Unchecked" IsChecked="True"/>
+                                    <CheckBox x:Name="FilterFemale"   DockPanel.Dock="Right" Content="Feminino"  Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterFemale_Checked" Unchecked="FilterFemale_Unchecked" IsChecked="True"/>
+                                    <CheckBox x:Name="FilterNoGender" DockPanel.Dock="Right" Content="Nenhum"    Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterNoGender_Checked" Unchecked="FilterNoGender_Unchecked" IsChecked="True"/>
+                                </StackPanel>
+                            </Expander>
+                        </DockPanel>
+                        <DockPanel>
+                            <Expander DockPanel.Dock="Right" Cursor="Hand" FontWeight="Bold" Foreground="White" Header="Outros" IsExpanded="True">
+                                <StackPanel Background="#FF4B4B4B">
+                                    <CheckBox x:Name="FilterCustom" DockPanel.Dock="Right" Content="Customizadas" Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterCustom_Checked" Unchecked="FilterCustom_Unchecked" IsChecked="True"/>
+                                </StackPanel>
+                            </Expander>
+                        </DockPanel>
+                        <DockPanel>
+                            <Expander DockPanel.Dock="Right" Cursor="Hand" FontWeight="Bold" Foreground="White" Header="Lógica Exclusiva" IsExpanded="True">
+                                <StackPanel Background="#FF4B4B4B">
+                                    <CheckBox x:Name="FilterUnlockedOnly" DockPanel.Dock="Right" Content="Desbloqueadas" Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterUnlockedOnly_Checked" Unchecked="FilterUnlockedOnly_Unchecked"/>
+                                    <CheckBox x:Name="FilterLockedOnly"   DockPanel.Dock="Right" Content="Bloqueadas"    Margin="10,3,3,3" VerticalContentAlignment="Center" Foreground="White" Checked="FilterLockedOnly_Checked"   Unchecked="FilterLockedOnly_Unchecked"/>
+                                </StackPanel>
+                            </Expander>
+                        </DockPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </DockPanel>
+        </Expander>
+    </Grid>
+</UserControl>

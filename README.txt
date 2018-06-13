@@ -1,0 +1,1 @@
+Extrair o arquivo assets.rar na pasta do executável!!!

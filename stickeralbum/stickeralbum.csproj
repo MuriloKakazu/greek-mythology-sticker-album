@@ -5,7 +5,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{2BBDFFDD-1B04-4F21-9273-DCA01B20A5B7}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
+    <OutputType>Exe</OutputType>
     <RootNamespace>stickeralbum</RootNamespace>
     <AssemblyName>stickeralbum</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
@@ -13,6 +13,21 @@
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -33,9 +48,20 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>stickeralbum.App</StartupObject>
+  </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NAudio, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NAudio.1.8.4\lib\net35\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -54,7 +80,86 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Compile Include="Audio\SoundSampleProvider.cs" />
+    <Compile Include="Debug\DebugUtils.cs" />
+    <Compile Include="Debug\Tests\EntityTest.cs" />
+    <Compile Include="Design\Controls\Configs.xaml.cs">
+      <DependentUpon>Configs.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\FilterSidepanel.xaml.cs">
+      <DependentUpon>FilterSidepanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\Homepage.xaml.cs">
+      <DependentUpon>Homepage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\PlayerInventory.xaml.cs">
+      <DependentUpon>PlayerInventory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\SlotColumn.xaml.cs">
+      <DependentUpon>SlotColumn.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\SlotMinigame.xaml.cs">
+      <DependentUpon>SlotMinigame.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\StickerDetails.xaml.cs">
+      <DependentUpon>StickerDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\StickerInfo.xaml.cs">
+      <DependentUpon>StickerInfo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\StickerRegister_Creature.xaml.cs">
+      <DependentUpon>StickerRegister_Creature.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\StickerRegister_Finished.xaml.cs">
+      <DependentUpon>StickerRegister_Finished.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\StickerRegister_Semigod.xaml.cs">
+      <DependentUpon>StickerRegister_Semigod.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\BarItem.xaml.cs">
+      <DependentUpon>BarItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\SidebarMenu.xaml.cs">
+      <DependentUpon>SidebarMenu.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\StickerRegister_Titan.xaml.cs">
+      <DependentUpon>StickerRegister_Titan.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\StickerRegister_TypeChoosing.xaml.cs">
+      <DependentUpon>StickerRegister_TypeChoosing.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Sprite.cs" />
+    <Compile Include="Design\Controls\Album.xaml.cs">
+      <DependentUpon>Album.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\AlbumPage.xaml.cs">
+      <DependentUpon>AlbumPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\Sticker.xaml.cs">
+      <DependentUpon>Sticker.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Design\Controls\StickerRegister_God.xaml.cs">
+      <DependentUpon>StickerRegister_God.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Enums\IconType.cs" />
+    <Compile Include="Enums\Theme.cs" />
+    <Compile Include="Entities\Chaos.cs" />
+    <Compile Include="Entities\Creature.cs" />
+    <Compile Include="Entities\EntityUtils.cs" />
+    <Compile Include="Entities\Titan.cs" />
+    <Compile Include="Enums\ControlState.cs" />
+    <Compile Include="Extensions\BitmapSourceExtensions.cs" />
+    <Compile Include="Extensions\UIElementExtensions.cs" />
+    <Compile Include="Game\FilterSettings.cs" />
+    <Compile Include="Game\GameMaster.cs" />
+    <Compile Include="Game\Inventory.cs" />
+    <Compile Include="Game\Items\InventoryItem.cs" />
+    <Compile Include="Game\Items\SimpleSticker.cs" />
+    <Compile Include="IO\Cacheable.cs" />
+    <Compile Include="IO\Paths.cs" />
+    <Compile Include="Game\Player.cs" />
+    <Compile Include="Debug\Tests\JsonTest.cs" />
+    <Page Include="Client.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -62,10 +167,98 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
+    <Compile Include="Enums\Gender.cs" />
+    <Compile Include="Extensions\IEnumerableExtensions.cs" />
+    <Compile Include="IO\Cache.cs" />
+    <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\God.cs" />
+    <Compile Include="Enums\Rarity.cs" />
+    <Compile Include="Entities\SemiGod.cs" />
+    <Compile Include="Audio\SoundTrack.cs" />
+    <Compile Include="Audio\SoundPlayer.cs" />
+    <Compile Include="Generics\LinkedList.cs" />
+    <Compile Include="Generics\Node.cs" />
+    <Compile Include="Game\Settings.cs" />
+    <Compile Include="Client.xaml.cs">
+      <DependentUpon>Client.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Design\Controls\Album.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\AlbumPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\Configs.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\FilterSidepanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\Homepage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\PlayerInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\SlotColumn.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\SlotMinigame.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\StickerDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\StickerInfo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\StickerRegister_Creature.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\StickerRegister_Finished.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\StickerRegister_Semigod.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\BarItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\SidebarMenu.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\Sticker.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\StickerRegister_God.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\StickerRegister_Titan.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Design\Controls\StickerRegister_TypeChoosing.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -84,7 +277,9 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -92,6 +287,22 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Exceptions\" />
+    <Folder Include="Prefabs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
