@@ -13,8 +13,8 @@ namespace stickeralbum.Game {
         public Inventory()
             => Stickers = new LinkedList<SimpleSticker>();
 
-        public void RemoveCustoms() =>
-            Stickers = Stickers.Remove(Stickers.Where(x => x.Entity.IsCustom));
+        public void RemoveAll() =>
+            Stickers.Clear();
 
         public Boolean ContainsKey(String itemKey)
             => CountItem(itemKey) > 0;

@@ -14,7 +14,7 @@
                     <StackPanel>
                         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Label Content="Descrição:" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" FontWeight="Bold" FontFamily="Diogenes"/>
-                            <TextBlock x:Name="DescriptionContainer" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Diogenes" FontWeight="Bold" FontSize="14"/>
+                            <TextBlock x:Name="DescriptionContainer" TextWrapping="Wrap" TextAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" FontFamily="Diogenes" FontWeight="Bold" FontSize="20px"/>
                         </StackPanel>
                         <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center" LastChildFill="False" Margin="0,20">
                             <DockPanel HorizontalAlignment="Center" VerticalAlignment="Center">

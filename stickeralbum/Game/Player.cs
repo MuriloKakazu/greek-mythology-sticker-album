@@ -15,6 +15,12 @@ namespace stickeralbum.Game {
             UnlockedIDs = new LinkedList<String>();
         }
 
+        public void Reset() {
+            this.Coins = 0;
+            this.UnlockedIDs.Clear();
+            this.LastGift = DateTime.Now;
+        }
+
         public Boolean HasUnlocked(Entity e) //=> true;
             => UnlockedIDs.Contains(e.ID);
 

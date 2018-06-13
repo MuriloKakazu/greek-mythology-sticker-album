@@ -51,7 +51,7 @@ namespace stickeralbum.Audio {
         private void Device_PlaybackStopped(object sender, StoppedEventArgs e) {
             State = PlaybackState.Stopped;
             if (e?.Exception != null) {
-                DebugUtils.LogError($"Playback for <{Track?.ID}> stopped with an Exception => {e?.Exception?.Message}");
+                //DebugUtils.LogError($"Playback for <{Track?.ID}> stopped with an Exception => {e?.Exception?.Message}");
             } else {
                 DebugUtils.LogAudio($"Playback for <{Track?.ID}> stopped.");
             }
@@ -84,7 +84,7 @@ namespace stickeralbum.Audio {
 
         public void Play(SoundTrack track, Boolean loop = false) {
             if (track == null || Device == null || Mixer == null) {
-                DebugUtils.LogError($"Error playing track => <{track?.ID}>. Reason => Null reference in SoundPlayer");
+                //DebugUtils.LogError($"Error playing track => <{track?.ID}>. Reason => Null reference in SoundPlayer");
                 return;
             }
             try {
@@ -98,7 +98,7 @@ namespace stickeralbum.Audio {
                 Device.Play();
                 DebugUtils.LogAudio($"Playing track => <{track?.ID}> Volume => {Volume * 100f}%");
             } catch (Exception e) {
-                DebugUtils.LogError($"Error playing track => <{track?.ID}>. Reason => {e.Message}");
+                //DebugUtils.LogError($"Error playing track => <{track?.ID}>. Reason => {e.Message}");
             }
         }
 

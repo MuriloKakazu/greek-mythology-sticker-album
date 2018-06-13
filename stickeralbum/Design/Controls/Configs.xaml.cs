@@ -24,7 +24,7 @@ namespace stickeralbum.Design.Controls {
     /// </summary>
     public partial class Configs : UserControl {
 
-        public double volume;
+        public static double volume;
         public bool autoContext = false;
 
         public Configs() {
@@ -35,7 +35,7 @@ namespace stickeralbum.Design.Controls {
             autoContext = true;
             volume = SliderVolume.Value = GameMaster.Settings.Volume;
             autoContext = false;
-            volume = GameMaster.Settings.Volume;
+            CheckBoxMuted.IsChecked = volume == 0;
 
             if (!SoundTrack.Get("st_main").IsPlaying) {
                 SoundPlayer.StopAll();
@@ -51,30 +51,32 @@ namespace stickeralbum.Design.Controls {
         }
 
         private void ButtonRestore_Click(object sender, RoutedEventArgs e) {
-            var emptyJson = "[\n\n]";
-            File.WriteAllText(Paths.CustomCreaturesMetadata, emptyJson);
-            File.WriteAllText(Paths.CustomSemiGodsMetadata,  emptyJson);
-            File.WriteAllText(Paths.CustomGodsMetadata,      emptyJson);
-            File.WriteAllText(Paths.CustomTitansMetadata,    emptyJson);
-            File.WriteAllText(Paths.CustomSpritesMetadata,   emptyJson);
-            //Console.WriteLine("[CACHE] - Metadata removed");
-            DebugUtils.LogCache("Metadata removed");
-            DirectoryInfo di = new DirectoryInfo(Paths.CustomSpritesDirectory);
-            GameMaster.Player.Inventory.RemoveCustoms();
-            //Console.WriteLine("[CACHE] - Custom stickers removed");
-            DebugUtils.LogCache("Custom stickers removed");
-            //Console.WriteLine(Game.GameMaster.Player.Inventory.Stickers);
-            DebugUtils.Log(GameMaster.Player.Inventory.Stickers);
-            GameMaster.SaveAll();
-            Cache.Clear();
+            try {
+                var emptyJson = "[\n\n]";
+                File.WriteAllText(Paths.CustomCreaturesMetadata, emptyJson);
+                File.WriteAllText(Paths.CustomSemiGodsMetadata, emptyJson);
+                File.WriteAllText(Paths.CustomGodsMetadata, emptyJson);
+                File.WriteAllText(Paths.CustomTitansMetadata, emptyJson);
+                File.WriteAllText(Paths.CustomSpritesMetadata, emptyJson);
+                DebugUtils.LogCache("Metadata removed");
+                DirectoryInfo di = new DirectoryInfo(Paths.CustomSpritesDirectory);
+                GameMaster.Player.Inventory.RemoveAll();
+                DebugUtils.LogCache("Stickers removed from inventory");
+                DebugUtils.Log(GameMaster.Player.Inventory.Stickers);
+                GameMaster.Player.Reset();
+                GameMaster.SaveAll();
+                Cache.Clear();
 
-            GC.Collect();
-            GC.WaitForPendingFinalizers();
+                GC.Collect();
+                GC.WaitForPendingFinalizers();
 
-            foreach(FileInfo file in di.GetFiles()) {
-                //file.Delete();
+                foreach (FileInfo file in di.GetFiles()) {
+                    //file.Delete();
+                }
+                Cache.Load();
+            } catch(Exception ex) {
+                //DebugUtils.LogError(ex.Message);
             }
-            Cache.Load();
         }
 
         private void SliderVolume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
@@ -89,15 +91,18 @@ namespace stickeralbum.Design.Controls {
         }
 
         private void ButtonSave_Click(object sender, RoutedEventArgs e) {
-            GameMaster.Settings.Volume = (float)volume;
+            GameMaster.Settings.Volume = CheckBoxMuted.IsChecked.Value ? 0 : (float)volume;
             GameMaster.Settings.AntiAliasing = CheckBoxAA.IsChecked.Value;
             GameMaster.SaveAll();
             ButtonSave.IsEnabled = false;
+            SoundPlayer.StopAll();
+            SoundPlayer.Instance.Play(SoundTrack.Get("st_main"), loop: true);
+
         }
 
         private void CheckBoxAA_Click(object sender, RoutedEventArgs e) {
 
-            //////////ButtonSave.IsEnabled = true;*-
+            ButtonSave.IsEnabled = true;
         }
     }
 }

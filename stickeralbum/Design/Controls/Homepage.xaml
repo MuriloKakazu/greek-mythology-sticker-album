@@ -18,7 +18,7 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label Content ="Greek Mithology" FontSize="128px" FontWeight="ExtraBold" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" Padding="0" FontFamily="Diogenes" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+        <Label Content ="Greek Mithology" FontSize="90" FontWeight="ExtraBold" Grid.Column="0" Grid.Row="0" VerticalAlignment="Bottom" Padding="0" FontFamily="Diogenes" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
         <Label Content ="The Sticker Album" FontSize="56px" FontWeight="ExtraBold" Grid.Column="0" Grid.Row="1" VerticalAlignment="Top" Padding="0" FontFamily="Diogenes" VerticalContentAlignment="Top" HorizontalContentAlignment="Center"/>
         <Label Content ="Developers:" FontSize="56px" FontWeight="ExtraBold" Grid.Column="0" Grid.Row="2" VerticalAlignment="Bottom" Padding="0" FontFamily="Diogenes" VerticalContentAlignment="Top" HorizontalContentAlignment="Center"/>
         <Label Content ="Murilo Yuri Kakazu" FontSize="36px" FontWeight="ExtraBold" Grid.Column="0" Grid.Row="3" VerticalAlignment="Bottom" Padding="0" FontFamily="Diogenes" VerticalContentAlignment="Top" HorizontalContentAlignment="Center"/>
